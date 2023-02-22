@@ -2,27 +2,27 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 
     int score;
-    public static GameManager inst;
+    public static GameManager instance;
 
-    [SerializeField] Text scoreText;
-
-    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] Player playerMovement;
 
     public void IncrementScore ()
     {
         score++;
-        scoreText.text = "SCORE: " + score;
+        scoreText.text = score.ToString();
         // Increase the player's speed
         playerMovement.speed += playerMovement.speedIncreasePerPoint;
     }
 
     private void Awake ()
     {
-        inst = this;
+        instance = this;
     }
 
     private void Start () {

@@ -4,17 +4,16 @@ using System.Collections.Generic;
 
 public class Obstacle : MonoBehaviour {
 
-    PlayerMovement playerMovement;
+    Player m_player;
 
 	private void Start () {
-        playerMovement = GameObject.FindObjectOfType<PlayerMovement>();
+        m_player = GameObject.FindObjectOfType<Player>();
 	}
 
     private void OnCollisionEnter (Collision collision)
     {
         if (collision.gameObject.name == "Player") {
-            // Kill the player
-            playerMovement.Die();
+            m_player.Hit();
         }
     }
 
