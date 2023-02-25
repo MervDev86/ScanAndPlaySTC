@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        m_capCollider = GetComponent<CapsuleCollider>();
+        //m_capCollider = GetComponent<CapsuleCollider>();
 
 #if !UNITY_EDITOR
     enableCollider = true;
