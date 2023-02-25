@@ -30,13 +30,40 @@ public class GameManager : MonoBehaviour
     [SerializeField] int m_playerCount;
     [SerializeField] ForwardMovement m_playerForwardMovement;
     [SerializeField] int m_totalMovementPoints = 3;
+
     [Tooltip("Calculated using Chunk Bounds")]
-    [SerializeField] float _movementDistance =3.33f;//Calculated using Chunk Bounds
+    [SerializeField] float _movementDistance = 3.33f;//Calculated using Chunk Bounds
+
     [Header(" Movement")]
+
+    [SerializeField] float envMovementSpeed = 0.5f;
+    [SerializeField] float startingSpeed = 0.2f;
+    [SerializeField] float speedIncreasePerPoint = 0.1f;
+    public float EnvMovementSpeed
+    {
+        get { return envMovementSpeed; }
+        set
+        {
+            if (value != envMovementSpeed)
+            {
+                envMovementSpeed = value;
+                OnEnvValueChanged?.Invoke(value);
+            }
+        }
+    }
+
     [SerializeField] Vector3[] MovementSpawnPositions;
 
-    private Action<GameState> onChangedGameState;
 
+
+
+    public event Action<float> OnEnvValueChanged;
+    public Action<GameState> onChangedGameState;
+
+    public float GetGlobalSpeed()
+    {
+        return envMovementSpeed;
+    }
 
     private void OnValidate()
     {
@@ -51,6 +78,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Debug.LogWarning($"Distance Set to: {_movementDistance}");
+        ChangeGameState(GameState.GAME_COUNTDOWN);
     }
 
     #region Score
@@ -59,7 +87,13 @@ public class GameManager : MonoBehaviour
         score++;
         scoreText.text = score.ToString();
         // Increase the player's speed
-        m_playerForwardMovement.speed += m_playerForwardMovement.speedIncreasePerPoint;
+        //m_playerForwardMovement.speed += m_playerForwardMovement.speedIncreasePerPoint;
+        EnvMovementSpeed += speedIncreasePerPoint;
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 
     #endregion
@@ -79,7 +113,24 @@ public class GameManager : MonoBehaviour
     public void ChangeGameState(GameState p_gameState)
     {
         m_gameState = p_gameState;
-        onChangedGameState!.Invoke(p_gameState);
+        onChangedGameState?.Invoke(p_gameState);
+
+        switch (p_gameState)
+        {
+            case GameState.MAIN_MENU:
+                break;
+            case GameState.GAME_COUNTDOWN:
+                EnvMovementSpeed = 0;
+                break;
+            case GameState.GAME_START:
+                EnvMovementSpeed = startingSpeed;
+                break;
+            case GameState.GAME_END:
+                UIManager.Instance.ShowEndScreen();
+                break;
+            default:
+                break;
+        }
     }
     #endregion
 
