@@ -59,7 +59,8 @@ sysinfo.txt
 crashlytics-build.properties
 
 Assets/ARFoundationRemoteInstaller
-Library//
+Assets/3D
+Library/
 *.psd
 *.psd.meta
 *.zip
