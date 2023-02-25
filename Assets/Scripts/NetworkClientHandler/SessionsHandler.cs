@@ -14,10 +14,14 @@ namespace NetworkClientHandler
 
         public static Action<bool> OnStartPlaying;
         public static Action<int> OnPlayer1Move;
+        
+
         public static Action OnPlayer1MoveRight;
         public static Action OnPlayer1MoveLeft;
 
         private static string DB_SESSIONS = "stcrunner_sessions";
+        private static string DB_REGISTRATIONS = "stcrunner_registrations";
+
         private static string REF_SESSION_ISPLAYING = "stcrunner_sessions/isPlaying";
         private static string REF_SESSION_ISMULTIPLAYER = "stcrunner_sessions/isMultiplayer";
 
@@ -28,7 +32,10 @@ namespace NetworkClientHandler
         private FirebaseDatabase m_DB;
 
         private DatabaseReference m_sessionsDB;
-        private DatabaseReference m_sessionPlayer1;
+        private DatabaseReference m_registrationsDB;
+        private DatabaseReference m_refCurrentPosP1;
+        private DatabaseReference m_refUuidPosP1;
+        private DatabaseReference m_refNameP1;
 
         private bool m_isPlaying = false;
         private bool m_isMultiplayer = false;
@@ -38,12 +45,20 @@ namespace NetworkClientHandler
         DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
         protected bool isFirebaseInitialized = false;
 
+    
 
+        private static string m_namePlayer1 = "";
+        public static string GetPlayerName1()
+        {
+            return m_namePlayer1;
+        }
 
         // Start is called before the first frame update
         void Start()
         {
             //instance = this;
+
+            GameManager.instance.onChangedGameState += HandleGameStateChanged;
 
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
             {
@@ -66,6 +81,7 @@ namespace NetworkClientHandler
             m_DB = FirebaseDatabase.DefaultInstance;
 
             m_sessionsDB = m_DB.GetReference(DB_SESSIONS);
+            m_registrationsDB = m_DB.GetReference(DB_REGISTRATIONS);
 
             LoadServerListeners();
 
@@ -75,6 +91,26 @@ namespace NetworkClientHandler
         protected void LoadServerListeners()
         {
             m_sessionsDB.ValueChanged += HandleSessionStatusChanged;
+        }
+
+        private void HandleGameStateChanged(GameState p_gameState)
+        {
+            Debug.Log("SessionClientHandler::--> " + p_gameState);
+            if (p_gameState.Equals(GameState.GAME_END))
+            {
+                m_isPlaying = false;
+
+                var newData = new Dictionary<string, object>();
+                newData["/isPlaying"] = false;
+
+                m_sessionsDB.UpdateChildrenAsync(newData);
+
+                OnPlayer1Move?.Invoke(1);
+                m_refCurrentPosP1.ValueChanged -= OnP1CurrentPositionChanged;
+                return;
+            }
+
+            
         }
 
         private void HandleSessionStatusChanged(object sender, ValueChangedEventArgs args)
@@ -106,10 +142,26 @@ namespace NetworkClientHandler
                             break;
 
                         case "player1":
+                            if (GameManager.instance.GetCurrentGameState().Equals(GameState.GAME_END)) return;
+
                             if (m_isPlaying)
                             {
-                                m_sessionPlayer1 = m_DB.GetReference(REF_SESSION_PLAYER1 + "/currentPosition");
-                                m_sessionPlayer1.ValueChanged += OnPlayer1SessionDataChanged;
+                                var playerRef = m_DB.GetReference(REF_SESSION_PLAYER1);
+                                m_refCurrentPosP1 = playerRef.Child("/currentPosition");
+                                m_refCurrentPosP1.ValueChanged += OnP1CurrentPositionChanged;
+
+                                m_refUuidPosP1 = playerRef.Child("/uuid");
+                                m_refUuidPosP1.ValueChanged += OnP1UuidChanged;
+
+                                /*
+                                var uuid = (string) playerRef.Child("/uuid").GetValueAsync().Result.Value;
+                                m_namePlayer1 = (string) m_registrationsDB.Child("/"+ uuid + "/firstname").GetValueAsync().Result.Value;
+                                Debug.Log("playerName = " + m_namePlayer1);
+                                */
+                            }
+                            else
+                            {
+                                m_refUuidPosP1.ValueChanged -= OnP1UuidChanged;
                             }
                             break;
                         //case "player2":
@@ -125,7 +177,39 @@ namespace NetworkClientHandler
             }
         }
 
-        private void OnPlayer1SessionDataChanged(object sender, ValueChangedEventArgs args)
+        private void OnP1UuidChanged(object sender, ValueChangedEventArgs args)
+        {
+            if (args.DatabaseError != null)
+            {
+                Debug.LogError(args.DatabaseError.Message);
+                return;
+            }
+
+            if (args.Snapshot != null && args.Snapshot.Value != null)
+            {
+                //Debug.Log(args.Snapshot.Key + " = " + args.Snapshot.Value);
+                m_refNameP1 = m_registrationsDB.Child("/" + args.Snapshot.Value.ToString() + "/firstname");
+                m_refNameP1.ValueChanged += OnP1CurrentNameValueChanged;
+            }
+        }
+
+        private void OnP1CurrentNameValueChanged(object sender, ValueChangedEventArgs args)
+        {
+            if (args.DatabaseError != null)
+            {
+                Debug.LogError(args.DatabaseError.Message);
+                return;
+            }
+
+            if (args.Snapshot != null && args.Snapshot.Value != null)
+            {
+                //Debug.Log(args.Snapshot.Key + " = " + args.Snapshot.Value);
+                m_namePlayer1 = args.Snapshot.Value.ToString();
+            }
+        }
+
+
+        private void OnP1CurrentPositionChanged(object sender, ValueChangedEventArgs args)
         {
             if (args.DatabaseError != null)
             {
@@ -154,7 +238,8 @@ namespace NetworkClientHandler
             {
                 //OnStartPlaying?.Invoke(false);
                 OnPlayer1Move?.Invoke(1);
-                m_sessionPlayer1.ValueChanged -= OnPlayer1SessionDataChanged;
+                m_refCurrentPosP1.ValueChanged -= OnP1CurrentPositionChanged;
+                m_refUuidPosP1.ValueChanged -= OnP1UuidChanged;
             }
         }
 
@@ -181,7 +266,8 @@ namespace NetworkClientHandler
         void OnDestroy()
         {
             //m_DB.GetReference(REF_SESSION_PLAYER1 + "/currentPosition").ValueChanged -= OnPlayer1SessionDataChanged;
-            if (m_sessionPlayer1 != null) m_sessionPlayer1.ValueChanged -= OnPlayer1SessionDataChanged;
+            if (m_refCurrentPosP1 != null) m_refCurrentPosP1.ValueChanged -= OnP1CurrentPositionChanged;
+            if (m_refUuidPosP1 != null) m_refUuidPosP1.ValueChanged -= OnP1UuidChanged;
 
             m_sessionsDB.ValueChanged -= HandleSessionStatusChanged;
 
@@ -198,7 +284,7 @@ namespace NetworkClientHandler
         public int currentPosition;
         public string moveTo;
 
-        PlayerSessionData(string p_sessionPath, string p_uuid, int p_currentPos, string p_moveTo)
+        public PlayerSessionData(string p_sessionPath, string p_uuid, int p_currentPos, string p_moveTo)
         {
             path = p_sessionPath;
             uuid = p_uuid;

@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Transform[] playerLiveObjs;
 
     [SerializeField] TextMeshProUGUI m_totalScoreText;
+    [SerializeField] TextMeshProUGUI m_player1NameText;
+
     [SerializeField] GameObject m_introPanel;
 
     int currentLife;
@@ -71,5 +73,7 @@ public class UIManager : MonoBehaviour
     public void ShowIntroPanel(bool p_show) {
         m_introPanel.SetActive(p_show);
         GameManager.instance.ChangeGameState(GameState.GAME_COUNTDOWN);
+
+        m_player1NameText.text = SessionsHandler.GetPlayerName1();
     }
 }

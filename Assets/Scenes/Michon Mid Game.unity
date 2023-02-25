@@ -2123,10 +2123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303e285194a46a74e8d4070f646445dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_player: {fileID: 0}
   m_endScreenMenu: {fileID: 466554307}
   playerLifeParent: {fileID: 1612647405}
   playerLiveObjs: []
   m_totalScoreText: {fileID: 2049766438}
+  m_player1NameText: {fileID: 1076791269}
   m_introPanel: {fileID: 756937284}
 --- !u!4 &896838263 stripped
 Transform:
@@ -3402,6 +3404,7 @@ MonoBehaviour:
   m_capCollider: {fileID: 0}
   playerIndex: 1
   m_life: 3
+  hittable: 1
   positionIndex: 0
   m_movementMultiplier: 10
   m_minX: -2
@@ -3410,6 +3413,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   movementXPositions: []
   m_offset: 0
+  hitRestartDelay: 0.5
   enableCollider: 1
 --- !u!54 &1372155199
 Rigidbody:
@@ -5512,6 +5516,7 @@ MonoBehaviour:
   m_capCollider: {fileID: 1372155200}
   playerIndex: 1
   m_life: 3
+  hittable: 1
   positionIndex: 0
   m_movementMultiplier: 10
   m_minX: -2
@@ -5520,6 +5525,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   movementXPositions: []
   m_offset: 0
+  hitRestartDelay: 0.5
   enableCollider: 1
 --- !u!1001 &6398149442851077323
 PrefabInstance:
