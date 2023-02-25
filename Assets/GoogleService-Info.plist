@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>297850186952-063n6ech971j01qpr3p45ncgg8v69s4i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.297850186952-063n6ech971j01qpr3p45ncgg8v69s4i</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB_R-osRL_-7KqR5IAKDoJzo2Twrpy51Vo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>297850186952</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.stc.scanandplayrunner</string>
+	<key>PROJECT_ID</key>
+	<string>infinevents-d8e71</string>
+	<key>STORAGE_BUCKET</key>
+	<string>infinevents-d8e71.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:297850186952:ios:869ebbb26317fd639989fd</string>
+	<key>DATABASE_URL</key>
+	<string>https://infinevents-d8e71-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
