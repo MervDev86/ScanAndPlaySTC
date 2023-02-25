@@ -32,16 +32,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] int m_totalMovementPoints = 3;
 
     [Tooltip("Calculated using Chunk Bounds")]
-    [SerializeField] float _movementDistance =3.33f;//Calculated using Chunk Bounds
-    
+    [SerializeField] float _movementDistance = 3.33f;//Calculated using Chunk Bounds
+
     [Header(" Movement")]
 
     [SerializeField] float envMovementSpeed = 0.5f;
-    [SerializeField] Vector3[] MovementSpawnPositions;
-
-    private Action<GameState> onChangedGameState;
-
-
+    [SerializeField] float speedIncreasePerPoint = 0.1f;
     public float EnvMovementSpeed
     {
         get { return envMovementSpeed; }
@@ -55,7 +51,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [SerializeField] Vector3[] MovementSpawnPositions;
+
+
+
+
     public event Action<float> OnEnvValueChanged;
+    private Action<GameState> onChangedGameState;
 
     public float GetGlobalSpeed()
     {
@@ -84,7 +86,7 @@ public class GameManager : MonoBehaviour
         scoreText.text = score.ToString();
         // Increase the player's speed
         //m_playerForwardMovement.speed += m_playerForwardMovement.speedIncreasePerPoint;
-        EnvMovementSpeed += m_playerForwardMovement.speedIncreasePerPoint;
+        EnvMovementSpeed += speedIncreasePerPoint;
     }
 
     public int GetScore()
