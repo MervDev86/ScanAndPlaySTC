@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using NetworkClientHandler;
+
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
@@ -13,6 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Transform[] playerLiveObjs;
 
     [SerializeField] TextMeshProUGUI m_totalScoreText;
+    [SerializeField] GameObject m_introPanel;
+
     private void Awake()
     {
         if (_instance == null)
@@ -21,6 +25,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         Init();
+
+        SessionsHandler.OnStartPlaying += ShowIntroPanel;
     }
 
     private void Init()
@@ -42,5 +48,10 @@ public class UIManager : MonoBehaviour
     {
         m_endScreenMenu.SetActive(true);
         m_totalScoreText.text = GameManager.instance.GetScore().ToString();
+    }
+
+    public void ShowIntroPanel(bool p_show) {
+        m_introPanel.SetActive(p_show);
+        GameManager.instance.ChangeGameState(GameState.GAME_COUNTDOWN);
     }
 }

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using System;
+using NetworkClientHandler;
 
 public enum GameState
 {
@@ -17,6 +18,9 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    public event Action<float> OnEnvValueChanged;
+    public Action<GameState> onChangedGameState;
 
     [SerializeField] int score;
 
@@ -34,11 +38,15 @@ public class GameManager : MonoBehaviour
     [Tooltip("Calculated using Chunk Bounds")]
     [SerializeField] float _movementDistance = 3.33f;//Calculated using Chunk Bounds
 
-    [Header(" Movement")]
-
+    [Header("Movement")]
     [SerializeField] float envMovementSpeed = 0.5f;
     [SerializeField] float startingSpeed = 0.2f;
     [SerializeField] float speedIncreasePerPoint = 0.1f;
+    [SerializeField] Vector3[] MovementSpawnPositions;
+    [SerializeField] SessionsHandler networkSessionHandler;
+    //[SerializeField] Countdown networkSessionHandler;
+
+
     public float EnvMovementSpeed
     {
         get { return envMovementSpeed; }
@@ -52,13 +60,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [SerializeField] Vector3[] MovementSpawnPositions;
 
 
 
 
-    public event Action<float> OnEnvValueChanged;
-    public Action<GameState> onChangedGameState;
 
     public float GetGlobalSpeed()
     {
@@ -78,7 +83,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Debug.LogWarning($"Distance Set to: {_movementDistance}");
-        ChangeGameState(GameState.GAME_COUNTDOWN);
+        ChangeGameState(GameState.MAIN_MENU);
     }
 
     #region Score
@@ -118,6 +123,7 @@ public class GameManager : MonoBehaviour
         switch (p_gameState)
         {
             case GameState.MAIN_MENU:
+
                 break;
             case GameState.GAME_COUNTDOWN:
                 EnvMovementSpeed = 0;

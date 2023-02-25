@@ -11,6 +11,8 @@ namespace NetworkClientHandler
     {
 
         //public static SessionsHandler instance;
+
+        public static Action<bool> OnStartPlaying;
         public static Action<int> OnPlayer1Move;
         public static Action OnPlayer1MoveRight;
         public static Action OnPlayer1MoveLeft;
@@ -73,44 +75,7 @@ namespace NetworkClientHandler
         protected void LoadServerListeners()
         {
             m_sessionsDB.ValueChanged += HandleSessionStatusChanged;
-            //m_sessionsDB.ChildAdded += HandlePlayerSessionDataAdded;
-            //m_sessionsDB.ChildRemoved += HandlePlayerSessionDataRemoved;
         }
-
-        //private void HandlePlayerSessionDataAdded(object sender, ChildChangedEventArgs args)
-        //{
-        //    if (args.DatabaseError != null)
-        //    {
-        //        Debug.LogError(args.DatabaseError.Message);
-        //        return;
-        //    }
-
-        //    if (args.Snapshot != null)
-        //    {
-        //        Debug.Log("dataadded::--> " + args.Snapshot.Key);
-        //        if (args.Snapshot.Key == "playe1")
-        //        {
-        //            m_DB.GetReference(REF_SESSION_PLAYER1 + "/currentPosition").ValueChanged += OnPlayer1SessionDataChanged;
-        //        }
-        //    }
-        //}
-
-        //private void HandlePlayerSessionDataRemoved(object sender, ChildChangedEventArgs args)
-        //{
-        //    if (args.DatabaseError != null)
-        //    {
-        //        Debug.LogError(args.DatabaseError.Message);
-        //        return;
-        //    }
-
-        //    if (args.Snapshot != null)
-        //    {
-        //        if (args.Snapshot.Key == "playe1")
-        //        {
-        //            m_DB.GetReference(REF_SESSION_PLAYER1 + "/currentPosition").ValueChanged -= OnPlayer1SessionDataChanged;
-        //        }
-        //    }
-        //}
 
         private void HandleSessionStatusChanged(object sender, ValueChangedEventArgs args)
         {
@@ -128,7 +93,11 @@ namespace NetworkClientHandler
                     {
                         case "isPlaying":
                             m_isPlaying = (bool) childSnapshot.Value;
-                            //Debug.Log("[isPlaying] " + m_isPlaying);
+                            Debug.Log("[isPlaying] " + m_isPlaying);
+                            if (m_isPlaying)
+                            {
+                                OnStartPlaying?.Invoke(false);
+                            }
                             break;
 
                         case "isMultiplayer":
@@ -183,6 +152,7 @@ namespace NetworkClientHandler
             } 
             else
             {
+                //OnStartPlaying?.Invoke(false);
                 OnPlayer1Move?.Invoke(1);
                 m_sessionPlayer1.ValueChanged -= OnPlayer1SessionDataChanged;
             }
