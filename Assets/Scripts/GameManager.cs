@@ -54,20 +54,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Vector3[] MovementSpawnPositions;
 
-
-
-
     public event Action<float> OnEnvValueChanged;
     public Action<GameState> onChangedGameState;
 
     public float GetGlobalSpeed()
     {
         return envMovementSpeed;
-    }
-
-    private void OnValidate()
-    {
-
     }
 
     private void Awake()

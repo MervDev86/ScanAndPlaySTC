@@ -1852,6 +1852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303e285194a46a74e8d4070f646445dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_player: {fileID: 5389327911735294484}
   m_endScreenMenu: {fileID: 466554307}
   playerLifeParent: {fileID: 1612647405}
   playerLiveObjs: []
