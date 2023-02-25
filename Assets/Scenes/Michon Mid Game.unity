@@ -1814,13 +1814,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  m_gameState: 0
+  m_gameState: 1
   scoreText: {fileID: 1996389421}
   m_playerCount: 0
   m_playerForwardMovement: {fileID: 1591612057}
   m_totalMovementPoints: 3
   _movementDistance: 2
-  envMovementSpeed: 0.2
+  envMovementSpeed: 0
+  startingSpeed: 0.2
   speedIncreasePerPoint: 0.001
   MovementSpawnPositions: []
 --- !u!4 &863502732
@@ -1851,7 +1852,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303e285194a46a74e8d4070f646445dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_startMenu: {fileID: 0}
   m_endScreenMenu: {fileID: 466554307}
   playerLifeParent: {fileID: 1612647405}
   playerLiveObjs: []
@@ -2021,6 +2021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1591612056}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1016235823
 GameObject:
   m_ObjectHideFlags: 0
@@ -3669,7 +3670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countdownText: {fileID: 1065890321}
   m_currentTimeCountDown: 0
-  m_startTime: 3
+  m_startTime: 3.5
   m_multiplier: 1
   m_gameStarted: 0
 --- !u!4 &1608136368 stripped

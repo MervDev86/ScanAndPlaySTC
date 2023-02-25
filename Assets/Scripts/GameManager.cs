@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     [Header(" Movement")]
 
     [SerializeField] float envMovementSpeed = 0.5f;
+    [SerializeField] float startingSpeed = 0.2f;
     [SerializeField] float speedIncreasePerPoint = 0.1f;
     public float EnvMovementSpeed
     {
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Debug.LogWarning($"Distance Set to: {_movementDistance}");
+        ChangeGameState(GameState.GAME_COUNTDOWN);
     }
 
     #region Score
@@ -118,8 +120,10 @@ public class GameManager : MonoBehaviour
             case GameState.MAIN_MENU:
                 break;
             case GameState.GAME_COUNTDOWN:
+                EnvMovementSpeed = 0;
                 break;
             case GameState.GAME_START:
+                EnvMovementSpeed = startingSpeed;
                 break;
             case GameState.GAME_END:
                 UIManager.Instance.ShowEndScreen();
