@@ -5,14 +5,19 @@ using UnityEngine.UI;
 using TMPro;
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject m_startMenu;
+    private static UIManager _instance;
+    public static UIManager Instance => _instance;
     [SerializeField] GameObject m_endScreenMenu;
 
     [SerializeField] GameObject playerLifeParent;
     [SerializeField] Transform[] playerLiveObjs;
 
     [SerializeField] TextMeshProUGUI m_totalScoreText;
-
+    private void Awake()
+    {
+        if (_instance == null)
+            _instance = this;
+    }
     private void Start()
     {
         Init();
@@ -35,7 +40,6 @@ public class UIManager : MonoBehaviour
 
     public void ShowEndScreen()
     {
-        GameManager.instance.ChangeGameState(GameState.GAME_END);
         m_endScreenMenu.SetActive(true);
         m_totalScoreText.text = GameManager.instance.GetScore().ToString();
     }

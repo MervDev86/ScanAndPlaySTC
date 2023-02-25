@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 
 
     public event Action<float> OnEnvValueChanged;
-    private Action<GameState> onChangedGameState;
+    public Action<GameState> onChangedGameState;
 
     public float GetGlobalSpeed()
     {
@@ -112,6 +112,21 @@ public class GameManager : MonoBehaviour
     {
         m_gameState = p_gameState;
         onChangedGameState?.Invoke(p_gameState);
+
+        switch (p_gameState)
+        {
+            case GameState.MAIN_MENU:
+                break;
+            case GameState.GAME_COUNTDOWN:
+                break;
+            case GameState.GAME_START:
+                break;
+            case GameState.GAME_END:
+                UIManager.Instance.ShowEndScreen();
+                break;
+            default:
+                break;
+        }
     }
     #endregion
 

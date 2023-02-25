@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
         alive = false;
         // Restart the game
         Debug.Log("Player Died!");
-
+        GameManager.instance.ChangeGameState(GameState.GAME_END);
         //Invoke("Restart", 2);
     }
 
