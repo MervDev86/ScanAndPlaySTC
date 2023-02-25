@@ -14,7 +14,7 @@ public class Coin : MonoBehaviour {
         }
 
         // Check that the object we collided with is the player
-        if (other.gameObject.name != "Player") {
+        if (other.gameObject.tag != "Player") {
             return;
         }
 
