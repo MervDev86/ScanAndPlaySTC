@@ -211,7 +211,8 @@ namespace NetworkClientHandler
         void OnDestroy()
         {
             //m_DB.GetReference(REF_SESSION_PLAYER1 + "/currentPosition").ValueChanged -= OnPlayer1SessionDataChanged;
-            m_sessionPlayer1.ValueChanged -= OnPlayer1SessionDataChanged;
+            if (m_sessionPlayer1 != null) m_sessionPlayer1.ValueChanged -= OnPlayer1SessionDataChanged;
+
             m_sessionsDB.ValueChanged -= HandleSessionStatusChanged;
 
             m_DB.GoOffline();
