@@ -56,23 +56,22 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EndlessRef\Scripts\Obstacle.cs" />
-    <Compile Include="Assets\EndlessRef\Scripts\Coin.cs" />
-    <Compile Include="Assets\EndlessRef\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Obstacle.cs" />
+    <Compile Include="Assets\Scripts\Coin.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\CameraController.cs" />
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\MoveCamera.cs" />
-    <Compile Include="Assets\Scripts\Platform.cs" />
     <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\GUIControllerFlying.cs" />
     <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\GUIControllerAttack.cs" />
     <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\QuerySoundController.cs" />
-    <Compile Include="Assets\EndlessRef\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\Util\ViewFPS.cs" />
     <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\GUIController.cs" />
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\AmbientController.cs" />
-    <Compile Include="Assets\EndlessRef\Scripts\GroundTile.cs" />
+    <Compile Include="Assets\Scripts\GroundTile.cs" />
     <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\QueryAnimationController.cs" />
-    <Compile Include="Assets\EndlessRef\Scripts\CameraFollow.cs" />
-    <Compile Include="Assets\EndlessRef\Scripts\GroundSpawner.cs" />
+    <Compile Include="Assets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\GroundSpawner.cs" />
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\FlyThroughController.cs" />
     <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\QueryEmotionalController.cs" />
     <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\CameraAction.cs" />
