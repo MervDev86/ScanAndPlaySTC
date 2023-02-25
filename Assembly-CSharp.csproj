@@ -83,6 +83,8 @@
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\Util\SetFPS.cs" />
     <Compile Include="Assets\Scripts\Countdown.cs" />
     <Compile Include="Assets\Scripts\Michon\SegmentBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Michon\SegmentManager.cs" />
+    <Compile Include="Assets\Scripts\Michon\ObjectMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ZRNAssets\005339_08932_25_14\Shaders\su_VertexCol_1UV_Single.shader" />
