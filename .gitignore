@@ -9,6 +9,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/Assets/[Ff]irebase/*
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -59,7 +60,8 @@ sysinfo.txt
 crashlytics-build.properties
 
 Assets/ARFoundationRemoteInstaller
-Library//
+Assets/3D
+Library/
 *.psd
 *.psd.meta
 *.zip
