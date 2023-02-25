@@ -80,6 +80,7 @@
     <Compile Include="Assets\ZRNAssets\Cars\Scripts\AICarMove.cs" />
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\ZRNGUIController.cs" />
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\Util\SetFPS.cs" />
+    <Compile Include="Assets\Scripts\Michon\ForwardMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ZRNAssets\005339_08932_25_14\Shaders\su_VertexCol_1UV_Single.shader" />

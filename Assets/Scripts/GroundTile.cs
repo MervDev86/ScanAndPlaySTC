@@ -64,11 +64,17 @@ public class GroundTile : MonoBehaviour
 
     Vector3 GetRandomPointInCollider(Collider collider)
     {
+        //Vector3 point = new Vector3(
+        //    GetXPosition(Random.Range(0, 3)),
+        //    1,
+        //    Random.Range(collider.bounds.min.z, collider.bounds.max.z)
+        //    );
+
         Vector3 point = new Vector3(
-            GetXPosition(Random.Range(0, 3)),
-            1,
-            Random.Range(collider.bounds.min.z, collider.bounds.max.z)
-            );
+           GetXPosition(Random.Range(0, 3)),
+           1,
+           GetZPosition(Random.Range(0, 3))
+           );
 
         if (point != collider.ClosestPoint(point))
         {
@@ -82,6 +88,13 @@ public class GroundTile : MonoBehaviour
         var pointDistance = (m_collider.bounds.max.x - m_collider.bounds.min.x) / m_totalSpawnPoints;
         var calculatedXPos = (m_collider.bounds.min.x + (p_posValue * pointDistance)) + m_offset;
         return calculatedXPos;
+    }
+
+    public float GetZPosition(int p_posValue)
+    {
+        var pointDistance = (m_collider.bounds.max.z - m_collider.bounds.min.z) / 15;
+        var calculatedZPos = (m_collider.bounds.min.z + (p_posValue * pointDistance)) + m_offset;
+        return calculatedZPos;
     }
 
     private void OnTriggerExit(Collider other)

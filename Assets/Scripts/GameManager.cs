@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Player Values")]
     [SerializeField] int m_playerCount;
-    [SerializeField] Player playerMovement;
+    [SerializeField] ForwardMovement m_playerForwardMovement;
     [SerializeField] int m_totalMovementPoints = 3;
     [Tooltip("Calculated using Chunk Bounds")]
     [SerializeField] float _movementDistance =3.33f;//Calculated using Chunk Bounds
@@ -50,9 +50,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _movementDistance = _movementDistance;
         Debug.LogWarning($"Distance Set to: {_movementDistance}");
-
     }
 
     #region Score
@@ -61,11 +59,10 @@ public class GameManager : MonoBehaviour
         score++;
         scoreText.text = score.ToString();
         // Increase the player's speed
-        playerMovement.speed += playerMovement.speedIncreasePerPoint;
+        m_playerForwardMovement.speed += m_playerForwardMovement.speedIncreasePerPoint;
     }
 
     #endregion
-
 
     #region Spawn and Movement
     public int GetTotalMovementPoints => m_totalMovementPoints;
@@ -73,6 +70,11 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region GameState
+
+    public GameState GetCurrentGameState()
+    {
+        return m_gameState;
+    }
 
     public void ChangeGameState(GameState p_gameState)
     {
