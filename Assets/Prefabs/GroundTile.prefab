@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 374595906407350880}
   - component: {fileID: 5148572637908866231}
   - component: {fileID: 5184653721730717373}
+  - component: {fileID: 1072904527}
   m_Layer: 0
   m_Name: GroundTile
   m_TagString: Untagged
@@ -376,3 +377,16 @@ MonoBehaviour:
   m_offset: 0.1
   calculatedPoint: {x: 0, y: 0, z: 0}
   indicatorSize: -0.3
+--- !u!114 &1072904527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682584033024778767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f4ddc2623e9d04880dc96545534bc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedDelta: {x: 0, y: 0, z: -0.1}

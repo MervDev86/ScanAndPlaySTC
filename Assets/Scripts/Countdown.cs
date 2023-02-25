@@ -9,6 +9,7 @@ public class Countdown : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_countdownText;
     [SerializeField] float m_currentTimeCountDown;
     [SerializeField] float m_startTime = 3;
+    [SerializeField] float m_multiplier = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +19,17 @@ public class Countdown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_currentTimeCountDown -= Time.fixedDeltaTime;
-        if (m_currentTimeCountDown <=0)
+        m_currentTimeCountDown -= Time.deltaTime * m_multiplier;
+        if (m_currentTimeCountDown <= 0)
         {
             m_currentTimeCountDown = 0;
-            Debug.Log("Start");
+
+            //Call GameManager to Start
+            Debug.Log("GAME START");
+            GameManager.instance.ChangeGameState(GameState.GAME_START);
         }
+
         m_countdownText.text = m_currentTimeCountDown.ToString("##");
+
     }
 }
