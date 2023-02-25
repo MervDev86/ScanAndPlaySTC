@@ -5,7 +5,7 @@ using UnityEngine;
 public class SegmentManager : MonoBehaviour
 {
     private static SegmentManager _instance;
-    public static SegmentManager Instance;
+    public static SegmentManager Instance => _instance;
 
     [SerializeField] int totalSpawn = 15;
 

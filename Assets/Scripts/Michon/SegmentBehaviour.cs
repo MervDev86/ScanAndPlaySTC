@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class SegmentBehaviour : MonoBehaviour
 {
-    //[Header("Debugger")]
-    //[SerializeField] GameObject endOfSegmentIndicator;
 
+    //[Header("Debugger")]
+    [SerializeField] GameObject endOfSegmentIndicator;
+    [SerializeField] bool showEndSegment = false;
+    private void OnTriggerExit(Collider other)
+    {
+        SegmentManager.Instance.SpawnTile(false);
+        Destroy(gameObject, 2);
+    }
     private void Start()
     {
-        //endOfSegmentIndicator.SetActive(false);
+#if !UNITY_EDITOR
+    showEndSegment = false;
+#endif
+        endOfSegmentIndicator.SetActive(showEndSegment);
     }
 
 
