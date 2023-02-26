@@ -20,12 +20,19 @@ public class Countdown : MonoBehaviour
         GameManager.instance.onChangedGameState += OnChangeState;
     }
 
-    void OnChangeState(GameState p_gameState) {
-   
-        if (p_gameState == GameState.GAME_COUNTDOWN)
+    void OnChangeState(GameState p_gameState) 
+    {
+  
+        switch (p_gameState)
         {
-            m_gameStarting = true;
+            case GameState.GAME_COUNTDOWN:
+                m_gameStarting = true; break;
+
+            case GameState.GAME_END:
+            default:
+                m_gameStarting = false; break;
         }
+       
     }
 
     // Update is called once per frame

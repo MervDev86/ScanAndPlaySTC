@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
             initPosition.x + GameManager.instance.GetMovementDistance,
             };
 
-        SessionsHandler.OnPlayer1Move += MoveToPositionIndex;
+        SessionsHandler.OnMovePlayer1 += MoveToPositionIndex;
     }
 
     private void FixedUpdate()
@@ -179,6 +179,6 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
-        SessionsHandler.OnPlayer1Move -= MoveToPositionIndex;
+        SessionsHandler.OnMovePlayer1 -= MoveToPositionIndex;
     }
 }

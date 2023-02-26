@@ -39,6 +39,13 @@ public class UIManager : MonoBehaviour
         Init();
 
         SessionsHandler.OnStartPlaying += ShowIntroPanel;
+        SessionsHandler.SetNamePlayer1 += UpdateNamePlayer1;
+    }
+
+    private void OnDestroy()
+    {
+        SessionsHandler.OnStartPlaying -= ShowIntroPanel;
+        SessionsHandler.SetNamePlayer1 -= UpdateNamePlayer1;
     }
 
     private void Init()
@@ -73,7 +80,10 @@ public class UIManager : MonoBehaviour
     public void ShowIntroPanel(bool p_show) {
         m_introPanel.SetActive(p_show);
         GameManager.instance.ChangeGameState(GameState.GAME_COUNTDOWN);
+    }
 
-        m_player1NameText.text = SessionsHandler.GetPlayerName1();
+    private void UpdateNamePlayer1(string value)
+    {
+        m_player1NameText.text = value;
     }
 }
