@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "297850186952",
+    "firebase_url": "https://infinevents-d8e71-default-rtdb.firebaseio.com",
+    "project_id": "infinevents-d8e71",
+    "storage_bucket": "infinevents-d8e71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297850186952:android:e689526a78ecbbe49989fd",
+        "android_client_info": {
+          "package_name": "com.stc.scanandplay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297850186952-jpk6g5b4qp0o6iu87k4eaql4ndfj7m8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB7gWaH_AU1MtMFt8e-l_sVwd-4htaD5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297850186952-jpk6g5b4qp0o6iu87k4eaql4ndfj7m8o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "297850186952-063n6ech971j01qpr3p45ncgg8v69s4i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.stc.scanandplayrunner"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297850186952:android:804fc59f6b0a35079989fd",
+        "android_client_info": {
+          "package_name": "com.stc.scanandplayrunner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297850186952-jpk6g5b4qp0o6iu87k4eaql4ndfj7m8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB7gWaH_AU1MtMFt8e-l_sVwd-4htaD5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297850186952-jpk6g5b4qp0o6iu87k4eaql4ndfj7m8o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "297850186952-063n6ech971j01qpr3p45ncgg8v69s4i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.stc.scanandplayrunner"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

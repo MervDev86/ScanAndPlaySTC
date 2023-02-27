@@ -3,7 +3,7 @@
 public class GroundSpawner : MonoBehaviour {
 
     [SerializeField] GameObject groundTile;
-    Vector3 nextSpawnPoint;
+    [SerializeField] Vector3 nextSpawnPoint;
 
     public void SpawnTile (bool spawnItems)
     {
@@ -11,8 +11,8 @@ public class GroundSpawner : MonoBehaviour {
         nextSpawnPoint = temp.transform.GetChild(1).transform.position;
 
         if (spawnItems) {
-            temp.GetComponent<GroundTile>().SpawnObstacle();
-            temp.GetComponent<GroundTile>().SpawnCoins();
+            //temp.GetComponent<GroundTile>().SpawnObstacle();
+            //temp.GetComponent<GroundTile>().SpawnCoins();
         }
     }
 

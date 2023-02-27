@@ -2,29 +2,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using NetworkClientHandler;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject m_startMenu;
-    [SerializeField] GameObject m_endScreenMenu;
+    private static UIManager _instance;
+    public static UIManager Instance => _instance;
+    [Header("Players")]
+    [SerializeField] Player m_player;
 
+    [Header("UI")]
+
+    [SerializeField] GameObject m_endScreenMenu;
     [SerializeField] GameObject playerLifeParent;
     [SerializeField] Transform[] playerLiveObjs;
 
+    [SerializeField] TextMeshProUGUI m_totalScoreText;
+    [SerializeField] TextMeshProUGUI m_player1NameText;
 
+    [SerializeField] GameObject m_introPanel;
+
+    int currentLife;
+
+    private void Awake()
+    {
+        if (_instance == null)
+            _instance = this;
+
+        //m_player.onPlayerHit += OnLifeChange;
+        //m_player.OnPlayerHit += OnLifeChange;
+
+    }
     private void Start()
     {
         Init();
+
+        SessionsHandler.OnStartPlaying += ShowIntroPanel;
+        SessionsHandler.SetNamePlayer1 += UpdateNamePlayer1;
+    }
+
+    private void OnDestroy()
+    {
+        SessionsHandler.OnStartPlaying -= ShowIntroPanel;
+        SessionsHandler.SetNamePlayer1 -= UpdateNamePlayer1;
     }
 
     private void Init()
     {
-        playerLiveObjs = playerLifeParent.GetComponentsInChildren<Transform>();
+        playerLiveObjs = new Transform[playerLifeParent.transform.childCount]; 
+        for (int childIndex = 0; childIndex < playerLifeParent.transform.childCount; childIndex++)
+        {
+            playerLiveObjs[childIndex] = playerLifeParent.transform.GetChild(childIndex);
+        }
+        currentLife = playerLifeParent.transform.childCount;
     }
 
-    public void OnLifeChange()
+    //public void OnLifeChange(int p_life)
+    public void UpdateLife()
     {
-
+        currentLife--;
+        Debug.Log($"player hit {currentLife}");
+        playerLiveObjs[currentLife].gameObject.SetActive(false);
     }
 
     public void StartGame()
@@ -34,6 +73,17 @@ public class UIManager : MonoBehaviour
 
     public void ShowEndScreen()
     {
-        GameManager.instance.ChangeGameState(GameState.GAME_END);
+        m_endScreenMenu.SetActive(true);
+        m_totalScoreText.text = GameManager.instance.GetScore().ToString();
+    }
+
+    public void ShowIntroPanel(bool p_show) {
+        m_introPanel.SetActive(p_show);
+        GameManager.instance.ChangeGameState(GameState.GAME_COUNTDOWN);
+    }
+
+    private void UpdateNamePlayer1(string value)
+    {
+        m_player1NameText.text = value;
     }
 }
