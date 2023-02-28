@@ -181,6 +181,7 @@ namespace NetworkClientHandler
                 Debug.Log("SessionClientHandler::--> " + p_gameState);
                 m_sessionsDB.Child(SessionsDataRef.IS_PLAYING).SetValueAsync(false).ContinueWithOnMainThread(task =>
                 {
+
                 });
 
                 OnMovePlayer1?.Invoke(1);

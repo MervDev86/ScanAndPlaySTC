@@ -42,6 +42,17 @@ public class UIManager : MonoBehaviour
         SessionsHandler.SetNamePlayer1 += UpdateNamePlayer1;
     }
 
+
+    //for simulation only
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            UpdateNamePlayer1("MABIN");
+            ShowIntroPanel(false);
+        }
+    }
+
     private void OnDestroy()
     {
         SessionsHandler.OnStartPlaying -= ShowIntroPanel;
