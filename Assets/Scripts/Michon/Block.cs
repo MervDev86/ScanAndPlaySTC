@@ -14,10 +14,10 @@ public class Block : MonoBehaviour
     [Space]
 
     [Header("Grid")]
-    //xPoints is supposed to be based off the movement points of the player
+    //xPoints is supposed to be based off the movement points of the player  | l | m = 0 | r | 
     [SerializeField] float[] xPoints = new float[3];
-    [SerializeField] int row;//DEFAULT = 3  => FOR NOW KEEP THE SAME VAL
-    [SerializeField] int column = 3;
+    [SerializeField] int column = 3;//DEFAULT = 3  => FOR NOW KEEP THE SAME VAL
+    [SerializeField] int row;
     [Space]
     [SerializeField] float zOffset;
     Vector3[,] spawnPoints;
@@ -27,6 +27,7 @@ public class Block : MonoBehaviour
     [SerializeField] float d_sphereSize = 0.3f;
     [SerializeField] Color d_color = Color.white;
     [Space]
+
     [Header("Block Visualizer")]
     [SerializeField] bool showNextBlockPreview = true;
     [SerializeField] int previewLimit = 2;

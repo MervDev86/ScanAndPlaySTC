@@ -4,48 +4,44 @@ using UnityEngine;
 
 public class SegmentManager : MonoBehaviour
 {
-    private static SegmentManager _instance;
-    public static SegmentManager Instance => _instance;
-
-    [SerializeField] int totalSpawn = 15;
-
+    [Header("Spawn Values")]
+    [Tooltip("Gameobject that handled the Spawning of this Object")]
     [SerializeField] GameObject segmentParent;
     [SerializeField] GameObject segmentPrefab;
+    [SerializeField] int totalSpawn = 15;
     [SerializeField] Vector3 nextSpawnPoint;
+    [Space]
+    [Tooltip("If theres already a preset spawn enabled")]
+    [SerializeField] GameObject initSpawn;
+    [Space]
+    [Tooltip("Found in Prefab as 'Next Point'. Sets where the next spawn object will be.")]
+    [SerializeField] float m_spawnPositionDiff;
 
-    private void Awake()
+    private void OnValidate()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-        }
+        m_spawnPositionDiff = segmentPrefab.transform.GetChild(1).transform.position.z;
     }
 
     private void Start()
     {
-        for (int i = 0; i < totalSpawn; i++)
+        for (int spawnIndex = 0; spawnIndex <= totalSpawn; spawnIndex++)
         {
-            if (i < 3)
-            {
-                SpawnTile(false);
-            }
-            else
-            {
-                SpawnTile(true);
-            }
+            if (initSpawn != null && spawnIndex < 2)
+                nextSpawnPoint = initSpawn.transform.GetChild(1).transform.position;
+            SpawnTile();
         }
     }
 
-    public void SpawnTile(bool spawnItems)
+    public void SpawnTile()
     {
         GameObject temp = Instantiate(segmentPrefab, nextSpawnPoint, Quaternion.identity);
+        temp.GetComponent<SegmentBehaviour>().SetSpawnParent(this);
         temp.transform.parent = segmentParent.transform;
         nextSpawnPoint = temp.transform.GetChild(1).transform.position;
-
-        if (spawnItems)
-        {
-            //temp.GetComponent<GroundTile>().SpawnObstacle();
-            //temp.GetComponent<GroundTile>().SpawnCoins();
-        }
     }
+
+    public float GetLastSpawnPosition() => (totalSpawn - 1) * m_spawnPositionDiff;
+    public int GetTotalSpawnCount() => totalSpawn;
+    public float GetSpawnPositionDifference() => m_spawnPositionDiff;
+
 }

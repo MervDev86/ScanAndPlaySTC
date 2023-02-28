@@ -684,10 +684,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007f701fccb49a94eac4b3c09a92182b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalSpawn: 3
   segmentParent: {fileID: 2095795602}
   segmentPrefab: {fileID: 3214024949219647480, guid: 6f34c642cda1d0744b84316b00263e9c, type: 3}
+  totalSpawn: 4
   nextSpawnPoint: {x: 0, y: 0, z: 0}
+  initSpawn: {fileID: 1781751893}
+  m_spawnPositionDiff: 190.41
 --- !u!1 &377409279
 GameObject:
   m_ObjectHideFlags: 0
@@ -1941,7 +1943,7 @@ MonoBehaviour:
   m_totalMovementPoints: 3
   _movementDistance: 2
   envMovementSpeed: 0
-  startingSpeed: 0.2
+  startingSpeed: 4
   speedIncreasePerPoint: 0.001
   MovementSpawnPositions: []
 --- !u!4 &863502732
@@ -2849,8 +2851,8 @@ MonoBehaviour:
   - -2
   - 0
   - 2
-  row: 3
   column: 4
+  row: 3
   zOffset: 1.14
   d_sphereSize: 0.32
   d_color: {r: 1, g: 0.17647058, b: 0.34843478, a: 1}
@@ -3520,6 +3522,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1781751893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3214024949219647480, guid: 6f34c642cda1d0744b84316b00263e9c, type: 3}
+  m_PrefabInstance: {fileID: 3214024948612089851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1817726274
 GameObject:
   m_ObjectHideFlags: 0
@@ -4176,10 +4183,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2095795603}
     m_Modifications:
-    - target: {fileID: 2050759054856691758, guid: 6f34c642cda1d0744b84316b00263e9c, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3214024949219647480, guid: 6f34c642cda1d0744b84316b00263e9c, type: 3}
       propertyPath: m_Name
       value: Segment
@@ -4189,9 +4192,13 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3214024949219647486, guid: 6f34c642cda1d0744b84316b00263e9c, type: 3}
-      propertyPath: segmentSpawner
+      propertyPath: m_spawnParent
       value: 
       objectReference: {fileID: 374466448}
+    - target: {fileID: 3214024949219647486, guid: 6f34c642cda1d0744b84316b00263e9c, type: 3}
+      propertyPath: m_showEndSegment
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3214024949219647487, guid: 6f34c642cda1d0744b84316b00263e9c, type: 3}
       propertyPath: m_RootOrder
       value: 2
