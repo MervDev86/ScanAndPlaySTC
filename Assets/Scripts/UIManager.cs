@@ -8,7 +8,7 @@ using NetworkClientHandler;
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
-    public static UIManager Instance => _instance;
+
     [Header("Players")]
     [SerializeField] Player m_player;
 

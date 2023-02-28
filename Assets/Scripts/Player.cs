@@ -4,6 +4,7 @@ using System;
 
 using NetworkClientHandler;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -40,6 +41,9 @@ public class Player : MonoBehaviour
 
     public static Action onPlayerMoveRight;
     public static Action onPlayerMoveLeft;
+    
+    [SerializeField] private KeyCode m_moveLeftKey;
+    [SerializeField] private KeyCode m_moveRightKey;
 
     #region Lifecycles
 
@@ -52,7 +56,7 @@ public class Player : MonoBehaviour
         positionIndex = 1;
 
         m_offset = GameManager.instance.GetMovementDistance;
-        initPosition = transform.position;
+        initPosition = transform.localPosition;
 
         movementXPositions = new[] {
              initPosition.x - GameManager.instance.GetMovementDistance,
@@ -66,7 +70,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         //if (!alive) return;
-        transform.position = new Vector3(Mathf.Lerp(transform.position.x, targetPosition.x, Time.fixedDeltaTime * m_movementMultiplier), transform.position.y, transform.position.z);
+        transform.localPosition = new Vector3(Mathf.Lerp(transform.localPosition.x, targetPosition.x, Time.fixedDeltaTime * m_movementMultiplier), transform.localPosition.y, transform.localPosition.z);
     }
 
     private void Update()
@@ -74,28 +78,16 @@ public class Player : MonoBehaviour
         if (!alive)
             return;
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(m_moveLeftKey))
         {
             MoveLeft();
-
-            //positionIndex--;
-            //if (positionIndex <= 0)
-            //    positionIndex = 0;
-            ////transform.position = new Vector3(Mathf.Clamp(transform.position.x - 2, m_minX, m_maxX), transform.position.y, transform.position.z);
-            ////targetPosition = new Vector3(movementXPositions[positionIndex].x, movementXPositions[positionIndex].y, transform.position.z);
-            //targetPosition.x = movementXPositions[positionIndex];
+            Debug.Log(this.name + " : left");
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(m_moveRightKey))
         {
             MoveRight();
-
-            //positionIndex++;
-            //if (positionIndex >= movementXPositions.Length)
-            //    positionIndex = movementXPositions.Length - 1;
-            //targetPosition.x = movementXPositions[positionIndex];
-            ////targetPosition = new Vector3(movementXPositions[positionIndex].x, movementXPositions[positionIndex].y, transform.position.z);
-            ////transform.position = new Vector3(Mathf.Clamp(transform.position.x + 2, m_minX, m_maxX), transform.position.y, transform.position.z);
+            Debug.Log(this.name + " : right");
         }
 
         if (transform.position.y < -5)
@@ -109,8 +101,6 @@ public class Player : MonoBehaviour
         positionIndex--;
         if (positionIndex <= 0)
             positionIndex = 0;
-        //transform.position = new Vector3(Mathf.Clamp(transform.position.x - 2, m_minX, m_maxX), transform.position.y, transform.position.z);
-        //targetPosition = new Vector3(movementXPositions[positionIndex].x, movementXPositions[positionIndex].y, transform.position.z);
         targetPosition.x = movementXPositions[positionIndex];
     }
 
@@ -121,8 +111,6 @@ public class Player : MonoBehaviour
             positionIndex = movementXPositions.Length - 1;
 
         targetPosition.x = movementXPositions[positionIndex];
-        //targetPosition = new Vector3(movementXPositions[positionIndex].x, movementXPositions[positionIndex].y, transform.position.z);
-        //transform.position = new Vector3(Mathf.Clamp(transform.position.x + 2, m_minX, m_maxX), transform.position.y, transform.position.z);
     }
 
     private void MoveToPositionIndex(int p_index)
@@ -148,11 +136,9 @@ public class Player : MonoBehaviour
             }
             Debug.Log("Life: " + m_life);
 
-            UIManager.Instance.UpdateLife();
+            // UIManager.Instance.UpdateLife();
         }
-        else { return; }
-
-       
+   
     }
 
     private IEnumerator HitRestartDelay()

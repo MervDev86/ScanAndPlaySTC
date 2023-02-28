@@ -59,20 +59,10 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
-
-
-
-
-
+    
     public float GetGlobalSpeed()
     {
         return envMovementSpeed;
-    }
-
-    private void OnValidate()
-    {
-
     }
 
     private void Awake()
@@ -132,7 +122,7 @@ public class GameManager : MonoBehaviour
                 EnvMovementSpeed = startingSpeed;
                 break;
             case GameState.GAME_END:
-                UIManager.Instance.ShowEndScreen();
+                // UIManager.Instance.ShowEndScreen();
                 break;
             default:
                 break;

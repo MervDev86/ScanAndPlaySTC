@@ -12,11 +12,11 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{28d339a5-4bb1-5150-7a9c-e01ba3036be5}</ProjectGuid>
+    <ProjectGuid>{e08d3bd9-211b-c766-8613-a21092a77b32}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>UnityEngine.UI.Tests</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -41,26 +41,18 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\Image" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\Toggle" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\Button" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\ScrollBar" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\Graphic" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\TextEditor" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\Slider" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime" />
-     <None Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\UnityEngine.UI.Tests.asmdef" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\InputField" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\EventSystem\InputModuleTests" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\Canvas" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\Dropdown" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\MaskClipping" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\ScrollRect" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\EventSystem" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\Layout" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\LayoutGroup" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\Util" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests\Runtime\NestedLayout" />
+     <None Include="Assets\Firebase\Editor\FirebaseDatabase_version-10.5.0_manifest.txt" />
+     <Folder Include="Assets\Scripts\Editor" />
+     <None Include="Assets\Firebase\Editor\FirebaseAnalytics_version-10.5.0_manifest.txt" />
+     <Folder Include="Assets\ExternalDependencyManager\Editor" />
+     <Folder Include="Assets\Firebase\Editor" />
+     <None Include="Assets\Firebase\Editor\AuthDependencies.xml" />
+     <None Include="Assets\Firebase\Editor\AppDependencies.xml" />
+     <None Include="Assets\Firebase\Editor\FirebaseAuth_version-10.5.0_manifest.txt" />
+     <None Include="Assets\Firebase\Editor\AnalyticsDependencies.xml" />
+     <None Include="Assets\ExternalDependencyManager\Editor\external-dependency-manager_version-1.2.175_manifest.txt" />
+     <Folder Include="Assets\ExternalDependencyManager\Editor\1.2.175" />
+     <None Include="Assets\Firebase\Editor\DatabaseDependencies.xml" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.19f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
      </Reference>

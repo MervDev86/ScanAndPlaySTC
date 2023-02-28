@@ -1,16 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SegmentBehaviour : MonoBehaviour
+public class Segment : MonoBehaviour
 {
-    //[Header("Debugger")]
-    //[SerializeField] GameObject endOfSegmentIndicator;
+    public Transform spawnPoint;
 
     private void Start()
     {
         //endOfSegmentIndicator.SetActive(false);
     }
 
+    private void Update()
+    {
 
+    }
 }
