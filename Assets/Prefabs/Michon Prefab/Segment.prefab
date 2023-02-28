@@ -18600,8 +18600,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3214024949219647487}
-  - component: {fileID: 3214024949219647486}
   - component: {fileID: 3214024949219647484}
+  - component: {fileID: 3214024949219647486}
   - component: {fileID: 3214024949219647485}
   m_Layer: 0
   m_Name: Segment
@@ -18628,21 +18628,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3214024949219647486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3214024949219647480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84f4ddc2623e9d04880dc96545534bc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  segmentSpawner: {fileID: 0}
-  endOfSegmentIndicator: {fileID: 3214024948670561981}
-  showEndSegment: 0
 --- !u!65 &3214024949219647484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18656,6 +18641,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 14.889054, y: 3.2790952, z: 193.36974}
   m_Center: {x: 0.11326456, y: 1.1395473, z: 93.73754}
+--- !u!114 &3214024949219647486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3214024949219647480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f4ddc2623e9d04880dc96545534bc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endOfSegmentIndicator: {fileID: 3214024948670561981}
+  showEndSegment: 0
 --- !u!114 &3214024949219647485
 MonoBehaviour:
   m_ObjectHideFlags: 0

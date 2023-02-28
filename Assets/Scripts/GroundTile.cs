@@ -42,7 +42,6 @@ public class GroundTile : MonoBehaviour
     }
     #endregion
 
-
     public void SpawnObstacle()
     {
         // Choose a random point to spawn the obstacle

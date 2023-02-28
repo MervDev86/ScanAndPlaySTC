@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SegmentBehaviour : MonoBehaviour
 {
-
     //[Header("Debugger")]
     [SerializeField] GameObject endOfSegmentIndicator;
     [SerializeField] bool showEndSegment = false;

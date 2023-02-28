@@ -13,7 +13,6 @@ public class SegmentManager : MonoBehaviour
     [SerializeField] GameObject segmentPrefab;
     [SerializeField] Vector3 nextSpawnPoint;
 
-
     private void Awake()
     {
         if (_instance == null)
@@ -21,6 +20,7 @@ public class SegmentManager : MonoBehaviour
             _instance = this;
         }
     }
+
     private void Start()
     {
         for (int i = 0; i < totalSpawn; i++)
@@ -35,6 +35,7 @@ public class SegmentManager : MonoBehaviour
             }
         }
     }
+
     public void SpawnTile(bool spawnItems)
     {
         GameObject temp = Instantiate(segmentPrefab, nextSpawnPoint, Quaternion.identity);
