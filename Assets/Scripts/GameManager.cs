@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using System;
 using NetworkClientHandler;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -21,19 +22,9 @@ public class GameManager : MonoBehaviour
 
     public event Action<float> OnEnvValueChanged;
     public Action<GameState> onChangedGameState;
-
-    [SerializeField] int score;
-
+    
     [Header("Game Values")]
     [SerializeField] GameState m_gameState;
-
-    [Header("UI")]
-    [SerializeField] TextMeshProUGUI scoreText;
-
-    [Header("Player Values")]
-    [SerializeField] int m_playerCount;
-    [SerializeField] ForwardMovement m_playerForwardMovement;
-    [SerializeField] int m_totalMovementPoints = 3;
 
     [Tooltip("Calculated using Chunk Bounds")]
     [SerializeField] float _movementDistance = 3.33f;//Calculated using Chunk Bounds
@@ -41,11 +32,57 @@ public class GameManager : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float envMovementSpeed = 0.5f;
     [SerializeField] float startingSpeed = 0.2f;
-    [SerializeField] float speedIncreasePerPoint = 0.1f;
-    [SerializeField] Vector3[] MovementSpawnPositions;
-    [SerializeField] SessionsHandler networkSessionHandler;
-    //[SerializeField] Countdown networkSessionHandler;
+    [SerializeField] private Player m_player1;
+    [SerializeField] private Player m_player2;
 
+    private bool m_isSinglePlayer = true; 
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Start()
+    {
+        ChangeGameState(GameState.MAIN_MENU);
+        SessionsHandler.OnInitializeGame += OnInitializeGame;
+        SessionsHandler.OnPlayer1SetName += m_player1.SetPlayerName;
+        SessionsHandler.OnPlayer2SetName += m_player2.SetPlayerName;
+        SessionsHandler.OnMovePlayer1 += m_player1.MoveToPositionIndex;
+        SessionsHandler.OnMovePlayer2 += m_player2.MoveToPositionIndex;
+    }
+
+    private void OnDestroy()
+    {
+        SessionsHandler.OnInitializeGame -= OnInitializeGame;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {  
+            Restart();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {  
+            Application.Quit();
+        }
+        
+        //For Debug Only
+        if (Input.GetKeyDown(KeyCode.F1)) //Start 1 player game
+        {
+            OnInitializeGame(1);
+            m_player1.SetPlayerName("Mabin");
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F2)) //Start 2 player game
+        {
+            OnInitializeGame(2);
+            m_player1.SetPlayerName("Mervin");
+            m_player2.SetPlayerName("Rainne");
+        }
+        
+    }
 
     public float EnvMovementSpeed
     {
@@ -59,42 +96,29 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    
+
+    public void OnInitializeGame(int m_playerCount) //TODO listen to server to start the game
+    {
+        m_isSinglePlayer = m_playerCount == 1;
+        if (m_playerCount == 1)
+        {
+            m_player1.InitPlayer(m_isSinglePlayer);
+            m_player2.ResetPlayer();
+        }
+        else
+        {
+            m_player1.InitPlayer(m_isSinglePlayer);
+            m_player2.InitPlayer(m_isSinglePlayer);
+        }
+    }
+
     public float GetGlobalSpeed()
     {
         return envMovementSpeed;
     }
 
-    private void Awake()
-    {
-        instance = this;
-    }
-
-    private void Start()
-    {
-        Debug.LogWarning($"Distance Set to: {_movementDistance}");
-        ChangeGameState(GameState.MAIN_MENU);
-    }
-
-    #region Score
-    public void IncrementScore()
-    {
-        score++;
-        scoreText.text = score.ToString();
-        // Increase the player's speed
-        //m_playerForwardMovement.speed += m_playerForwardMovement.speedIncreasePerPoint;
-        EnvMovementSpeed += speedIncreasePerPoint;
-    }
-
-    public int GetScore()
-    {
-        return score;
-    }
-
-    #endregion
 
     #region Spawn and Movement
-    public int GetTotalMovementPoints => m_totalMovementPoints;
     public float GetMovementDistance => _movementDistance;
     #endregion
 
@@ -128,6 +152,12 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+    
+    void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
+    
     #endregion
 
     #region Debug

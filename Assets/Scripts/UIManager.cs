@@ -8,13 +8,8 @@ using NetworkClientHandler;
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
-
-    [Header("Players")]
-    [SerializeField] Player m_player;
-
+    
     [Header("UI")]
-
-    [SerializeField] GameObject m_endScreenMenu;
     [SerializeField] GameObject playerLifeParent;
     [SerializeField] Transform[] playerLiveObjs;
 
@@ -39,7 +34,7 @@ public class UIManager : MonoBehaviour
         Init();
 
         SessionsHandler.OnStartPlaying += ShowIntroPanel;
-        SessionsHandler.SetNamePlayer1 += UpdateNamePlayer1;
+        SessionsHandler.OnPlayer1SetName += UpdateNamePlayer1;
     }
 
 
@@ -56,7 +51,7 @@ public class UIManager : MonoBehaviour
     private void OnDestroy()
     {
         SessionsHandler.OnStartPlaying -= ShowIntroPanel;
-        SessionsHandler.SetNamePlayer1 -= UpdateNamePlayer1;
+        SessionsHandler.OnPlayer1SetName -= UpdateNamePlayer1;
     }
 
     private void Init()
@@ -84,8 +79,8 @@ public class UIManager : MonoBehaviour
 
     public void ShowEndScreen()
     {
-        m_endScreenMenu.SetActive(true);
-        m_totalScoreText.text = GameManager.instance.GetScore().ToString();
+        // m_endScreenMenu.SetActive(true);
+        // m_totalScoreText.text = GameManager.instance.GetScore().ToString();
     }
 
     public void ShowIntroPanel(bool p_show) {

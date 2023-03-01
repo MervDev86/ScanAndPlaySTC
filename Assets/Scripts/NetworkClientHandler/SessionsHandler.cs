@@ -19,14 +19,19 @@ namespace NetworkClientHandler
         //public static SessionsHandler instance;
 
         public static Action<bool> OnStartPlaying;
+        
+        //MERVIN ADDED
+        public static Action<int> OnInitializeGame; //Set how many players
 
-        #region PLAYER_1 Events
+        #region PLAYER_Movement
         public static Action<int> OnMovePlayer1;
-        public static Action<string> SetNamePlayer1;
+        public static Action<string> OnPlayer1SetName;
+        
+        public static Action<int> OnMovePlayer2;
+        public static Action<string> OnPlayer2SetName;
 
-        public static Action OnPlayer1MoveRight;    //not used
-        public static Action OnPlayer1MoveLeft;     //not used
-        #endregion PLAYER_1 Events
+
+        #endregion PLAYER_Movement
 
 
         private static string DB_SESSIONS = "stcrunner_sessions";
@@ -116,17 +121,23 @@ namespace NetworkClientHandler
                         {
                             if (task.IsCompleted)
                             {
-                                SetNamePlayer1?.Invoke((string)task.Result.Child("firstname").Value);
-                            }
-                            else
-                            {
-                                return;
+                                string player1Name = (string)task.Result.Child("firstname").Value;
+                                OnPlayer1SetName?.Invoke(player1Name); //Initialize Player when name is added
                             }
                         });
                         break;
 
                     case "player2":
                         Debug.Log("[PLAYER_2 :: added] uuid = " + args.Snapshot.Child("uuid").Value);
+                        string uuidP2 = (string) args.Snapshot.Child("uuid").Value;
+                        m_registrationsDB.Child(uuidP2).GetValueAsync().ContinueWithOnMainThread(task =>
+                        {
+                            if (task.IsCompleted)
+                            {
+                                string player2Name = (string)task.Result.Child("firstname").Value;
+                                OnPlayer2SetName?.Invoke(player2Name); //Initialize Player when name is added
+                            }
+                        });
                         break;
                 }
             }
@@ -153,7 +164,6 @@ namespace NetworkClientHandler
                     {
                         m_sessionsDB.ChildChanged -= HandleSessionsChildChanged;
                         OnMovePlayer1?.Invoke(1);
-                        return;
                     } 
                     else
                     {
@@ -164,7 +174,6 @@ namespace NetworkClientHandler
                             if (position == -1) OnMovePlayer1?.Invoke(0);
                             else if (position == 1) OnMovePlayer1?.Invoke(2);
                             else OnMovePlayer1?.Invoke(1);  // (position == 0)
-                            return;
                         }
                     }
                 }

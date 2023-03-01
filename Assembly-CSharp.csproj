@@ -71,6 +71,7 @@
      <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\ZRNGUIController.cs" />
      <Compile Include="Assets\Scripts\Countdown.cs" />
      <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\Util\SetFPS.cs" />
+     <Compile Include="Assets\Scripts\PlayerHud.cs" />
      <Folder Include="Assets" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\mergetool.ja.txt" />
      <Folder Include="Assets\ZRNAssets\PQAssets\Query-Chan" />
@@ -101,6 +102,7 @@
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\images.es.txt" />
      <None Include="Library\PackageCache\com.unity.modules.ai@1.0.0\package.json" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\differences.es.txt" />
+     <Folder Include="Assets\Fonts\OTFs" />
      <Folder Include="Assets\ZRNAssets\PQAssets\Query-Chan\Textures\icon" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\commontypes.zh-Hans.txt" />
      <Folder Include="Assets\Firebase\m2repository\com\google" />
@@ -233,6 +235,7 @@
      <Folder Include="Assets\Traffic Essentials Asset Pack\NEWPrefabs" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\basecommands.en.txt" />
      <Folder Include="Assets\ZRNAssets" />
+     <Folder Include="Assets\Fonts\WOFFs" />
      <Folder Include="Assets\Scripts\Objects" />
      <Folder Include="Library\PackageCache\com.unity.modules.vr@1.0.0" />
      <Folder Include="Library\PackageCache\com.unity.testtools.codecoverage@1.2.2" />
@@ -328,6 +331,7 @@
      <Folder Include="Assets\3D\Group_C\Group_C.fbm" />
      <Folder Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor" />
      <Folder Include="Assets\ZRNAssets\Skyboxes\Textures\Overcast1" />
+     <Folder Include="Assets\Fonts" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\plastic-gui.es.txt" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\images.en.txt" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\binmergetool.ja.txt" />
@@ -435,6 +439,7 @@
      <None Include="Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0\package.json" />
      <None Include="Library\PackageCache\com.unity.modules.uielements@1.0.0\package.json" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\plastic-gui.ja.txt" />
+     <Folder Include="Assets\Fonts\TTFs" />
      <Folder Include="Assets\ZRNAssets\PQAssets\Query-Chan\Sounds\Voice\01_Greetings" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\i3.en.txt" />
      <Folder Include="Assets\ZRNAssets\Cars\Models" />
