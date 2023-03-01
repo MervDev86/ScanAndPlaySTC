@@ -7,11 +7,18 @@ public class SegmentBehaviour : MonoBehaviour
     [Header("Objs")]
     [SerializeField] SegmentManager m_spawnParent;
     [SerializeField] Vector3 m_respawnPoint;
-    
+    [Header("Block Settings")]
+    [SerializeField] GameObject m_initialBlock;
+    [SerializeField] Transform m_blockParent;
+    [SerializeField] GameObject m_blockPrefab;
+    [SerializeField] int m_totalBlockCount = 17;
+
     [Header("Debugger")]
     [SerializeField] bool m_showEndSegment = false;
     [SerializeField] float m_segmentPosLimit = -200;
     [SerializeField] GameObject endOfSegmentIndicator;
+
+    #region LifeCycle
 
     private void Start()
     {
@@ -20,6 +27,8 @@ public class SegmentBehaviour : MonoBehaviour
 #endif
         endOfSegmentIndicator.SetActive(m_showEndSegment);
         m_respawnPoint = new Vector3(transform.position.x, transform.position.y, m_spawnParent.GetLastSpawnPosition());
+
+        SpawnBlocks();
     }
 
     private void LateUpdate()
@@ -28,6 +37,18 @@ public class SegmentBehaviour : MonoBehaviour
         {
             Respawn();
         }
+    }
+    #endregion
+
+    void SpawnBlocks()
+    {
+        var blockPositionArr = Block.GetBlockSpawnPoints(m_totalBlockCount, m_initialBlock.transform.position);
+        for (int spawnIndex = 1; spawnIndex < blockPositionArr.Length; spawnIndex++)
+        {
+            var tempBlock = Instantiate(m_blockPrefab, m_blockParent);
+            tempBlock.transform.position = blockPositionArr[spawnIndex];
+        }
+
     }
 
     #region Respawn Functions

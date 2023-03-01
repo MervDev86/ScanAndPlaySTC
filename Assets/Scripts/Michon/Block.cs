@@ -11,12 +11,10 @@ public class Block : MonoBehaviour
     [Header("Spawner")]
     [SerializeField] GameObject m_coinPrefab;
     [SerializeField] GameObject m_ObstaclePrefab;
-    [SerializeField] Transform originTransform;
-    [SerializeField] int obstacleSpawnLimit = 1;
     [Space]
 
     [Header("Grid")]
-    //xPoints is supposed to be based off the movement points of the player  | l | m = 0 | r | 
+    //xPoints is supposed to be based off the movement points of the player  | l | m = 0 | r |   ++ current: -2 0 2
     [SerializeField] float[] xPoints = new float[3];
     [SerializeField] int column = 3;//DEFAULT = 3  => FOR NOW KEEP THE SAME VAL
     [SerializeField] int row;
@@ -39,12 +37,13 @@ public class Block : MonoBehaviour
     public float maxXBounds;
     public float maxYBounds;
     public static float zSize = 0;
+
     private void OnValidate()
     {
         if (m_collider == null)
             m_collider = GetComponent<BoxCollider>();
 
-        InitGridLayout();
+        InitGridLayout(); // To Keep track of the spawn Positions
     }
 
     private void Start()
@@ -61,11 +60,6 @@ public class Block : MonoBehaviour
         InitGridLayout();
     }
 
-    [ContextMenu("Block/Check Collider Length")]
-    public void GetColliderLength()
-    {
-        zSize = GetComponent<BoxCollider>().bounds.size.z;
-    }
 
     void InitGridLayout()
     {
@@ -162,8 +156,8 @@ public class Block : MonoBehaviour
         }
     }
 
-    [ContextMenu("Show Values")]
-    public void ShowValues()
+    [ContextMenu("Debug/Print Spawn Point Values")]
+    public void PrintSpawnValues()
     {
         string info = "";
         for (int xIndex = 0; xIndex < row; xIndex++)
@@ -176,6 +170,25 @@ public class Block : MonoBehaviour
             info += "\n";
         }
         Debug.Log(info);
+    }
+
+    [ContextMenu("Block/Check Collider Length")]
+    public void GetColliderLength()
+    {
+        zSize = GetComponent<BoxCollider>().bounds.size.z;
+    }
+
+    public static Vector3[] GetBlockSpawnPoints(int p_count, Vector3 p_initialBlockPosition)
+    {
+        Vector3[] spawnPoints = new Vector3[p_count];
+
+        for (int spawnPointIndex = 0; spawnPointIndex < spawnPoints.Length; spawnPointIndex++)
+        {
+            spawnPoints[spawnPointIndex] = p_initialBlockPosition + new Vector3(p_initialBlockPosition.x, p_initialBlockPosition.y, zSize * spawnPointIndex);
+        }
+
+
+        return spawnPoints;
     }
     #endregion
 
