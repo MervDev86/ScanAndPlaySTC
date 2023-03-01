@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class Block : MonoBehaviour
 {
     [SerializeField] BoxCollider m_collider;
@@ -51,6 +51,7 @@ public class Block : MonoBehaviour
     {
         m_collider = this.gameObject.GetComponent<BoxCollider>();
 
+        DestroySpawnedItems();
         InitGridLayout();
         SpawnItems();
     }
@@ -132,7 +133,6 @@ public class Block : MonoBehaviour
         Gizmos.color = d_color;
         foreach (var item in spawnPoints)
         {
-
             Gizmos.DrawSphere(transform.position + item, d_sphereSize);
         }
     }
@@ -147,6 +147,18 @@ public class Block : MonoBehaviour
                 //Gizmos.DrawCube(transform.position , m_collider.size);
                 Gizmos.DrawCube(transform.position + new Vector3(transform.position.x, transform.position.y, m_collider.size.z * i), m_collider.size);
             }
+        }
+    }
+
+
+    [ContextMenu("Kill Children")]
+    public void DestroySpawnedItems()
+    {
+        if (transform.childCount == 0)
+            return;
+        for (int childIndex = 0; childIndex < transform.childCount; childIndex++)
+        {
+            Destroy(transform.GetChild(childIndex).gameObject);
         }
     }
 

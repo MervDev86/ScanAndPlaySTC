@@ -27,7 +27,10 @@ public class SegmentManager : MonoBehaviour
         for (int spawnIndex = 0; spawnIndex <= totalSpawn; spawnIndex++)
         {
             if (initSpawn != null && spawnIndex < 1)
+            {
                 nextSpawnPoint = initSpawn.transform.GetChild(1).transform.position;
+                continue;
+            }
             SpawnTile(spawnIndex);
         }
     }
@@ -41,7 +44,7 @@ public class SegmentManager : MonoBehaviour
         nextSpawnPoint = temp.transform.GetChild(1).transform.position;
     }
 
-    public float GetLastSpawnPosition() => (totalSpawn - 1) * m_spawnPositionDiff;
+    public float GetLastSpawnPosition() => (totalSpawn) * m_spawnPositionDiff;
     public int GetTotalSpawnCount() => totalSpawn;
     public float GetSpawnPositionDifference() => m_spawnPositionDiff;
 

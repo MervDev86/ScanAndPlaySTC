@@ -4108,6 +4108,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Segment
       objectReference: {fileID: 0}
+    - target: {fileID: 2638800641994311684, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+      propertyPath: column
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638800641994311684, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+      propertyPath: zOffset
+      value: -4.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638800641994311684, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+      propertyPath: d_sphereSize
+      value: -0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638800641994311684, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+      propertyPath: xPoints.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1de230376836caf47a8bf90976354c21, type: 3}
 --- !u!1001 &3250592240796308338
