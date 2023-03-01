@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player m_player1;
     [SerializeField] private Player m_player2;
 
+    [SerializeField] GameObject m_introPanel;
+
     private bool m_isSinglePlayer = true; 
     private void Awake()
     {
@@ -45,8 +47,8 @@ public class GameManager : MonoBehaviour
     {
         ChangeGameState(GameState.MAIN_MENU);
         SessionsHandler.OnInitializeGame += OnInitializeGame;
-        SessionsHandler.OnPlayer1SetName += m_player1.SetPlayerName;
-        SessionsHandler.OnPlayer2SetName += m_player2.SetPlayerName;
+        SessionsHandler.OnPlayer1SetName += m_player1.SetPlayerReady;
+        SessionsHandler.OnPlayer2SetName += m_player2.SetPlayerReady;
         SessionsHandler.OnMovePlayer1 += m_player1.MoveToPositionIndex;
         SessionsHandler.OnMovePlayer2 += m_player2.MoveToPositionIndex;
     }
@@ -72,16 +74,58 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1)) //Start 1 player game
         {
             OnInitializeGame(1);
-            m_player1.SetPlayerName("Mabin");
+            m_introPanel.SetActive(false);
         }
         
         if (Input.GetKeyDown(KeyCode.F2)) //Start 2 player game
         {
             OnInitializeGame(2);
-            m_player1.SetPlayerName("Mervin");
-            m_player2.SetPlayerName("Rainne");
+            m_introPanel.SetActive(false);
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.F3)) //Simulate Player1 Ready
+        {
+            m_player1.SetPlayerReady("Mabin");
+            StartGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F4)) //Simulate Player1 Ready
+        {
+            m_player2.SetPlayerReady("Rainne");
+            StartGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F5)) //Simulate Player1 Ready
+        {
+            m_player1.GameOver();
+            if (!m_isSinglePlayer)
+                m_player2.GameOver();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z)) //Simulate Player1 Ready
+        {
+            m_player1.AddScore(5);
+        }
+
+        if (Input.GetKeyDown(KeyCode.X)) //Simulate Player1 Ready
+        {
+            m_player2.AddScore(5);
+        }
+    }
+
+    void StartGame()
+    {
+        if (m_isSinglePlayer && m_player1.playerStat == PlayerStatus.Ready)
+        {
+            m_player1.StartGame();
+        }
+        else if (!m_isSinglePlayer 
+            && m_player1.playerStat == PlayerStatus.Ready 
+            && m_player2.playerStat == PlayerStatus.Ready) //Start game if both players are ready
+        {
+            m_player1.StartGame();
+            m_player2.StartGame();
+        }
     }
 
     public float EnvMovementSpeed

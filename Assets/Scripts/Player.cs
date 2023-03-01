@@ -9,6 +9,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : MonoBehaviour
 {
+    public PlayerStatus playerStat = PlayerStatus.Waiting;
     public int playerID = 1;
     public int score = 0;
     public string playerName = "PLAYER";
@@ -30,44 +31,65 @@ public class Player : MonoBehaviour
     bool m_isActive = false;
     private bool m_isSingle = true;
 
-    #region Lifecycles
-
     public void InitPlayer(bool p_isSingle)
     {
-        score = 0;
         m_isSingle = p_isSingle;
+
+        score = 0;
+        m_playerHUD.SetScore(score);
+ 
         m_positionIndex = 1;
         m_initPosition = transform.localPosition;
 
         m_movementXPositions = new[] {
             m_initPosition.x - GameManager.instance.GetMovementDistance,
-            (float)m_initPosition.x,
+            m_initPosition.x,
             m_initPosition.x + GameManager.instance.GetMovementDistance,
         };
+
         m_playerHUD.gameObject.SetActive(true);
         m_isActive = false;
-        StopAllCoroutines();
-        StartCoroutine(StartGameSeq());
+        m_playerHUD.InitHud(p_isSingle);
+        playerStat = PlayerStatus.Waiting;
     }
 
     IEnumerator StartGameSeq()
     {
-        m_playerHUD.SetCountDown("3");
+        Debug.Log("StartGameSeq");
+        m_playerHUD.SetIntroPanel("3");
         yield return new WaitForSeconds(1);
-        m_playerHUD.SetCountDown("2");
+        m_playerHUD.SetIntroPanel("2");
         yield return new WaitForSeconds(1);
-        m_playerHUD.SetCountDown("1");
+        m_playerHUD.SetIntroPanel("1");
         yield return new WaitForSeconds(1);
-        m_playerHUD.SetCountDown("GO!");
+        m_playerHUD.SetIntroPanel("GO!",180);
         yield return new WaitForSeconds(1);
-        m_playerHUD.SetCountDown("");
+        m_playerHUD.SetIntroPanel("");
         m_isActive = true;
     }
 
-    public void SetPlayerName(string p_name)
+    public void SetPlayerReady(string p_name)
     {
-        m_playerHUD.InitHud(p_name,m_isSingle);
+        m_playerHUD.SetIntroPanel("Ready!",120);
+        playerName = p_name;
+        playerStat = PlayerStatus.Ready;
+        m_playerHUD.SetName(p_name);
     }
+
+    public void StartGame()
+    {
+        playerStat = PlayerStatus.Playing;
+        StartCoroutine(StartGameSeq());
+    }
+
+    public void GameOver()
+    {
+        m_isActive = false;
+        playerStat = PlayerStatus.Gameover;
+        m_playerHUD.ShowFinalScore(playerName,score);
+    }
+
+    #region Control
 
     private void FixedUpdate()
     {
@@ -96,6 +118,8 @@ public class Player : MonoBehaviour
         }
     }
 
+
+
     private void MoveLeft()
     {
         m_positionIndex--;
@@ -118,7 +142,7 @@ public class Player : MonoBehaviour
         if(m_isActive)
             m_targetPosition.x = m_movementXPositions[p_index];
     }
-    #endregion
+    #endregion Control
     
     public void Hit()
     {
@@ -149,4 +173,13 @@ public class Player : MonoBehaviour
         m_isActive = false;
         Debug.Log("Player Died!");
     }
+}
+
+public enum PlayerStatus
+{
+    Idle,
+    Waiting,
+    Ready,
+    Playing,
+    Gameover,
 }
