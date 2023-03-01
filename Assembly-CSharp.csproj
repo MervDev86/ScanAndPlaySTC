@@ -70,12 +70,14 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\Util\ViewFPS.cs" />
     <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\GUIController.cs" />
+    <Compile Include="Assets\Scripts\Michon\Block.cs" />
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\AmbientController.cs" />
     <Compile Include="Assets\Scripts\GroundTile.cs" />
     <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\QueryAnimationController.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\GroundSpawner.cs" />
     <Compile Include="Assets\Scripts\Michon\ForwardMovement.cs" />
+    <Compile Include="Assets\Scripts\Michon\BlockSpawner.cs" />
     <Compile Include="Assets\Scripts\Michon\SegmentManager.cs" />
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\FlyThroughController.cs" />
     <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\QueryEmotionalController.cs" />
@@ -85,8 +87,6 @@
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\ZRNGUIController.cs" />
     <Compile Include="Assets\Scripts\Countdown.cs" />
     <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\Util\SetFPS.cs" />
-    <Compile Include="Assets\Scripts\Michon\Block.cs" />
-    <Compile Include="Assets\Scripts\Michon\BlockSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ZRNAssets\005339_08932_25_14\Shaders\su_VertexCol_1UV_Single.shader" />

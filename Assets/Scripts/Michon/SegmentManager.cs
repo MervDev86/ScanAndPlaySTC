@@ -26,17 +26,18 @@ public class SegmentManager : MonoBehaviour
     {
         for (int spawnIndex = 0; spawnIndex <= totalSpawn; spawnIndex++)
         {
-            if (initSpawn != null && spawnIndex < 2)
+            if (initSpawn != null && spawnIndex < 1)
                 nextSpawnPoint = initSpawn.transform.GetChild(1).transform.position;
-            SpawnTile();
+            SpawnTile(spawnIndex);
         }
     }
 
-    public void SpawnTile()
+    public void SpawnTile(int? p_name = null)
     {
         GameObject temp = Instantiate(segmentPrefab, nextSpawnPoint, Quaternion.identity);
         temp.GetComponent<SegmentBehaviour>().SetSpawnParent(this);
         temp.transform.parent = segmentParent.transform;
+        temp.name = p_name != null ? $"Segment {p_name} " : "Segment";
         nextSpawnPoint = temp.transform.GetChild(1).transform.position;
     }
 
