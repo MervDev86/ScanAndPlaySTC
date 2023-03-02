@@ -7,6 +7,7 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     [SerializeField] BoxCollider m_collider;
+    [SerializeField] SegmentBehaviour m_segmentBehaviour;
 
     [Header("Spawner")]
     [SerializeField] GameObject m_coinPrefab;
@@ -37,7 +38,7 @@ public class Block : MonoBehaviour
     public float maxXBounds;
     public float maxYBounds;
     public static float zSize = 0;
-
+   
     private void OnValidate()
     {
         if (m_collider == null)
@@ -49,9 +50,16 @@ public class Block : MonoBehaviour
     private void Start()
     {
         m_collider = this.gameObject.GetComponent<BoxCollider>();
+        m_segmentBehaviour.onRespawn += OnSegmentRespawn;
+        InitGridLayout();
 
         DestroySpawnedItems();
-        InitGridLayout();
+        SpawnItems();
+    }
+
+    private void OnSegmentRespawn()
+    {
+        DestroySpawnedItems();
         SpawnItems();
     }
 
@@ -59,7 +67,6 @@ public class Block : MonoBehaviour
     {
         InitGridLayout();
     }
-
 
     void InitGridLayout()
     {
@@ -144,18 +151,6 @@ public class Block : MonoBehaviour
         }
     }
 
-
-    [ContextMenu("Kill Children")]
-    public void DestroySpawnedItems()
-    {
-        if (transform.childCount == 0)
-            return;
-        for (int childIndex = 0; childIndex < transform.childCount; childIndex++)
-        {
-            Destroy(transform.GetChild(childIndex).gameObject);
-        }
-    }
-
     [ContextMenu("Debug/Print Spawn Point Values")]
     public void PrintSpawnValues()
     {
@@ -172,12 +167,8 @@ public class Block : MonoBehaviour
         Debug.Log(info);
     }
 
-    [ContextMenu("Block/Check Collider Length")]
-    public void GetColliderLength()
-    {
-        zSize = GetComponent<BoxCollider>().bounds.size.z;
-    }
 
+    #endregion
     public static Vector3[] GetBlockSpawnPoints(int p_count, Vector3 p_initialBlockPosition)
     {
         Vector3[] spawnPoints = new Vector3[p_count];
@@ -190,6 +181,28 @@ public class Block : MonoBehaviour
 
         return spawnPoints;
     }
-    #endregion
+
+    [ContextMenu("Block/Check Collider Length")]
+    public void GetColliderLength()
+    {
+        zSize = GetComponent<BoxCollider>().bounds.size.z;
+    }
+
+    [ContextMenu("Kill Children")]
+    public void DestroySpawnedItems()
+    {
+        if (transform.childCount == 0)
+            return;
+        for (int childIndex = 0; childIndex < transform.childCount; childIndex++)
+        {
+            Destroy(transform.GetChild(childIndex).gameObject);
+        }
+    }
+
+    public void SetSegmentParent(SegmentBehaviour p_segmentBehaviour)
+    {
+        m_segmentBehaviour = p_segmentBehaviour;
+    }
+
 
 }

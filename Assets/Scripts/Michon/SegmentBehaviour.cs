@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,8 @@ public class SegmentBehaviour : MonoBehaviour
     [SerializeField] float m_segmentPosLimit = -200;
     [SerializeField] GameObject endOfSegmentIndicator;
 
+
+    public Action onRespawn;
     #region LifeCycle
 
     private void Start()
@@ -46,9 +49,9 @@ public class SegmentBehaviour : MonoBehaviour
         for (int spawnIndex = 1; spawnIndex < blockPositionArr.Length; spawnIndex++)
         {
             var tempBlock = Instantiate(m_blockPrefab, m_blockParent);
+            tempBlock.GetComponent<Block>().SetSegmentParent(this);
             tempBlock.transform.position = blockPositionArr[spawnIndex];
         }
-
     }
 
     #region Respawn Functions
@@ -56,6 +59,7 @@ public class SegmentBehaviour : MonoBehaviour
     void Respawn()
     {
         transform.position = m_respawnPoint;
+        onRespawn?.Invoke();
     }
 
     public void SetRespawnPoint(Vector3 p_position)
