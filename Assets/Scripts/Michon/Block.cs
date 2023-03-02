@@ -16,7 +16,7 @@ public class Block : MonoBehaviour
     //xPoints is supposed to be based off the movement points of the player  | l | m = 0 | r |   ++ current: -2 0 2
     [SerializeField] float[] xPoints = new float[3];
     [SerializeField] int m_gridColumn = 3; //DEFAULT = 3  => FOR NOW KEEP THE SAME VAL UNLESS CHANGED IN THE FUTURE
-    [Range(0,100)]
+    [Range(0, 100)]
     [SerializeField] int m_gridRow;
     [Space]
     [SerializeField] float zOffset;
@@ -54,13 +54,13 @@ public class Block : MonoBehaviour
 
         InitGridLayout();
         DestroySpawnedItems();
-        SpawnItems();
+        SpawnItems(1);
     }
 
     private void OnSegmentRespawn()
     {
         DestroySpawnedItems();
-        SpawnItems();
+        SpawnItems(1);
     }
 
     [ExecuteInEditMode]
@@ -71,10 +71,7 @@ public class Block : MonoBehaviour
 
     void InitGridLayout()
     {
-        //GetXpoints();
         spawnPoints = new Vector3[m_gridColumn, m_gridRow];
-
-        //var pointDiffX = m_collider.bounds.max.x / row;
 
         if (m_boundaryLength <= 0)
         {
@@ -92,21 +89,16 @@ public class Block : MonoBehaviour
         {
             for (int rowIndex = 0; rowIndex < m_gridRow; rowIndex++)//Index
             {
-                //var xVal = offset - pointXIndex * pointDiffX;
                 var yVal = (rowIndex * spawnPointDelta) + zOffset;
-                //spawnPoints[pointXIndex, pointYIndex] = new Vector3(xPoints[pointXIndex], transform.position.y, yVal);
                 try
                 {
                     spawnPoints[columnIndex, rowIndex] = new Vector3(xPoints[columnIndex], m_itemHeight, yVal);
                 }
                 catch (System.Exception e)
                 {
-                    //Debug.LogError($"[{pointXIndex},{pointYIndex}] :  Value not Added");
-                    //Debug.Log(e.Message);
                 }
             }
         }
-        //Debug.Log($"total Values loaded: {points.Length}");
     }
 
     void GetXpoints()
@@ -119,6 +111,29 @@ public class Block : MonoBehaviour
     }
 
     [ContextMenu("Spawnables/Spawn Collections")]
+    void SpawnItems(int p_row)
+    {
+        bool[] allowedSpawnColumns = new bool[m_gridColumn];
+
+        allowedSpawnColumns[0] = Random.Range(0, 2) == 1;
+        allowedSpawnColumns[1] = Random.Range(0, 2) == 1;
+        allowedSpawnColumns[2] = Random.Range(0, 2) == 1;
+
+        for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)
+        {
+            bool spawnOnThisColumn = Random.Range(0, 2) == 1;
+            for (int rowIndex = 0; rowIndex < m_gridColumn; rowIndex++)
+            {
+                if (spawnOnThisColumn)
+                {
+                    var obj = Instantiate(m_coinPrefab, transform);
+                    obj.transform.localPosition = spawnPoints[columnIndex, rowIndex];
+                }
+            }
+        }
+
+    }
+
     void SpawnItems()
     {
         foreach (var spawnPosition in spawnPoints)
