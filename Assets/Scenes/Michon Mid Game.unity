@@ -686,10 +686,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segmentParent: {fileID: 2095795602}
   segmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
-  totalSpawn: 4
+  totalSpawn: 1
   nextSpawnPoint: {x: 0, y: 0, z: 0}
   initSpawn: {fileID: 608081923}
-  m_spawnPositionDiff: 191
+  m_spawnPositionDiff: 190.63
+  m_segmentSpawnPointSphereSize: 154
+  m_segmentSpawnPoint: {x: 0, y: 0, z: 190.63}
+  m_segmentSpawnPointColor: {r: 1, g: 0.9330951, b: 0.5226415, a: 0}
 --- !u!1 &377409279
 GameObject:
   m_ObjectHideFlags: 0
@@ -4056,10 +4059,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2095795603}
     m_Modifications:
-    - target: {fileID: 2638800640437490679, guid: 1de230376836caf47a8bf90976354c21, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 193.06
-      objectReference: {fileID: 0}
     - target: {fileID: 2638800640560455770, guid: 1de230376836caf47a8bf90976354c21, type: 3}
       propertyPath: m_spawnParent
       value: 
@@ -4124,6 +4123,10 @@ PrefabInstance:
     - target: {fileID: 3250592241907925477, guid: 1f92975e19fd1a74aa907d8214948396, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250592241907925477, guid: 1f92975e19fd1a74aa907d8214948396, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3250592241907925482, guid: 1f92975e19fd1a74aa907d8214948396, type: 3}
       propertyPath: m_RootOrder

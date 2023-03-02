@@ -20,8 +20,8 @@ public class SegmentBehaviour : MonoBehaviour
     [SerializeField] GameObject endOfSegmentIndicator;
     [SerializeField] Vector3 d_despawnPoint = new Vector3(14, 4, 10);
 
-
     public Action onRespawn;
+
     #region LifeCycle
 
     private void Start()
@@ -30,9 +30,10 @@ public class SegmentBehaviour : MonoBehaviour
     m_showEndSegment = false;
 #endif
         endOfSegmentIndicator.SetActive(m_showEndSegment);
-        m_respawnPoint = new Vector3(transform.position.x, transform.position.y, m_spawnParent.GetLastSpawnPosition());
-
+        SetRespawnPoint(new Vector3(transform.position.x, transform.position.y, m_spawnParent.GetLastSpawnPosition()));
         SpawnBlocks();
+
+        Debug.Log($"{gameObject.name} spawned at {transform.position}");
     }
 
     private void LateUpdate()
@@ -46,7 +47,7 @@ public class SegmentBehaviour : MonoBehaviour
 
     void SpawnBlocks()
     {
-        var blockPositionArr = Block.GetBlockSpawnPoints(m_totalBlockCount, m_initialBlock.transform.position);
+        Vector3[] blockPositionArr = Block.GetBlockSpawnPoints(m_totalBlockCount, m_initialBlock.transform.position);
         for (int spawnIndex = 1; spawnIndex < blockPositionArr.Length; spawnIndex++)
         {
             var tempBlock = Instantiate(m_blockPrefab, m_blockParent);
@@ -59,6 +60,7 @@ public class SegmentBehaviour : MonoBehaviour
 
     void Respawn()
     {
+        Debug.Log($"{gameObject.name} spawned at {transform.position}");
         transform.position = m_respawnPoint;
         onRespawn?.Invoke();
     }
@@ -81,6 +83,10 @@ public class SegmentBehaviour : MonoBehaviour
         Gizmos.color = Color.red;
         //Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y, m_segmentPosLimit), 100f);
         Gizmos.DrawCube(new Vector3(transform.position.x, transform.position.y, m_segmentPosLimit), d_despawnPoint);
+        Gizmos.color = Color.green;
+
+        Gizmos.DrawSphere(m_respawnPoint, 40f);
+
     }
 
     [ContextMenu("GetEndPositionFromSize")]

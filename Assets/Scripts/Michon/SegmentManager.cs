@@ -16,6 +16,10 @@ public class SegmentManager : MonoBehaviour
     [Space]
     [Tooltip("Found in Prefab as 'Next Point'. Sets where the next spawn object will be.")]
     [SerializeField] float m_spawnPositionDiff;
+    [Header("Debugger")]
+    [SerializeField] float m_segmentSpawnPointSphereSize = 15f;
+    [SerializeField] Vector3 m_segmentSpawnPoint;
+    [SerializeField] Color m_segmentSpawnPointColor;
 
     private void OnValidate()
     {
@@ -31,17 +35,33 @@ public class SegmentManager : MonoBehaviour
                 nextSpawnPoint = initSpawn.transform.GetChild(1).transform.position;
                 continue;
             }
-            SpawnTile(spawnIndex);
+            SpawnTile(spawnIndex, spawnIndex == totalSpawn);
         }
     }
 
-    public void SpawnTile(int? p_name = null)
+    public void SpawnTile(int? p_name = null, bool p_isLast = false)
     {
         GameObject temp = Instantiate(segmentPrefab, nextSpawnPoint, Quaternion.identity);
+        if (p_isLast)
+        {
+            m_segmentSpawnPoint = temp.transform.position;
+        }
         temp.GetComponent<SegmentBehaviour>().SetSpawnParent(this);
         temp.transform.parent = segmentParent.transform;
         temp.name = p_name != null ? $"Segment {p_name} " : "Segment";
         nextSpawnPoint = temp.transform.GetChild(1).transform.position;
+    }
+
+    private void OnGUI()
+    {
+    
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = m_segmentSpawnPointColor;
+        m_segmentSpawnPoint = new Vector3(0, 0, GetLastSpawnPosition());
+        Gizmos.DrawSphere(m_segmentSpawnPoint, m_segmentSpawnPointSphereSize);
     }
 
     public float GetLastSpawnPosition() => (totalSpawn) * m_spawnPositionDiff;

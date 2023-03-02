@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-//[ExecuteInEditMode]
 public class Block : MonoBehaviour
 {
     [SerializeField] BoxCollider m_collider;
@@ -13,14 +12,15 @@ public class Block : MonoBehaviour
     [SerializeField] GameObject m_coinPrefab;
     [SerializeField] GameObject m_ObstaclePrefab;
     [Space]
-
     [Header("Grid")]
     //xPoints is supposed to be based off the movement points of the player  | l | m = 0 | r |   ++ current: -2 0 2
     [SerializeField] float[] xPoints = new float[3];
-    [SerializeField] int column = 3;//DEFAULT = 3  => FOR NOW KEEP THE SAME VAL
-    [SerializeField] int row;
+    [SerializeField] int m_gridColumn = 3; //DEFAULT = 3  => FOR NOW KEEP THE SAME VAL UNLESS CHANGED IN THE FUTURE
+    [Range(0,100)]
+    [SerializeField] int m_gridRow;
     [Space]
     [SerializeField] float zOffset;
+    [SerializeField] float m_itemHeight = 1;
     Vector3[,] spawnPoints;
     [Space]
 
@@ -38,12 +38,16 @@ public class Block : MonoBehaviour
     public float maxXBounds;
     public float maxYBounds;
     public static float zSize = 0;
-   
+
     private void OnValidate()
     {
         if (m_collider == null)
             m_collider = GetComponent<BoxCollider>();
 
+        if (m_gridRow<0)
+        {
+            m_gridRow = 0;
+        }
         InitGridLayout(); // To Keep track of the spawn Positions
     }
 
@@ -51,8 +55,8 @@ public class Block : MonoBehaviour
     {
         m_collider = this.gameObject.GetComponent<BoxCollider>();
         m_segmentBehaviour.onRespawn += OnSegmentRespawn;
-        InitGridLayout();
 
+        InitGridLayout();
         DestroySpawnedItems();
         SpawnItems();
     }
@@ -63,6 +67,7 @@ public class Block : MonoBehaviour
         SpawnItems();
     }
 
+    [ExecuteInEditMode]
     private void Update()
     {
         InitGridLayout();
@@ -71,7 +76,7 @@ public class Block : MonoBehaviour
     void InitGridLayout()
     {
         //GetXpoints();
-        spawnPoints = new Vector3[row, column];
+        spawnPoints = new Vector3[m_gridColumn, m_gridRow];
 
         //var pointDiffX = m_collider.bounds.max.x / row;
 
@@ -80,21 +85,30 @@ public class Block : MonoBehaviour
             zSize = m_collider.size.z;
             Debug.Log($"zSize has been set to {zSize}");
         }
+
         //maxXBounds = m_collider.bounds.max.x;
         zSize = m_collider.bounds.size.z;
-        var pointDiffY = zSize / column;
+        var spawnPointDelta = zSize / m_gridRow;
 
         Debug.LogWarning($"{gameObject.transform.parent.transform.parent}  using Max Z Bounds: {zSize} \n" +
-            $"calculated spawn distance = {pointDiffY}");
+            $"calculated spawn distance = {spawnPointDelta}");
 
-        for (int pointXIndex = 0; pointXIndex < row; pointXIndex++)
+        for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)//ROW
         {
-            for (int pointYIndex = 0; pointYIndex < column; pointYIndex++)
+            for (int rowIndex = 0; rowIndex < m_gridRow; rowIndex++)//Index
             {
                 //var xVal = offset - pointXIndex * pointDiffX;
-                var yVal = (pointYIndex * pointDiffY) + zOffset;
+                var yVal = (rowIndex * spawnPointDelta) + zOffset;
                 //spawnPoints[pointXIndex, pointYIndex] = new Vector3(xPoints[pointXIndex], transform.position.y, yVal);
-                spawnPoints[pointXIndex, pointYIndex] = new Vector3(xPoints[pointXIndex], 0, yVal);
+                try
+                {
+                    spawnPoints[columnIndex, rowIndex] = new Vector3(xPoints[columnIndex], m_itemHeight, yVal);
+                }
+                catch (System.Exception e)
+                {
+                    //Debug.LogError($"[{pointXIndex},{pointYIndex}] :  Value not Added");
+                    //Debug.Log(e.Message);
+                }
             }
         }
         //Debug.Log($"total Values loaded: {points.Length}");
@@ -103,7 +117,7 @@ public class Block : MonoBehaviour
     void GetXpoints()
     {
         var playerMovementPointDelta = GameManager.instance.GetMovementDistance;
-        for (int xPointIndex = 0; xPointIndex < row; xPointIndex++)
+        for (int xPointIndex = 0; xPointIndex < m_gridRow; xPointIndex++)
         {
             xPoints[xPointIndex] = xPointIndex * playerMovementPointDelta;
         }
@@ -155,9 +169,9 @@ public class Block : MonoBehaviour
     public void PrintSpawnValues()
     {
         string info = "";
-        for (int xIndex = 0; xIndex < row; xIndex++)
+        for (int xIndex = 0; xIndex < m_gridRow; xIndex++)
         {
-            for (int yIndex = 0; yIndex < column; yIndex++)
+            for (int yIndex = 0; yIndex < m_gridColumn; yIndex++)
             {
 
                 info += $" {spawnPoints[xIndex, yIndex]}";
@@ -195,6 +209,15 @@ public class Block : MonoBehaviour
         {
             Destroy(transform.GetChild(childIndex).gameObject);
         }
+
+//        foreach (Transform child in transform)
+//        {
+//#if UNITY_EDITOR
+//            DestroyImmediate(child.gameObject);
+//#else
+//            Destroy(child.gameObject);
+//#endif
+//        }
     }
 
     public void SetSegmentParent(SegmentBehaviour p_segmentBehaviour)
