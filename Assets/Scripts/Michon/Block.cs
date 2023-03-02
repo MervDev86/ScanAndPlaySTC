@@ -11,7 +11,10 @@ public class Block : MonoBehaviour
     [Header("Spawner")]
     [SerializeField] GameObject m_coinPrefab;
     [SerializeField] GameObject m_ObstaclePrefab;
+    [SerializeField] bool m_spawnObstacle = false;
     [Space]
+    [Range(0, 1)]
+    [SerializeField] float m_spawnChance = 1;
     [Header("Grid")]
     //xPoints is supposed to be based off the movement points of the player  | l | m = 0 | r |   ++ current: -2 0 2
     [SerializeField] float[] xPoints = new float[3];
@@ -116,10 +119,19 @@ public class Block : MonoBehaviour
     [ContextMenu("Spawnables/Spawn Collections")]
     void SpawnItems()
     {
+        bool obstacleSpawned = false;
         for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)
         {
-            bool spawnOnThisColumn = Random.Range(0, 2) == 1;
-            for (int rowIndex = 0; rowIndex < m_gridColumn; rowIndex++)
+            bool spawnOnThisColumn = Random.Range(0, 2) >= m_spawnChance;
+            if (m_spawnObstacle && Random.Range(0, 2) >= 1 && !obstacleSpawned)
+            {
+                var obj = Instantiate(m_ObstaclePrefab, transform);
+                obj.transform.localPosition = spawnPoints[columnIndex, 0];
+                obstacleSpawned = true;
+                continue;
+            }
+
+            for (int rowIndex = 0; rowIndex < m_gridRow; rowIndex++)
             {
                 if (spawnOnThisColumn)
                 {
@@ -129,6 +141,7 @@ public class Block : MonoBehaviour
             }
         }
     }
+
 
     //void SpawnItems()//Spawn on All Points
     //{

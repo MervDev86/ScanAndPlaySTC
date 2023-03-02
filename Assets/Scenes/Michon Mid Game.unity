@@ -686,12 +686,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segmentParent: {fileID: 2095795602}
   segmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
-  totalSpawn: 2
+  totalSpawn: 7
   nextSpawnPoint: {x: 0, y: 0, z: 0}
   initSpawn: {fileID: 608081923}
   m_spawnPositionDiff: 190.63
   m_segmentSpawnPointSphereSize: 154
-  m_segmentSpawnPoint: {x: 0, y: 0, z: 381.26}
+  m_segmentSpawnPoint: {x: 0, y: 0, z: 1334.41}
   m_segmentSpawnPointColor: {r: 1, g: 0.9330951, b: 0.5226415, a: 0}
 --- !u!1 &377409279
 GameObject:

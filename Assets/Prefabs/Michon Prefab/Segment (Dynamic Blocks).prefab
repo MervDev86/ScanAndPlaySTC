@@ -12500,7 +12500,7 @@ MonoBehaviour:
   m_initialBlock: {fileID: 2638800641994311688}
   m_blockParent: {fileID: 2638800641404389718}
   m_blockPrefab: {fileID: 2638800641994311688}
-  m_totalBlockCount: 21
+  m_totalBlockCount: 7
   m_showEndSegment: 0
   endOfSegmentIndicator: {fileID: 2638800641070678297}
   m_segmentPosLimit: -191
@@ -13205,8 +13205,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 14.294174, y: 4.286702, z: 8.79693}
-  m_Center: {x: 0, y: 5.911608e-12, z: 0.026751041}
+  m_Size: {x: 14.294174, y: 4.286702, z: 28.87}
+  m_Center: {x: 0, y: 0, z: 8.92}
 --- !u!114 &2638800641994311684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13223,19 +13223,21 @@ MonoBehaviour:
   m_segmentBehaviour: {fileID: 2638800640560455770}
   m_coinPrefab: {fileID: 681084056512101516, guid: 86f8181616978294497bf5163d10ff68, type: 3}
   m_ObstaclePrefab: {fileID: 3513120157906751832, guid: 02a82e7a718df8749aeb913af3ed8032, type: 3}
+  m_spawnObstacle: 0
+  m_spawnChance: 0.69
   xPoints:
   - -2
   - 0
   - 2
   m_gridColumn: 3
-  m_gridRow: 4
+  m_gridRow: 6
   zOffset: -3.54
   m_itemHeight: 0.48
   d_sphereSize: 0.2
   d_color: {r: 1, g: 0, b: 0.7581215, a: 1}
   ShowDebugTools: 0
   showNextBlockPreview: 0
-  previewLimit: 21
+  previewLimit: 7
   previewColor: {r: 0, g: 0.5517826, b: 1, a: 0.16470589}
   maxXBounds: 7.147087
   maxYBounds: 10.872333
