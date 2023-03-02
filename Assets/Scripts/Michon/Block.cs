@@ -37,18 +37,14 @@ public class Block : MonoBehaviour
 
     public float maxXBounds;
     public float maxYBounds;
-    public static float zSize = 0;
+    public static float m_boundaryLength = 0;
 
     private void OnValidate()
     {
         if (m_collider == null)
             m_collider = GetComponent<BoxCollider>();
 
-        if (m_gridRow<0)
-        {
-            m_gridRow = 0;
-        }
-        InitGridLayout(); // To Keep track of the spawn Positions
+        InitGridLayout(); // To keep track of the spawn Positions
     }
 
     private void Start()
@@ -80,17 +76,16 @@ public class Block : MonoBehaviour
 
         //var pointDiffX = m_collider.bounds.max.x / row;
 
-        if (zSize <= 0)
+        if (m_boundaryLength <= 0)
         {
-            zSize = m_collider.size.z;
-            Debug.Log($"zSize has been set to {zSize}");
+            m_boundaryLength = m_collider.size.z;
+            Debug.Log($"zSize has been set to {m_boundaryLength}");
         }
 
-        //maxXBounds = m_collider.bounds.max.x;
-        zSize = m_collider.bounds.size.z;
-        var spawnPointDelta = zSize / m_gridRow;
+        m_boundaryLength = m_collider.bounds.size.z;
+        var spawnPointDelta = m_boundaryLength / m_gridRow;
 
-        Debug.LogWarning($"{gameObject.transform.parent.transform.parent}  using Max Z Bounds: {zSize} \n" +
+        Debug.LogWarning($"{gameObject.transform.parent.transform.parent}  using Max Z Bounds: {m_boundaryLength} \n" +
             $"calculated spawn distance = {spawnPointDelta}");
 
         for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)//ROW
@@ -181,14 +176,13 @@ public class Block : MonoBehaviour
         Debug.Log(info);
     }
 
-
     #endregion
     public static Vector3[] GetBlockSpawnPoints(int p_count, Vector3 p_initialBlockPosition)
     {
         Vector3[] spawnPoints = new Vector3[p_count];
         for (int spawnPointIndex = 0; spawnPointIndex < spawnPoints.Length; spawnPointIndex++)
         {
-            spawnPoints[spawnPointIndex] = p_initialBlockPosition + new Vector3(p_initialBlockPosition.x, p_initialBlockPosition.y, zSize * spawnPointIndex);
+            spawnPoints[spawnPointIndex] = p_initialBlockPosition + new Vector3(p_initialBlockPosition.x, p_initialBlockPosition.y, m_boundaryLength * spawnPointIndex);
         }
 
         return spawnPoints;
@@ -197,7 +191,7 @@ public class Block : MonoBehaviour
     [ContextMenu("Block/Check Collider Length")]
     public void GetColliderLength()
     {
-        zSize = GetComponent<BoxCollider>().bounds.size.z;
+        m_boundaryLength = GetComponent<BoxCollider>().bounds.size.z;
     }
 
     [ContextMenu("Kill Children")]
@@ -209,15 +203,6 @@ public class Block : MonoBehaviour
         {
             Destroy(transform.GetChild(childIndex).gameObject);
         }
-
-//        foreach (Transform child in transform)
-//        {
-//#if UNITY_EDITOR
-//            DestroyImmediate(child.gameObject);
-//#else
-//            Destroy(child.gameObject);
-//#endif
-//        }
     }
 
     public void SetSegmentParent(SegmentBehaviour p_segmentBehaviour)
