@@ -12398,6 +12398,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_spawnParent: {fileID: 0}
   m_respawnPoint: {x: 0, y: 0, z: 0}
+  m_initialBlock: {fileID: 2638800641994311688}
+  m_blockParent: {fileID: 2638800641404389718}
+  m_blockPrefab: {fileID: 2638800641994311688}
+  m_totalBlockCount: 17
   m_showEndSegment: 0
   m_segmentPosLimit: -200
   endOfSegmentIndicator: {fileID: 2638800641070678297}
@@ -13116,15 +13120,14 @@ MonoBehaviour:
   m_collider: {fileID: 2638800641994311683}
   m_coinPrefab: {fileID: 681084056512101516, guid: 86f8181616978294497bf5163d10ff68, type: 3}
   m_ObstaclePrefab: {fileID: 3513120157906751832, guid: 02a82e7a718df8749aeb913af3ed8032, type: 3}
-  obstacleSpawnLimit: 1
   xPoints:
   - -2
   - 0
   - 2
-  column: 4
+  column: 7
   row: 3
-  zOffset: 1.14
-  d_sphereSize: 0.98
+  zOffset: -4.65
+  d_sphereSize: -0.17
   d_color: {r: 1, g: 0.17647058, b: 0.34843478, a: 1}
   ShowDebugTools: 1
   showNextBlockPreview: 1
