@@ -172,12 +172,10 @@ public class Block : MonoBehaviour
     public static Vector3[] GetBlockSpawnPoints(int p_count, Vector3 p_initialBlockPosition)
     {
         Vector3[] spawnPoints = new Vector3[p_count];
-
         for (int spawnPointIndex = 0; spawnPointIndex < spawnPoints.Length; spawnPointIndex++)
         {
             spawnPoints[spawnPointIndex] = p_initialBlockPosition + new Vector3(p_initialBlockPosition.x, p_initialBlockPosition.y, zSize * spawnPointIndex);
         }
-
 
         return spawnPoints;
     }
@@ -203,6 +201,5 @@ public class Block : MonoBehaviour
     {
         m_segmentBehaviour = p_segmentBehaviour;
     }
-
 
 }

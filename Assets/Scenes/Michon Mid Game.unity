@@ -689,7 +689,7 @@ MonoBehaviour:
   totalSpawn: 4
   nextSpawnPoint: {x: 0, y: 0, z: 0}
   initSpawn: {fileID: 608081923}
-  m_spawnPositionDiff: 190.41
+  m_spawnPositionDiff: 191
 --- !u!1 &377409279
 GameObject:
   m_ObjectHideFlags: 0
@@ -4056,13 +4056,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2095795603}
     m_Modifications:
-    - target: {fileID: 1853569742906131291, guid: 1de230376836caf47a8bf90976354c21, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2638800640437490679, guid: 1de230376836caf47a8bf90976354c21, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 191
+      value: 193.06
       objectReference: {fileID: 0}
     - target: {fileID: 2638800640560455770, guid: 1de230376836caf47a8bf90976354c21, type: 3}
       propertyPath: m_spawnParent

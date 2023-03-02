@@ -18,6 +18,7 @@ public class SegmentBehaviour : MonoBehaviour
     [SerializeField] bool m_showEndSegment = false;
     [SerializeField] float m_segmentPosLimit = -200;
     [SerializeField] GameObject endOfSegmentIndicator;
+    [SerializeField] Vector3 d_despawnPoint = new Vector3(14, 4, 10);
 
 
     public Action onRespawn;
@@ -78,7 +79,8 @@ public class SegmentBehaviour : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y, m_segmentPosLimit), 100f);
+        //Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y, m_segmentPosLimit), 100f);
+        Gizmos.DrawCube(new Vector3(transform.position.x, transform.position.y, m_segmentPosLimit), d_despawnPoint);
     }
 
     [ContextMenu("GetEndPositionFromSize")]
