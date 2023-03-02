@@ -8,7 +8,9 @@ public class SegmentBehaviour : MonoBehaviour
     [Header("Objs")]
     [SerializeField] SegmentManager m_spawnParent;
     [SerializeField] Vector3 m_respawnPoint;
-    [Header("Block Settings")]
+    [Space]
+
+    [Header("Block Spawn Settings")]
     [SerializeField] GameObject m_initialBlock;
     [SerializeField] Transform m_blockParent;
     [SerializeField] GameObject m_blockPrefab;
@@ -16,9 +18,13 @@ public class SegmentBehaviour : MonoBehaviour
 
     [Header("Debugger")]
     [SerializeField] bool m_showEndSegment = false;
-    [SerializeField] float m_segmentPosLimit = -200;
     [SerializeField] GameObject endOfSegmentIndicator;
+    [SerializeField] float m_segmentPosLimit = -200;
+    [Space]
     [SerializeField] Vector3 d_despawnPoint = new Vector3(14, 4, 10);
+    [Header("Respawn Debug")]
+    [SerializeField] float respawnPointDebugSize = 20;
+
 
     public Action onRespawn;
 
@@ -36,7 +42,7 @@ public class SegmentBehaviour : MonoBehaviour
         Debug.Log($"{gameObject.name} spawned at {transform.position}");
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         if (transform.position.z <= m_segmentPosLimit)
         {
@@ -60,8 +66,9 @@ public class SegmentBehaviour : MonoBehaviour
 
     void Respawn()
     {
-        Debug.Log($"{gameObject.name} spawned at {transform.position}");
+        Debug.Log($"{gameObject.name} despawned at {transform.position}");
         transform.position = m_respawnPoint;
+        Debug.Log($"{gameObject.name} respawned at {transform.position}");
         onRespawn?.Invoke();
     }
 
@@ -74,26 +81,28 @@ public class SegmentBehaviour : MonoBehaviour
     {
         m_spawnParent = p_parent;
     }
-    #endregion
 
-    #region Debugger
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        //Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y, m_segmentPosLimit), 100f);
-        Gizmos.DrawCube(new Vector3(transform.position.x, transform.position.y, m_segmentPosLimit), d_despawnPoint);
-        Gizmos.color = Color.green;
-
-        Gizmos.DrawSphere(m_respawnPoint, 40f);
-
-    }
 
     [ContextMenu("GetEndPositionFromSize")]
     public void GetEndPositionFromSize()
     {
         m_segmentPosLimit = transform.position.z - GetComponent<BoxCollider>().bounds.size.z;
     }
+    #endregion
+
+    #region Debugger
+
+    private void OnDrawGizmosSelected()
+    {
+        //Despawn Viz
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(new Vector3(transform.position.x, transform.position.y, m_segmentPosLimit), d_despawnPoint);
+
+        //Respawn Viz
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(m_respawnPoint, respawnPointDebugSize);
+    }
+
     #endregion
 
 }

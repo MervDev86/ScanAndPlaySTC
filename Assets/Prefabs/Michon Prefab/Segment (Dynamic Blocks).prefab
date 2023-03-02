@@ -3565,7 +3565,7 @@ Transform:
   - {fileID: 2778086773683448172}
   - {fileID: 8921297939948280369}
   m_Father: {fileID: 2638800640560455771}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &809269164666905133
 GameObject:
@@ -12414,7 +12414,7 @@ GameObject:
   m_Layer: 0
   m_Name: NextSpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -12431,7 +12431,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2638800640560455771}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2638800640560455772
 GameObject:
@@ -12464,8 +12464,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2638800640437490679}
   - {fileID: 142964629999904657}
+  - {fileID: 2638800640437490679}
   - {fileID: 2638800641404389718}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -12496,15 +12496,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_spawnParent: {fileID: 0}
-  m_respawnPoint: {x: 0, y: 0, z: 0}
+  m_respawnPoint: {x: 0, y: 0, z: 381.26}
   m_initialBlock: {fileID: 2638800641994311688}
   m_blockParent: {fileID: 2638800641404389718}
   m_blockPrefab: {fileID: 2638800641994311688}
   m_totalBlockCount: 21
   m_showEndSegment: 0
-  m_segmentPosLimit: -200
   endOfSegmentIndicator: {fileID: 2638800641070678297}
+  m_segmentPosLimit: -191
   d_despawnPoint: {x: 14, y: 4, z: 10}
+  respawnPointDebugSize: 4.07
 --- !u!114 &2638800640560455769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13232,8 +13233,8 @@ MonoBehaviour:
   m_itemHeight: 0.48
   d_sphereSize: 0.2
   d_color: {r: 1, g: 0, b: 0.7581215, a: 1}
-  ShowDebugTools: 1
-  showNextBlockPreview: 1
+  ShowDebugTools: 0
+  showNextBlockPreview: 0
   previewLimit: 21
   previewColor: {r: 0, g: 0.5517826, b: 1, a: 0.16470589}
   maxXBounds: 7.147087

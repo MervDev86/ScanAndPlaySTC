@@ -32,8 +32,10 @@ public class SegmentManager : MonoBehaviour
         {
             if (initSpawn != null && spawnIndex < 1)
             {
-                nextSpawnPoint = initSpawn.transform.GetChild(1).transform.position;
-                continue;
+                initSpawn.SetActive(false);
+                //initSpawn.GetComponent<SegmentBehaviour>().SetSpawnParent(this);
+                //nextSpawnPoint = initSpawn.transform.GetChild(1).transform.position;
+                //continue;
             }
             SpawnTile(spawnIndex, spawnIndex == totalSpawn);
         }
@@ -50,11 +52,6 @@ public class SegmentManager : MonoBehaviour
         temp.transform.parent = segmentParent.transform;
         temp.name = p_name != null ? $"Segment {p_name} " : "Segment";
         nextSpawnPoint = temp.transform.GetChild(1).transform.position;
-    }
-
-    private void OnGUI()
-    {
-    
     }
 
     private void OnDrawGizmosSelected()

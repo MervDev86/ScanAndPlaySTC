@@ -39,6 +39,7 @@ public class Block : MonoBehaviour
     public float maxYBounds;
     public static float m_boundaryLength = 0;
 
+    #region LifeCycle
     private void OnValidate()
     {
         if (m_collider == null)
@@ -56,6 +57,7 @@ public class Block : MonoBehaviour
         DestroySpawnedItems();
         SpawnItems();
     }
+    #endregion
 
     private void OnSegmentRespawn()
     {
@@ -82,8 +84,8 @@ public class Block : MonoBehaviour
         m_boundaryLength = m_collider.bounds.size.z;
         var spawnPointDelta = m_boundaryLength / m_gridRow;
 
-        Debug.LogWarning($"{gameObject.transform.parent.transform.parent}  using Max Z Bounds: {m_boundaryLength} \n" +
-            $"calculated spawn distance = {spawnPointDelta}");
+        //Debug.LogWarning($"{gameObject.transform.parent.transform.parent}  using Max Z Bounds: {m_boundaryLength} \n" +
+        //    $"calculated spawn distance = {spawnPointDelta}");
 
         for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)
         {
@@ -186,6 +188,7 @@ public class Block : MonoBehaviour
     }
 
     #endregion
+
     public static Vector3[] GetBlockSpawnPoints(int p_count, Vector3 p_initialBlockPosition)
     {
         Vector3[] spawnPoints = new Vector3[p_count];
