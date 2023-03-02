@@ -54,13 +54,13 @@ public class Block : MonoBehaviour
 
         InitGridLayout();
         DestroySpawnedItems();
-        SpawnItems(1);
+        SpawnItems();
     }
 
     private void OnSegmentRespawn()
     {
         DestroySpawnedItems();
-        SpawnItems(1);
+        SpawnItems();
     }
 
     [ExecuteInEditMode]
@@ -85,9 +85,9 @@ public class Block : MonoBehaviour
         Debug.LogWarning($"{gameObject.transform.parent.transform.parent}  using Max Z Bounds: {m_boundaryLength} \n" +
             $"calculated spawn distance = {spawnPointDelta}");
 
-        for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)//ROW
+        for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)
         {
-            for (int rowIndex = 0; rowIndex < m_gridRow; rowIndex++)//Index
+            for (int rowIndex = 0; rowIndex < m_gridRow; rowIndex++)
             {
                 var yVal = (rowIndex * spawnPointDelta) + zOffset;
                 try
@@ -96,6 +96,7 @@ public class Block : MonoBehaviour
                 }
                 catch (System.Exception e)
                 {
+
                 }
             }
         }
@@ -111,14 +112,8 @@ public class Block : MonoBehaviour
     }
 
     [ContextMenu("Spawnables/Spawn Collections")]
-    void SpawnItems(int p_row)
+    void SpawnItems()
     {
-        bool[] allowedSpawnColumns = new bool[m_gridColumn];
-
-        allowedSpawnColumns[0] = Random.Range(0, 2) == 1;
-        allowedSpawnColumns[1] = Random.Range(0, 2) == 1;
-        allowedSpawnColumns[2] = Random.Range(0, 2) == 1;
-
         for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)
         {
             bool spawnOnThisColumn = Random.Range(0, 2) == 1;
@@ -131,17 +126,16 @@ public class Block : MonoBehaviour
                 }
             }
         }
-
     }
 
-    void SpawnItems()
-    {
-        foreach (var spawnPosition in spawnPoints)
-        {
-            var obj = Instantiate(m_coinPrefab, transform);
-            obj.transform.localPosition = spawnPosition;
-        }
-    }
+    //void SpawnItems()//Spawn on All Points
+    //{
+    //    foreach (var spawnPosition in spawnPoints)
+    //    {
+    //        var obj = Instantiate(m_coinPrefab, transform);
+    //        obj.transform.localPosition = spawnPosition;
+    //    }
+    //}
 
     #region Debugger
 
