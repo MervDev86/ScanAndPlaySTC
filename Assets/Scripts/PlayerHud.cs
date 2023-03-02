@@ -10,6 +10,7 @@ public class PlayerHud : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_introText;
     [Header("GamePlaying")]
     [SerializeField] private TextMeshProUGUI m_playerNameText;
+    [SerializeField] private TextMeshProUGUI m_gameTime;
     [SerializeField] private TextMeshProUGUI m_scoreText;
     [Header("EndScreen")]
     [SerializeField] private RectTransform m_endScreenPanel;
@@ -59,7 +60,11 @@ public class PlayerHud : MonoBehaviour
     public void SetScore(int p_score)
     {
         m_scoreText.text = p_score.ToString();
-        
+    }
+
+    public void SetGameTime(float p_val)
+    {
+        m_gameTime.text = "Time: " +  p_val.ToString("00.00");
     }
     
     public void SetIntroPanel(string p_text,float p_fontSize = 320)

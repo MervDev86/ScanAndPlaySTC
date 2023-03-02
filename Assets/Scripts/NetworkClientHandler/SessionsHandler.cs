@@ -160,7 +160,7 @@ namespace NetworkClientHandler
                 }
                 if (args.Snapshot.Key == "player1")
                 {
-                    if (!m_isPlaying && state.Equals(GameState.GAME_END))
+                    if (!m_isPlaying && state.Equals(GameState.GAME_OVER))
                     {
                         m_sessionsDB.ChildChanged -= HandleSessionsChildChanged;
                         OnMovePlayer1?.Invoke(1);
@@ -183,7 +183,7 @@ namespace NetworkClientHandler
 
         private void OnGameStateChanged(GameState p_gameState)
         {
-            if (p_gameState.Equals(GameState.GAME_END))
+            if (p_gameState.Equals(GameState.GAME_OVER))
             {
                 m_isPlaying = false;
                 m_sessionsDB.ChildChanged -= HandleSessionsChildChanged;

@@ -10,9 +10,11 @@ using UnityEngine.SceneManagement;
 public enum GameState
 {
     MAIN_MENU,
-    GAME_COUNTDOWN,
-    GAME_START,
-    GAME_END
+    WAITING,
+    GAME_STARTED,
+    GAME_PLAYING,
+    GAME_OVER,
+    LEADERBOARD,
 }
 
 [ExecuteInEditMode]
@@ -32,8 +34,9 @@ public class GameManager : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float envMovementSpeed = 0.5f;
     [SerializeField] float startingSpeed = 0.2f;
-    [SerializeField] private Player m_player1;
-    [SerializeField] private Player m_player2;
+    [SerializeField] private PlayerGameHandler m_playerHandler1;
+    [SerializeField] private PlayerGameHandler m_playerHandler2;
+    [SerializeField] private Leaderboards m_leaderBoard;
 
     [SerializeField] GameObject m_introPanel;
 
@@ -47,19 +50,35 @@ public class GameManager : MonoBehaviour
     {
         ChangeGameState(GameState.MAIN_MENU);
         SessionsHandler.OnInitializeGame += OnInitializeGame;
-        SessionsHandler.OnPlayer1SetName += m_player1.SetPlayerReady;
-        SessionsHandler.OnPlayer2SetName += m_player2.SetPlayerReady;
-        SessionsHandler.OnMovePlayer1 += m_player1.MoveToPositionIndex;
-        SessionsHandler.OnMovePlayer2 += m_player2.MoveToPositionIndex;
+        SessionsHandler.OnPlayer1SetName += m_playerHandler1.SetPlayerReady;
+        SessionsHandler.OnPlayer2SetName += m_playerHandler2.SetPlayerReady;
+        SessionsHandler.OnMovePlayer1 += m_playerHandler1.playerControl.MoveToPositionIndex;
+        SessionsHandler.OnMovePlayer2 += m_playerHandler2.playerControl.MoveToPositionIndex;
     }
 
     private void OnDestroy()
     {
         SessionsHandler.OnInitializeGame -= OnInitializeGame;
+        SessionsHandler.OnPlayer1SetName -= m_playerHandler1.SetPlayerReady;
+        SessionsHandler.OnPlayer2SetName -= m_playerHandler2.SetPlayerReady;
+        SessionsHandler.OnMovePlayer1 -= m_playerHandler1.playerControl.MoveToPositionIndex;
+        SessionsHandler.OnMovePlayer2 -= m_playerHandler2.playerControl.MoveToPositionIndex;
     }
 
     private void Update()
     {
+        if (m_gameState == GameState.GAME_PLAYING)
+        {
+            if (m_playerHandler1.currentState == PlayerStatus.Gameover)
+            {
+                if (m_isSinglePlayer || (!m_isSinglePlayer && m_playerHandler2.currentState == PlayerStatus.Gameover))
+                {
+                    m_gameState = GameState.GAME_OVER;
+                    Debug.Log("GAME OVER");
+                }
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {  
             Restart();
@@ -85,46 +104,47 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F3)) //Simulate Player1 Ready
         {
-            m_player1.SetPlayerReady("Mabin");
+            m_playerHandler1.SetPlayerReady("Mabin");
             StartGame();
         }
 
         if (Input.GetKeyDown(KeyCode.F4)) //Simulate Player1 Ready
         {
-            m_player2.SetPlayerReady("Rainne");
+            m_playerHandler2.SetPlayerReady("Rainne");
             StartGame();
         }
 
         if (Input.GetKeyDown(KeyCode.F5)) //Simulate Player1 Ready
         {
-            m_player1.GameOver();
+            m_playerHandler1.GameOver();
             if (!m_isSinglePlayer)
-                m_player2.GameOver();
+                m_playerHandler2.GameOver();
         }
 
         if (Input.GetKeyDown(KeyCode.Z)) //Simulate Player1 Ready
         {
-            m_player1.AddScore(5);
+            m_playerHandler1.AddScore(5);
         }
 
         if (Input.GetKeyDown(KeyCode.X)) //Simulate Player1 Ready
         {
-            m_player2.AddScore(5);
+            m_playerHandler2.AddScore(5);
         }
     }
 
     void StartGame()
     {
-        if (m_isSinglePlayer && m_player1.playerStat == PlayerStatus.Ready)
+        if (m_isSinglePlayer && m_playerHandler1.currentState == PlayerStatus.Ready)
         {
-            m_player1.StartGame();
+            m_playerHandler1.StartGame();
         }
         else if (!m_isSinglePlayer 
-            && m_player1.playerStat == PlayerStatus.Ready 
-            && m_player2.playerStat == PlayerStatus.Ready) //Start game if both players are ready
+            && m_playerHandler1.currentState == PlayerStatus.Ready 
+            && m_playerHandler2.currentState == PlayerStatus.Ready) //Start game if both players are ready
         {
-            m_player1.StartGame();
-            m_player2.StartGame();
+            m_playerHandler1.StartGame();
+            m_playerHandler2.StartGame();
+            m_gameState = GameState.GAME_PLAYING;
         }
     }
 
@@ -146,14 +166,15 @@ public class GameManager : MonoBehaviour
         m_isSinglePlayer = m_playerCount == 1;
         if (m_playerCount == 1)
         {
-            m_player1.InitPlayer(m_isSinglePlayer);
-            m_player2.ResetPlayer();
+            m_playerHandler1.InitPlayer(m_isSinglePlayer);
+            m_playerHandler2.ResetPlayer();
         }
         else
         {
-            m_player1.InitPlayer(m_isSinglePlayer);
-            m_player2.InitPlayer(m_isSinglePlayer);
+            m_playerHandler1.InitPlayer(m_isSinglePlayer);
+            m_playerHandler2.InitPlayer(m_isSinglePlayer);
         }
+        m_gameState = GameState.GAME_STARTED;
     }
 
     public float GetGlobalSpeed()
@@ -183,14 +204,17 @@ public class GameManager : MonoBehaviour
             case GameState.MAIN_MENU:
 
                 break;
-            case GameState.GAME_COUNTDOWN:
+            case GameState.WAITING:
+
+                break;
+            case GameState.GAME_STARTED:
                 EnvMovementSpeed = 0;
                 break;
-            case GameState.GAME_START:
+            case GameState.GAME_PLAYING:
                 EnvMovementSpeed = startingSpeed;
                 break;
-            case GameState.GAME_END:
-                // UIManager.Instance.ShowEndScreen();
+            case GameState.GAME_OVER:
+
                 break;
             default:
                 break;

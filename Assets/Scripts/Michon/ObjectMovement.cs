@@ -22,10 +22,10 @@ public class ObjectMovement : MonoBehaviour
     
     private void OnGameEnded(GameState p_val)
     {
-        if (p_val.Equals(GameState.GAME_END))
-        {
-            speedDelta = 0;
-        }
+        // if (p_val.Equals(GameState.GAME_END))
+        // {
+        //     speedDelta = 0;
+        // }
     }
 
     void FixedUpdate()
