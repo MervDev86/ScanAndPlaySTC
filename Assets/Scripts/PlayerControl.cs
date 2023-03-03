@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+
+    public Action<int> OnTriggerPoints;
     [Header("Movement")]
     [SerializeField] int m_positionIndex = 0;
     [SerializeField] float m_movementSpeed = 1;
@@ -78,5 +81,14 @@ public class PlayerControl : MonoBehaviour
     {
         if(m_isActive)
             m_targetPosition.x = m_movementXPositions[p_index];
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Coins")
+        {
+            Debug.Log("Add score");
+        }
+        // OnTriggerPoints
     }
 }

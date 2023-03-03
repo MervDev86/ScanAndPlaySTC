@@ -153,13 +153,13 @@ public class GameManager : MonoBehaviour
         m_isSinglePlayer = m_playerCount == 1;
         if (m_playerCount == 1)
         {
-            m_playerHandler1.InitPlayer(m_isSinglePlayer);
+            m_playerHandler1.InitGame(m_isSinglePlayer);
             m_playerHandler2.ResetPlayer();
         }
         else
         {
-            m_playerHandler1.InitPlayer(m_isSinglePlayer);
-            m_playerHandler2.InitPlayer(m_isSinglePlayer);
+            m_playerHandler1.InitGame(m_isSinglePlayer);
+            m_playerHandler2.InitGame(m_isSinglePlayer);
         }
         ChangeGameState(GameState.GAME_STARTED);
     }

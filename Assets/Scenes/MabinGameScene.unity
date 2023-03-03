@@ -1666,12 +1666,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segmentParent: {fileID: 400436890}
   segmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
-  totalSpawn: 15
+  totalSpawn: 3
   nextSpawnPoint: {x: 500, y: 0, z: 0}
   initSpawn: {fileID: 2016625566}
   m_spawnPositionDiff: 190.63
-  m_segmentSpawnPointSphereSize: 15
-  m_segmentSpawnPoint: {x: 0, y: 0, z: 2859.4502}
+  m_segmentSpawnPointSphereSize: 3
+  m_segmentSpawnPoint: {x: 0, y: 0, z: 571.89}
   m_segmentSpawnPointColor: {r: 0, g: 0, b: 0, a: 0}
   m_envMovementSpeed: 0.5
 --- !u!1 &466554307
@@ -1933,12 +1933,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segmentParent: {fileID: 490695692}
   segmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
-  totalSpawn: 15
+  totalSpawn: 3
   nextSpawnPoint: {x: 0, y: 0, z: 0}
   initSpawn: {fileID: 608081923}
   m_spawnPositionDiff: 190.63
   m_segmentSpawnPointSphereSize: 15
-  m_segmentSpawnPoint: {x: 0, y: 0, z: 2859.4502}
+  m_segmentSpawnPoint: {x: 0, y: 0, z: 571.89}
   m_segmentSpawnPointColor: {r: 0, g: 0, b: 0, a: 0}
   m_envMovementSpeed: 0.5
 --- !u!1 &497091718
@@ -2592,7 +2592,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2742,6 +2742,9 @@ MonoBehaviour:
   m_maxTime: 10
   m_multiplier: 1
   m_startingSpeed: 0.2
+  m_renderCameras:
+  - {fileID: 963194225}
+  - {fileID: 2105989616}
 --- !u!1 &754139263
 GameObject:
   m_ObjectHideFlags: 0
@@ -2835,7 +2838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &756937285
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3324,12 +3327,12 @@ GameObject:
   - component: {fileID: 889862464}
   - component: {fileID: 889862463}
   m_Layer: 0
-  m_Name: ' Cam1_single'
+  m_Name: ' Cam_single'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &889862462
 Transform:
   m_ObjectHideFlags: 0
@@ -3452,7 +3455,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -3508,12 +3511,12 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194229}
   m_Layer: 0
-  m_Name: ' Cam1_single'
+  m_Name: ' Cam_single'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -5731,6 +5734,9 @@ MonoBehaviour:
   m_maxTime: 10
   m_multiplier: 1
   m_startingSpeed: 0.2
+  m_renderCameras:
+  - {fileID: 889862461}
+  - {fileID: 1569805580}
 --- !u!1001 &1400654464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6270,12 +6276,12 @@ GameObject:
   - component: {fileID: 1569805583}
   - component: {fileID: 1569805582}
   m_Layer: 0
-  m_Name: ' Cam1_multi'
+  m_Name: ' Cam_multi'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1569805581
 Transform:
   m_ObjectHideFlags: 0
@@ -6361,7 +6367,7 @@ GameObject:
   - component: {fileID: 5389327911735294485}
   m_Layer: 0
   m_Name: Player1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7311,7 +7317,7 @@ GameObject:
   - component: {fileID: 1964227593}
   m_Layer: 0
   m_Name: Player2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7748,7 +7754,7 @@ PrefabInstance:
     - target: {fileID: 2638800640560455770, guid: 1de230376836caf47a8bf90976354c21, type: 3}
       propertyPath: m_spawnParent
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 400436892}
     - target: {fileID: 2638800640560455771, guid: 1de230376836caf47a8bf90976354c21, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -8356,12 +8362,12 @@ GameObject:
   - component: {fileID: 2105989619}
   - component: {fileID: 2105989618}
   m_Layer: 0
-  m_Name: ' Cam1_multi'
+  m_Name: ' Cam_multi'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2105989617
 Transform:
   m_ObjectHideFlags: 0

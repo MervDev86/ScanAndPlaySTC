@@ -81,7 +81,7 @@ public class Block : MonoBehaviour
         if (m_boundaryLength <= 0)
         {
             m_boundaryLength = m_collider.size.z;
-            Debug.Log($"zSize has been set to {m_boundaryLength}");
+            // Debug.Log($"zSize has been set to {m_boundaryLength}");
         }
 
         m_boundaryLength = m_collider.bounds.size.z;

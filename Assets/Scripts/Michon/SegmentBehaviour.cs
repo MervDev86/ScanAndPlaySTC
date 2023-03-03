@@ -40,7 +40,7 @@ public class SegmentBehaviour : MonoBehaviour
         SetRespawnPoint(new Vector3(transform.position.x, transform.position.y, m_spawnParent.GetLastSpawnPosition()));
         SpawnBlocks();
 
-        Debug.Log($"{gameObject.name} spawned at {transform.position}");
+        // Debug.Log($"{gameObject.name} spawned at {transform.position}");
     }
 
     private void Update()

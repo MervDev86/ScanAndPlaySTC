@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class Coin : MonoBehaviour {
 
-    [SerializeField] float turnSpeed = 90f;
+    public int points = 10;
+    [SerializeField] float m_turnSpeed = 90f;
 
     private void OnTriggerEnter (Collider other)
     {
@@ -17,11 +18,7 @@ public class Coin : MonoBehaviour {
         if (other.gameObject.tag != "Player") {
             return;
         }
-
-        // Add to the player's score
-        // GameManager.instance.IncrementScore();
-
-        // Destroy this coin object
+        
         Destroy(gameObject);
     }
 
@@ -30,6 +27,6 @@ public class Coin : MonoBehaviour {
 	}
 
 	private void Update () {
-        transform.Rotate(0, 0, turnSpeed * Time.deltaTime);
+        transform.Rotate(0, 0, m_turnSpeed * Time.deltaTime);
 	}
 }

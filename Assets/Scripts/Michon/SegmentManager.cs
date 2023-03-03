@@ -45,8 +45,9 @@ public class SegmentManager : MonoBehaviour
         m_spawnPositionDiff = segmentPrefab.transform.GetChild(1).transform.position.z;
     }
 
-    private void Start()
+    public void InitEnvironment()
     {
+        m_envMovementSpeed = 0;
         for (int spawnIndex = 0; spawnIndex <= totalSpawn; spawnIndex++)
         {
             if (initSpawn != null && spawnIndex < 1)

@@ -47,8 +47,10 @@
      <Compile Include="Assets\Scripts\Objects\Coin.cs" />
      <Compile Include="Assets\Scripts\PlayerGameHandler.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
+     <Compile Include="Assets\Scripts\Leaderboards.cs" />
      <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\CameraController.cs" />
      <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\MoveCamera.cs" />
+     <Compile Include="Assets\Scripts\PlayerHud.cs" />
      <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\GUIControllerFlying.cs" />
      <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\GUIControllerAttack.cs" />
      <Compile Include="Assets\Scripts\Michon\SpawnIndicator.cs" />
@@ -56,12 +58,15 @@
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\Util\ViewFPS.cs" />
      <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\GUIController.cs" />
+     <Compile Include="Assets\Scripts\Michon\Block.cs" />
+     <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\AmbientController.cs" />
      <Compile Include="Assets\Scripts\GroundTile.cs" />
      <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\QueryAnimationController.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\GroundSpawner.cs" />
      <Compile Include="Assets\Scripts\Michon\ForwardMovement.cs" />
+     <Compile Include="Assets\Scripts\Michon\BlockSpawner.cs" />
      <Compile Include="Assets\Scripts\Michon\SegmentManager.cs" />
      <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\FlyThroughController.cs" />
      <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\QueryEmotionalController.cs" />
@@ -71,11 +76,6 @@
      <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\ZRNGUIController.cs" />
      <Compile Include="Assets\Scripts\Countdown.cs" />
      <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\Util\SetFPS.cs" />
-     <Compile Include="Assets\Scripts\PlayerHud.cs" />
-     <Compile Include="Assets\Scripts\Leaderboards.cs" />
-     <Compile Include="Assets\Scripts\PlayerControl.cs" />
-     <Compile Include="Assets\Scripts\Michon\BlockSpawner.cs" />
-     <Compile Include="Assets\Scripts\Michon\Block.cs" />
      <Folder Include="Assets" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\mergetool.ja.txt" />
      <Folder Include="Assets\ZRNAssets\PQAssets\Query-Chan" />
@@ -712,6 +712,12 @@
      <Reference Include="UnityEditor.UnityConnectModule">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.19f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
      </Reference>
+     <Reference Include="ReportGeneratorMerged">
+     <HintPath>D:\_Merv\_Raven\_GithubRepo\Endless-Game\Endless-Game\Library\PackageCache\com.unity.testtools.codecoverage@1.2.2\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
+     </Reference>
+     <Reference Include="Firebase.App">
+     <HintPath>D:\_Merv\_Raven\_GithubRepo\Endless-Game\Endless-Game\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+     </Reference>
      <Reference Include="Firebase.Analytics">
      <HintPath>D:\_Merv\_Raven\_GithubRepo\Endless-Game\Endless-Game\Assets\Firebase\Plugins\Firebase.Analytics.dll</HintPath>
      </Reference>
@@ -724,17 +730,11 @@
      <Reference Include="Google.MiniJson">
      <HintPath>D:\_Merv\_Raven\_GithubRepo\Endless-Game\Endless-Game\Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
      </Reference>
-     <Reference Include="Firebase.Platform">
-     <HintPath>D:\_Merv\_Raven\_GithubRepo\Endless-Game\Endless-Game\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
      <HintPath>D:\_Merv\_Raven\_GithubRepo\Endless-Game\Endless-Game\Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
      </Reference>
-     <Reference Include="ReportGeneratorMerged">
-     <HintPath>D:\_Merv\_Raven\_GithubRepo\Endless-Game\Endless-Game\Library\PackageCache\com.unity.testtools.codecoverage@1.2.2\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
-     </Reference>
-     <Reference Include="Firebase.App">
-     <HintPath>D:\_Merv\_Raven\_GithubRepo\Endless-Game\Endless-Game\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+     <Reference Include="Firebase.Platform">
+     <HintPath>D:\_Merv\_Raven\_GithubRepo\Endless-Game\Endless-Game\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
      </Reference>
      <Reference Include="Firebase.Auth">
      <HintPath>D:\_Merv\_Raven\_GithubRepo\Endless-Game\Endless-Game\Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>

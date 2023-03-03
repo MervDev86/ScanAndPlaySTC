@@ -17,6 +17,8 @@ public class PlayerGameHandler : MonoBehaviour
     [SerializeField] float m_multiplier = 1;
     [SerializeField] float m_startingSpeed = 0.5f;
     
+    [SerializeField] GameObject[] m_renderCameras;
+    
     
     int m_life = 3;
     bool m_isActive = false;
@@ -32,14 +34,25 @@ public class PlayerGameHandler : MonoBehaviour
         GameManager.instance.onChangedGameState -= OnGameStateChange;
     }
 
-    public void InitPlayer(bool p_isSingle)
+    public void InitGame(bool p_isSingle)
     {
         m_isSingle = p_isSingle;
+        
+        if (p_isSingle)
+        {
+            m_renderCameras[0].SetActive(true);
+            m_renderCameras[1].SetActive(false);
+        }
+        else
+        {
+            m_renderCameras[0].SetActive(false);
+            m_renderCameras[1].SetActive(true);
+        }
 
         score = 0;
         m_playerHUD.SetScore(score);
         m_playerHUD.gameObject.SetActive(true);
-        segmentManager.EnvMovementSpeed = 0;
+        segmentManager.InitEnvironment();
         m_isActive = true;
         m_playerHUD.InitHud(p_isSingle);
         currentState = PlayerStatus.Waiting;
