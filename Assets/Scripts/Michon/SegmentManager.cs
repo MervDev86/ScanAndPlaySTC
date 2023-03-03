@@ -32,10 +32,10 @@ public class SegmentManager : MonoBehaviour
         {
             if (initSpawn != null && spawnIndex < 1)
             {
-                initSpawn.SetActive(false);
-                //initSpawn.GetComponent<SegmentBehaviour>().SetSpawnParent(this);
-                //nextSpawnPoint = initSpawn.transform.GetChild(1).transform.position;
-                //continue;
+                //initSpawn.SetActive(false);
+                initSpawn.GetComponent<SegmentBehaviour>().SetSpawnParent(this);
+                nextSpawnPoint = initSpawn.transform.GetChild(1).transform.position;
+                continue;
             }
             SpawnTile(spawnIndex, spawnIndex == totalSpawn);
         }
@@ -48,8 +48,10 @@ public class SegmentManager : MonoBehaviour
         {
             m_segmentSpawnPoint = temp.transform.position;
         }
+
+
         temp.GetComponent<SegmentBehaviour>().SetSpawnParent(this);
-        temp.transform.parent = segmentParent.transform;
+        temp.transform.parent = segmentParent == null ? new GameObject("Segments").transform : segmentParent.transform;
         temp.name = p_name != null ? $"Segment {p_name} " : "Segment";
         nextSpawnPoint = temp.transform.GetChild(1).transform.position;
     }

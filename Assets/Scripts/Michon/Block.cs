@@ -12,8 +12,10 @@ public class Block : MonoBehaviour
     [SerializeField] GameObject m_coinPrefab;
     [SerializeField] GameObject m_ObstaclePrefab;
     [SerializeField] bool m_spawnObstacle = false;
+    [SerializeField] bool m_initialSpawnBlocked = true;
     [Space]
     [Range(0, 1)]
+    [Tooltip("the higher the value ; the lower the chance of spawning")]
     [SerializeField] float m_spawnChance = 1;
     [Header("Grid")]
     //xPoints is supposed to be based off the movement points of the player  | l | m = 0 | r |   ++ current: -2 0 2
@@ -53,12 +55,17 @@ public class Block : MonoBehaviour
 
     private void Start()
     {
+
         m_collider = this.gameObject.GetComponent<BoxCollider>();
         m_segmentBehaviour.onRespawn += OnSegmentRespawn;
 
         InitGridLayout();
         DestroySpawnedItems();
-        SpawnItems();
+
+        if (!m_initialSpawnBlocked || transform.GetSiblingIndex() <= 2)
+        {
+            SpawnItems();
+        }
     }
     #endregion
 
@@ -122,7 +129,7 @@ public class Block : MonoBehaviour
         bool obstacleSpawned = false;
         for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)
         {
-            bool spawnOnThisColumn = Random.Range(0, 2) >= m_spawnChance;
+            bool spawnOnThisColumn = Random.Range(0f, 1f) >= m_spawnChance;
             if (m_spawnObstacle && Random.Range(0, 2) >= 1 && !obstacleSpawned)
             {
                 var obj = Instantiate(m_ObstaclePrefab, transform);
@@ -141,7 +148,6 @@ public class Block : MonoBehaviour
             }
         }
     }
-
 
     //void SpawnItems()//Spawn on All Points
     //{
@@ -234,5 +240,14 @@ public class Block : MonoBehaviour
     {
         m_segmentBehaviour = p_segmentBehaviour;
     }
+    public Block SetSegmentManager(SegmentBehaviour p_segmentBehaviour)
+    {
+        m_segmentBehaviour = p_segmentBehaviour;
+        return this;
+    }
 
+    public void SetInitialSpawn(bool p_enable)
+    {
+        m_initialSpawnBlocked = p_enable;
+    }
 }

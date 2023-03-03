@@ -11,10 +11,13 @@ public class SegmentBehaviour : MonoBehaviour
     [Space]
 
     [Header("Block Spawn Settings")]
+    [Tooltip("If theres already a preset spawn enabled")]
     [SerializeField] GameObject m_initialBlock;
     [SerializeField] Transform m_blockParent;
     [SerializeField] GameObject m_blockPrefab;
-    [SerializeField] int m_totalBlockCount = 17;
+
+
+    [SerializeField] int m_totalBlockCount = 4;
 
     [Header("Debugger")]
     [SerializeField] bool m_showEndSegment = false;
@@ -56,8 +59,15 @@ public class SegmentBehaviour : MonoBehaviour
         Vector3[] blockPositionArr = Block.GetBlockSpawnPoints(m_totalBlockCount, m_initialBlock.transform.position);
         for (int spawnIndex = 1; spawnIndex < blockPositionArr.Length; spawnIndex++)
         {
+            if (m_initialBlock != null && spawnIndex < 1)
+            {
+                m_initialBlock.GetComponent<Block>()
+                   .SetSegmentManager(this)
+                   .SetInitialSpawn(true);
+                continue;
+            }
             var tempBlock = Instantiate(m_blockPrefab, m_blockParent);
-            tempBlock.GetComponent<Block>().SetSegmentParent(this);
+            tempBlock.GetComponent<Block>().SetSegmentManager(this);
             tempBlock.transform.position = blockPositionArr[spawnIndex];
         }
     }
