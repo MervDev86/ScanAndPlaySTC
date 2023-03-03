@@ -1,29 +1,36 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System;
-
-using NetworkClientHandler;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerGameHandler : MonoBehaviour
 {
     public PlayerStatus currentState = PlayerStatus.Idle;
-    public int playerID = 1;
-    public int score = 0;
     public PlayerControl playerControl;
+    public SegmentManager segmentManager;
+    public int score = 0;
+
     public string playerName = "PLAYER";
     [Header("HUD")]
     [SerializeField] PlayerHud m_playerHUD;
     [SerializeField] float m_currentTime = 0;
     [SerializeField] float m_maxTime = 60;
     [SerializeField] float m_multiplier = 1;
+    [SerializeField] float m_startingSpeed = 0.5f;
     
     
     int m_life = 3;
     bool m_isActive = false;
     private bool m_isSingle = true;
+
+    private void Start()
+    {
+        GameManager.instance.onChangedGameState += OnGameStateChange;
+    }
+    
+    private void OnDestroy()
+    {
+        GameManager.instance.onChangedGameState -= OnGameStateChange;
+    }
 
     public void InitPlayer(bool p_isSingle)
     {
@@ -32,9 +39,34 @@ public class PlayerGameHandler : MonoBehaviour
         score = 0;
         m_playerHUD.SetScore(score);
         m_playerHUD.gameObject.SetActive(true);
-        m_isActive = false;
+        segmentManager.EnvMovementSpeed = 0;
+        m_isActive = true;
         m_playerHUD.InitHud(p_isSingle);
         currentState = PlayerStatus.Waiting;
+    }
+
+    void OnGameStateChange(GameState p_gameState)
+    {
+        if(!m_isActive)
+            return;
+        switch (p_gameState)
+        {
+            case GameState.MAIN_MENU:
+                break;
+            case GameState.WAITING:
+                break;
+            case GameState.GAME_STARTED:
+                // StartGame();
+                break;
+            case GameState.GAME_PLAYING:
+                break;
+            case GameState.GAME_OVER:
+                break;
+            case GameState.LEADERBOARD:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(p_gameState), p_gameState, null);
+        }
     }
 
     IEnumerator StartGameSeq()
@@ -48,9 +80,9 @@ public class PlayerGameHandler : MonoBehaviour
         m_playerHUD.SetIntroPanel("GO!",180);
         yield return new WaitForSeconds(1);
         m_playerHUD.SetIntroPanel("");
-        playerControl.ActivateController();
+        playerControl.ActivateController(true);
         currentState = PlayerStatus.Playing;
-        m_isActive = true;
+        segmentManager.EnvMovementSpeed = m_startingSpeed;
     }
 
     private void Update()
@@ -86,7 +118,9 @@ public class PlayerGameHandler : MonoBehaviour
     {
         m_isActive = false;
         currentState = PlayerStatus.Gameover;
+        playerControl.ActivateController(false);
         m_playerHUD.ShowFinalScore(playerName,score);
+        segmentManager.EnvMovementSpeed = 0;
     }
     
     public void Hit()

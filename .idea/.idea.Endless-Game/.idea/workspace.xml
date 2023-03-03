@@ -7,24 +7,41 @@
     <list default="true" id="d744b789-586a-47f6-971e-ec2f08db1d35" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Endless-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Endless-Game/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Fonts/OTFs/STCForward-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/OTFs/STCForward-Bold SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Fonts/OTFs/STCForward-Regular SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/OTFs/STCForward-Regular SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Leaderboard/LeaderBoardHard.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Leaderboard/LeaderBoardHard.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/ARC_Col_4_Tex.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/ARC_Col_4_Tex.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/ARC_Vinyls_Tex_Col4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/ARC_Vinyls_Tex_Col4.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/ARC_Vinyls_Tex_Col4_2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/ARC_Vinyls_Tex_Col4_2.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/red.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/red.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/white.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/white.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/yellow.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbm/yellow.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/Car_A/Car_A.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Coin_Mat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Coin_Mat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Coin_Mat.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Coin_Mat.mat.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Obstacle_Mat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Obstacle_Mat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Obstacle_Mat.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Obstacle_Mat.mat.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Player_Mat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Player_Mat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Player_Mat.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Player_Mat.mat.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Coin.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Coin.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Coin.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Coin.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Michon Prefab/Segment.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Michon Prefab/Segment.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Obstacle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Obstacle.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Obstacle.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Obstacle.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Segment.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Segment.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MabinGameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MabinGameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Countdown.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Countdown.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GroundSpawner.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GroundSpawner.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GroundTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GroundTile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GroundTile.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GroundTile.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Michon/ObjectMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Michon/ObjectMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NetworkClientHandler/SessionsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NetworkClientHandler/SessionsHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Michon/Segment.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Michon/Segment.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Michon/SegmentManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Michon/SegmentManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Objects/Obstacle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Objects/Obstacle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerGameHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerGameHandler.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerHud.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerHud.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerControl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerGameHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerGameHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Endless-Game.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Endless-Game.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FullscreenEditor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/FullscreenEditor.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Traffic Essentials Asset Pack/NEWPrefabs/RegPylon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Traffic Essentials Asset Pack/NEWPrefabs/RegPylon.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +49,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../RAFI/TestEnvironment/Assets/Scripts/Countdown.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerControl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerHud.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -101,7 +119,7 @@
       <workItem from="1677225215080" duration="2937000" />
       <workItem from="1677502610871" duration="1260000" />
       <workItem from="1677505077367" duration="17000" />
-      <workItem from="1677505279358" duration="35255000" />
+      <workItem from="1677505279358" duration="46442000" />
     </task>
     <servers />
   </component>

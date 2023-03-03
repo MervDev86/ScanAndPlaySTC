@@ -31,9 +31,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("Calculated using Chunk Bounds")]
     [SerializeField] float _movementDistance = 3.33f;//Calculated using Chunk Bounds
 
-    [Header("Movement")]
-    [SerializeField] float envMovementSpeed = 0.5f;
-    [SerializeField] float startingSpeed = 0.2f;
+
     [SerializeField] private PlayerGameHandler m_playerHandler1;
     [SerializeField] private PlayerGameHandler m_playerHandler2;
     [SerializeField] private Leaderboards m_leaderBoard;
@@ -73,7 +71,7 @@ public class GameManager : MonoBehaviour
             {
                 if (m_isSinglePlayer || (!m_isSinglePlayer && m_playerHandler2.currentState == PlayerStatus.Gameover))
                 {
-                    m_gameState = GameState.GAME_OVER;
+                    ChangeGameState(GameState.GAME_OVER);
                     Debug.Log("GAME OVER");
                 }
             }
@@ -144,22 +142,11 @@ public class GameManager : MonoBehaviour
         {
             m_playerHandler1.StartGame();
             m_playerHandler2.StartGame();
-            m_gameState = GameState.GAME_PLAYING;
         }
+        ChangeGameState(GameState.GAME_PLAYING);
     }
 
-    public float EnvMovementSpeed
-    {
-        get { return envMovementSpeed; }
-        set
-        {
-            if (value != envMovementSpeed)
-            {
-                envMovementSpeed = value;
-                OnEnvValueChanged?.Invoke(value);
-            }
-        }
-    }
+
 
     public void OnInitializeGame(int m_playerCount) //TODO listen to server to start the game
     {
@@ -174,14 +161,9 @@ public class GameManager : MonoBehaviour
             m_playerHandler1.InitPlayer(m_isSinglePlayer);
             m_playerHandler2.InitPlayer(m_isSinglePlayer);
         }
-        m_gameState = GameState.GAME_STARTED;
+        ChangeGameState(GameState.GAME_STARTED);
     }
-
-    public float GetGlobalSpeed()
-    {
-        return envMovementSpeed;
-    }
-
+    
 
     #region Spawn and Movement
     public float GetMovementDistance => _movementDistance;
@@ -208,10 +190,10 @@ public class GameManager : MonoBehaviour
 
                 break;
             case GameState.GAME_STARTED:
-                EnvMovementSpeed = 0;
+
                 break;
             case GameState.GAME_PLAYING:
-                EnvMovementSpeed = startingSpeed;
+                
                 break;
             case GameState.GAME_OVER:
 

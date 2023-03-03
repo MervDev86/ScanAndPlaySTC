@@ -39,17 +39,22 @@ public class PlayerControl : MonoBehaviour
         transform.localPosition = new Vector3(Mathf.Lerp(transform.localPosition.x, m_targetPosition.x, Time.fixedDeltaTime * m_movementSpeed), transform.localPosition.y, transform.localPosition.z);
     }
     
-    public void ActivateController()
+    public void ActivateController(bool p_isActive)
     {
-        m_isActive = true;
-        m_positionIndex = 1;
-        m_initPosition = transform.localPosition;
+        m_isActive = p_isActive;
+        if (m_isActive)
+        {
+            m_positionIndex = 1;
+            m_initPosition = transform.localPosition;
 
-        m_movementXPositions = new[] {
-            m_initPosition.x - GameManager.instance.GetMovementDistance,
-            m_initPosition.x,
-            m_initPosition.x + GameManager.instance.GetMovementDistance,
-        };
+            m_movementXPositions = new[] {
+                m_initPosition.x - GameManager.instance.GetMovementDistance,
+                m_initPosition.x,
+                m_initPosition.x + GameManager.instance.GetMovementDistance,
+            };
+        }
+
+
     }
 
     private void MoveLeft()

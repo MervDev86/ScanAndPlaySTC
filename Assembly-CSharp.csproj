@@ -66,7 +66,7 @@
      <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\FlyThroughController.cs" />
      <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\QueryEmotionalController.cs" />
      <Compile Include="Assets\ZRNAssets\PQAssets\Query-Chan\Scripts\CameraAction.cs" />
-     <Compile Include="Assets\Scripts\Michon\Segment.cs" />
+     <Compile Include="Assets\Scripts\Michon\SegmentBehaviour.cs" />
      <Compile Include="Assets\ZRNAssets\Cars\Scripts\AICarMove.cs" />
      <Compile Include="Assets\ZRNAssets\005339_08932_25_14\Scripts\ZRNGUIController.cs" />
      <Compile Include="Assets\Scripts\Countdown.cs" />
@@ -74,6 +74,8 @@
      <Compile Include="Assets\Scripts\PlayerHud.cs" />
      <Compile Include="Assets\Scripts\Leaderboards.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
+     <Compile Include="Assets\Scripts\Michon\BlockSpawner.cs" />
+     <Compile Include="Assets\Scripts\Michon\Block.cs" />
      <Folder Include="Assets" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.0\Lib\Editor\PlasticSCM\localization\mergetool.ja.txt" />
      <Folder Include="Assets\ZRNAssets\PQAssets\Query-Chan" />
