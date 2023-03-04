@@ -33,7 +33,10 @@ public class Block : MonoBehaviour
     [Space]
 
     [Header("Block Visualizer")]
-    [SerializeField] bool ShowDebugTools = true;
+
+    [SerializeField] Vector3 blockSpawnOffset;
+    static Vector3 _blockSpawnOffset;
+    [SerializeField] bool showDebugTools = true;
     [SerializeField] bool showNextBlockPreview = true;
     [SerializeField] int previewLimit = 2;
     [SerializeField] Color previewColor = Color.white;
@@ -49,6 +52,7 @@ public class Block : MonoBehaviour
             m_collider = GetComponent<BoxCollider>();
 
         InitGridLayout(); // To keep track of the spawn Positions
+        _blockSpawnOffset = blockSpawnOffset;
     }
 
     private void Start()
@@ -156,7 +160,7 @@ public class Block : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!ShowDebugTools)
+        if (!showDebugTools)
             return;
         ShowSpawnPointVisualizer();
         ShowNextBlockVisualizer();
@@ -207,7 +211,8 @@ public class Block : MonoBehaviour
         Vector3[] spawnPoints = new Vector3[p_count];
         for (int spawnPointIndex = 0; spawnPointIndex < spawnPoints.Length; spawnPointIndex++)
         {
-            spawnPoints[spawnPointIndex] = p_initialBlockPosition + new Vector3(p_initialBlockPosition.x, p_initialBlockPosition.y, m_boundaryLength * spawnPointIndex);
+            //spawnPoints[spawnPointIndex] = p_initialBlockPosition + new Vector3(p_initialBlockPosition.x, p_initialBlockPosition.y, m_boundaryLength * spawnPointIndex);
+            spawnPoints[spawnPointIndex] = new Vector3(0, 0, m_boundaryLength * spawnPointIndex) + p_initialBlockPosition;
         }
 
         return spawnPoints;

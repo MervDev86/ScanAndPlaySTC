@@ -54,12 +54,12 @@ public class SegmentBehaviour : MonoBehaviour
 
     void SpawnBlocks()
     {
-        Vector3[] blockPositionArr = Block.GetBlockSpawnPoints(m_totalBlockCount, m_initialBlock.transform.position);
+        Vector3[] blockPositionArr = Block.GetBlockSpawnPoints(m_totalBlockCount, m_initialBlock.transform.localPosition);
         for (int spawnIndex = 1; spawnIndex < blockPositionArr.Length; spawnIndex++)
         {
             var tempBlock = Instantiate(m_blockPrefab, m_blockParent);
             tempBlock.GetComponent<Block>().SetSegmentParent(this);
-            tempBlock.transform.position = blockPositionArr[spawnIndex];
+            tempBlock.transform.localPosition = blockPositionArr[spawnIndex];
         }
     }
 
