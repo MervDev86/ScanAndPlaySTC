@@ -45,15 +45,18 @@ public class SegmentManager : MonoBehaviour
 
     private void OnValidate()
     {
-        m_spawnPositionDiff = m_segmentPrefab.transform.GetChild(1).transform.position.z;
+        if (m_segmentPrefab != null)
+        {
+            m_spawnPositionDiff = m_segmentPrefab.transform.GetChild(1).transform.position.z;
+        }
+
         try
         {
             m_nextSpawnPoint.x = transform.parent.position.x;//ensures the location of the parent is inline with the spawn
         }
         catch (Exception)
         {
-            Debug.LogError($"{gameObject.name} error cant find Parent");
-            throw;
+            //Debug.LogError($"{gameObject.name} error cant find Parent");
         }
     }
 

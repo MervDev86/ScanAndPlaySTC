@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2684208805283619399}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -46,11 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_envMovementSpeed: 0.5
-  initSpawn: {fileID: 2684208805669377608}
-  segmentParent: {fileID: 2684208805283619399}
-  segmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
-  nextSpawnPoint: {x: 0, y: 0, z: 0}
-  totalSpawn: 3
+  m_initSpawn: {fileID: 2684208805669377608}
+  m_segmentParent: {fileID: 2684208805283619399}
+  m_initSegmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+  m_segmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+  m_nextSpawnPoint: {x: 0, y: 0, z: 0}
+  m_totalSpawn: 3
   m_spawnPositionDiff: 190.63
   m_segmentSpawnPointSphereSize: 15
   m_segmentSpawnPoint: {x: 0, y: 0, z: 571.89}
