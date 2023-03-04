@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -14,7 +13,7 @@ public class Block : MonoBehaviour
     [SerializeField] bool m_spawnObstacle = false;
     [Space]
     [Range(0, 1)]
-    [Tooltip("Chance Percentage To Spawn Item per Column (1 =100% chance)")]
+    [Tooltip("Chance Percentage To Spawn Item per Column (1 = 100% chance)")]
     [SerializeField] float m_spawnChance = 1;
     [Header("Grid")]
     //xPoints is based off the movement points of the player  | l | m = 0 | r |   ++ current: -2 0 2
@@ -23,12 +22,11 @@ public class Block : MonoBehaviour
     [SerializeField] int m_gridRow;
     int m_gridColumn = 3; //DEFAULT = 3  => FOR NOW KEEP THE SAME VAL UNLESS CHANGED IN THE FUTURE
     [Space]
-
     [SerializeField] float m_itemHeight = 1;
     [Tooltip("Coin Spawn Offset in Z Axis")]
     [SerializeField] float m_itemSpawnzOffset;
     [Tooltip("Maximum Columns that spawn coins. Default : 3")]
-    [SerializeField] int m_coinSpawnLimit = 3;
+    int m_coinSpawnLimit = 1;
     Vector3[,] spawnPoints;
     [Space]
 
@@ -41,17 +39,17 @@ public class Block : MonoBehaviour
     [Header("Block Visualizer")]
 
     [SerializeField] Vector3 blockSpawnOffset;
-    static Vector3 _blockSpawnOffset;
     [SerializeField] bool showDebugTools = true;
     [SerializeField] bool showNextBlockPreview = true;
     [SerializeField] int previewLimit = 2;
     [SerializeField] Color previewColor = Color.white;
-    #endregion
-
 
     public float maxXBounds;
     public float maxYBounds;
     public static float m_boundaryLength = 0;
+    #endregion
+
+
 
     #region LifeCycle
     private void OnValidate()
@@ -60,7 +58,6 @@ public class Block : MonoBehaviour
             m_collider = GetComponent<BoxCollider>();
 
         InitGridLayout(); // To keep track of the spawn Positions
-        _blockSpawnOffset = blockSpawnOffset;
     }
 
     private void Start()
@@ -70,7 +67,8 @@ public class Block : MonoBehaviour
 
         InitGridLayout();
         DestroySpawnedItems();
-        SpawnItems();
+        SpawnItems(true);
+        Debug.Log($"{gameObject.name} spawned at index {transform.GetSiblingIndex()}");
     }
     #endregion
 
@@ -113,7 +111,7 @@ public class Block : MonoBehaviour
                 }
                 catch (System.Exception e)
                 {
-
+                    //getting error to capacity
                 }
             }
         }
@@ -121,8 +119,15 @@ public class Block : MonoBehaviour
 
 
     [ContextMenu("Spawnables/Spawn Collections")]
-    void SpawnItems()
+    void SpawnItems(bool p_initSpawn = false)
     {
+        if (p_initSpawn && transform.GetSiblingIndex() <= m_coinSpawnLimit)
+        {
+            Debug.Log($"{gameObject.name} skipped spawn at index {transform.GetSiblingIndex()}");
+
+            return;
+        }
+
         bool obstacleSpawned = false;
         for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)
         {
@@ -156,6 +161,7 @@ public class Block : MonoBehaviour
             xPoints[xPointIndex] = xPointIndex * playerMovementPointDelta;
         }
     }
+
     //void SpawnItems()//Spawn on All Points
     //{
     //    foreach (var spawnPosition in spawnPoints)
@@ -164,6 +170,41 @@ public class Block : MonoBehaviour
     //        obj.transform.localPosition = spawnPosition;
     //    }
     //}
+
+
+    public static Vector3[] GetBlockSpawnPoints(int p_count, Vector3 p_initialBlockPosition)
+    {
+        Vector3[] spawnPoints = new Vector3[p_count];
+        for (int spawnPointIndex = 0; spawnPointIndex < spawnPoints.Length; spawnPointIndex++)
+        {
+            //spawnPoints[spawnPointIndex] = p_initialBlockPosition + new Vector3(p_initialBlockPosition.x, p_initialBlockPosition.y, m_boundaryLength * spawnPointIndex);
+            spawnPoints[spawnPointIndex] = new Vector3(0, 0, m_boundaryLength * spawnPointIndex) + p_initialBlockPosition;
+        }
+
+        return spawnPoints;
+    }
+
+    [ContextMenu("Block/Check Collider Length")]
+    public void GetColliderLength()
+    {
+        m_boundaryLength = GetComponent<BoxCollider>().bounds.size.z;
+    }
+
+    [ContextMenu("Kill Children")]
+    public void DestroySpawnedItems()
+    {
+        if (transform.childCount == 0)
+            return;
+        for (int childIndex = 0; childIndex < transform.childCount; childIndex++)
+        {
+            Destroy(transform.GetChild(childIndex).gameObject);
+        }
+    }
+
+    public void SetSegmentParent(SegmentBehaviour p_segmentBehaviour)
+    {
+        m_segmentBehaviour = p_segmentBehaviour;
+    }
 
     #region Debugger
 
@@ -214,39 +255,5 @@ public class Block : MonoBehaviour
     }
 
     #endregion
-
-    public static Vector3[] GetBlockSpawnPoints(int p_count, Vector3 p_initialBlockPosition)
-    {
-        Vector3[] spawnPoints = new Vector3[p_count];
-        for (int spawnPointIndex = 0; spawnPointIndex < spawnPoints.Length; spawnPointIndex++)
-        {
-            //spawnPoints[spawnPointIndex] = p_initialBlockPosition + new Vector3(p_initialBlockPosition.x, p_initialBlockPosition.y, m_boundaryLength * spawnPointIndex);
-            spawnPoints[spawnPointIndex] = new Vector3(0, 0, m_boundaryLength * spawnPointIndex) + p_initialBlockPosition;
-        }
-
-        return spawnPoints;
-    }
-
-    [ContextMenu("Block/Check Collider Length")]
-    public void GetColliderLength()
-    {
-        m_boundaryLength = GetComponent<BoxCollider>().bounds.size.z;
-    }
-
-    [ContextMenu("Kill Children")]
-    public void DestroySpawnedItems()
-    {
-        if (transform.childCount == 0)
-            return;
-        for (int childIndex = 0; childIndex < transform.childCount; childIndex++)
-        {
-            Destroy(transform.GetChild(childIndex).gameObject);
-        }
-    }
-
-    public void SetSegmentParent(SegmentBehaviour p_segmentBehaviour)
-    {
-        m_segmentBehaviour = p_segmentBehaviour;
-    }
 
 }

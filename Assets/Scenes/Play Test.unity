@@ -2036,9 +2036,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1397128185}
     m_Modifications:
+    - target: {fileID: 2684208803883204112, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
+      propertyPath: m_coinSpawnLimit
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
+      propertyPath: totalSpawn
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
       propertyPath: nextSpawnPoint.x
-      value: 0
+      value: 552
       objectReference: {fileID: 0}
     - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
       propertyPath: nextSpawnPoint.z
@@ -2046,7 +2054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
       propertyPath: m_segmentSpawnPoint.x
-      value: 500
+      value: 552
       objectReference: {fileID: 0}
     - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
       propertyPath: m_segmentSpawnPointSphereSize
@@ -4438,7 +4446,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397128184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 500, y: 0, z: 0}
+  m_LocalPosition: {x: 552, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6707,6 +6715,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 710124139}
     m_Modifications:
+    - target: {fileID: 2684208803883204112, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
+      propertyPath: m_coinSpawnLimit
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
       propertyPath: nextSpawnPoint.z
       value: 0
