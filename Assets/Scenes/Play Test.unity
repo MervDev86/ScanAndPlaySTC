@@ -1412,11 +1412,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4148829804482578656, guid: 2a2bbd272ff6cc842a1f3839312da18c, type: 3}
   m_PrefabInstance: {fileID: 482329699}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &490695692 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2684208805283619399, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
-  m_PrefabInstance: {fileID: 2684208805064511051}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &490695693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2684208805283619398, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
@@ -1427,7 +1422,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
   m_PrefabInstance: {fileID: 2684208805064511051}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490695692}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 007f701fccb49a94eac4b3c09a92182b, type: 3}
@@ -4200,11 +4195,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187381114}
   m_CullTransparentMesh: 1
---- !u!1 &1190965953 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2684208805669377608, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
-  m_PrefabInstance: {fileID: 2684208805064511051}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1191193859
 GameObject:
   m_ObjectHideFlags: 0
@@ -6828,38 +6818,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 710124139}
     m_Modifications:
-    - target: {fileID: 2684208803883204112, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
-      propertyPath: m_coinSpawnLimit
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
-      propertyPath: m_initSpawn
-      value: 
-      objectReference: {fileID: 1190965953}
-    - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
-      propertyPath: m_totalSpawn
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
-      propertyPath: m_segmentParent
-      value: 
-      objectReference: {fileID: 490695692}
-    - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
-      propertyPath: m_segmentPrefab
-      value: 
-      objectReference: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
-    - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
-      propertyPath: nextSpawnPoint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
-      propertyPath: m_initSegmentPrefab
-      value: 
-      objectReference: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
-    - target: {fileID: 2684208805283619397, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
-      propertyPath: m_segmentSpawnPoint.z
-      value: 571.89
-      objectReference: {fileID: 0}
     - target: {fileID: 2684208805283619398, guid: 64e34482aae04f54eac4ccc3674b07dd, type: 3}
       propertyPath: m_RootOrder
       value: 3

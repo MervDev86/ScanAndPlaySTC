@@ -1300,16 +1300,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007f701fccb49a94eac4b3c09a92182b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segmentParent: {fileID: 400436890}
-  segmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
-  totalSpawn: 3
-  nextSpawnPoint: {x: 500, y: 0, z: 0}
-  initSpawn: {fileID: 2016625566}
+  m_envMovementSpeed: 0.5
+  m_initSpawn: {fileID: 2016625566}
+  m_segmentParent: {fileID: 400436890}
+  m_initSegmentPrefab: {fileID: 2016625566}
+  m_segmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+  m_nextSpawnPoint: {x: 500, y: 0, z: 0}
+  m_totalSpawn: 3
   m_spawnPositionDiff: 190.63
   m_segmentSpawnPointSphereSize: 7.17
   m_segmentSpawnPoint: {x: 500, y: 0, z: 571.89}
   m_segmentSpawnPointColor: {r: 1, g: 0.94509804, b: 0, a: 1}
-  m_envMovementSpeed: 0.5
 --- !u!1 &466554307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,16 +1508,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007f701fccb49a94eac4b3c09a92182b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segmentParent: {fileID: 490695692}
-  segmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
-  totalSpawn: 3
-  nextSpawnPoint: {x: 0, y: 0, z: 0}
-  initSpawn: {fileID: 608081923}
+  m_envMovementSpeed: 0.5
+  m_initSpawn: {fileID: 608081923}
+  m_segmentParent: {fileID: 490695692}
+  m_initSegmentPrefab: {fileID: 608081923}
+  m_segmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+  m_nextSpawnPoint: {x: 0, y: 0, z: 0}
+  m_totalSpawn: 3
   m_spawnPositionDiff: 190.63
   m_segmentSpawnPointSphereSize: 15
   m_segmentSpawnPoint: {x: 0, y: 0, z: 571.89}
   m_segmentSpawnPointColor: {r: 1, g: 0, b: 0, a: 1}
-  m_envMovementSpeed: 0.5
 --- !u!1 &497091718
 GameObject:
   m_ObjectHideFlags: 0
@@ -5850,6 +5852,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 400436892}
     - target: {fileID: 2638800640560455770, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+      propertyPath: m_showEndSegment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638800640560455770, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+      propertyPath: m_segmentPosLimit
+      value: -193.36974
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638800640560455770, guid: 1de230376836caf47a8bf90976354c21, type: 3}
       propertyPath: m_totalBlockCount
       value: 3
       objectReference: {fileID: 0}
@@ -6816,6 +6826,14 @@ PrefabInstance:
     - target: {fileID: 2638800640560455770, guid: 1de230376836caf47a8bf90976354c21, type: 3}
       propertyPath: m_respawnPoint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638800640560455770, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+      propertyPath: m_showEndSegment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638800640560455770, guid: 1de230376836caf47a8bf90976354c21, type: 3}
+      propertyPath: m_segmentPosLimit
+      value: -193.36974
       objectReference: {fileID: 0}
     - target: {fileID: 2638800640560455771, guid: 1de230376836caf47a8bf90976354c21, type: 3}
       propertyPath: m_RootOrder
