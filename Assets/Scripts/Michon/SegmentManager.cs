@@ -43,6 +43,14 @@ public class SegmentManager : MonoBehaviour
     private void OnValidate()
     {
         m_spawnPositionDiff = segmentPrefab.transform.GetChild(1).transform.position.z;
+        try
+        {
+            nextSpawnPoint.x = transform.parent.position.x;
+        }
+        catch (Exception)
+        {
+
+        }
     }
 
     private void Start()
@@ -67,7 +75,7 @@ public class SegmentManager : MonoBehaviour
         environtmentInitialized = true;
     }
 
-    public void SpawnSegment(int? p_name = null, bool p_isLast = false)
+    public void SpawnSegment(int? p_index = null, bool p_isLast = false)
     {
         GameObject temp = Instantiate(segmentPrefab, nextSpawnPoint, Quaternion.identity);
         if (p_isLast)
@@ -79,7 +87,7 @@ public class SegmentManager : MonoBehaviour
         sb.SetSpawnParent(this);
         OnEnvValueChanged += sb.UpdateSpeed;
         temp.transform.parent = segmentParent.transform;
-        temp.name = p_name != null ? $"Segment {p_name} " : "Segment";
+        temp.name = p_index != null ? $"Segment {p_index} " : "Segment";
         nextSpawnPoint = temp.transform.GetChild(1).transform.position;
     }
 
