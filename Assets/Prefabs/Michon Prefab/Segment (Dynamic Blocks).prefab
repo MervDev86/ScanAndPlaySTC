@@ -12495,6 +12495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f4ddc2623e9d04880dc96545534bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedDelta: 0
   m_spawnParent: {fileID: 0}
   m_respawnPoint: {x: 0, y: 0, z: 381.26}
   m_initialBlock: {fileID: 2638800641994311688}
@@ -12518,7 +12519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053c8421d9888014b90a2e64b2fe648c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedDelta: 0
 --- !u!1 &2638800641070678297
 GameObject:
   m_ObjectHideFlags: 0
@@ -13235,7 +13235,8 @@ MonoBehaviour:
   m_itemHeight: 0.48
   d_sphereSize: 0.2
   d_color: {r: 1, g: 0, b: 0.7581215, a: 1}
-  ShowDebugTools: 0
+  blockSpawnOffset: {x: 0, y: 0, z: 0}
+  showDebugTools: 1
   showNextBlockPreview: 0
   previewLimit: 7
   previewColor: {r: 0, g: 0.5517826, b: 1, a: 0.16470589}

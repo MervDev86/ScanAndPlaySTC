@@ -21,12 +21,12 @@ public class SegmentManager : MonoBehaviour
     [SerializeField] float m_segmentSpawnPointSphereSize = 15f;
     [SerializeField] Vector3 m_segmentSpawnPoint;
     [SerializeField] Color m_segmentSpawnPointColor;
-    
+
     [Header("Movement")]
     [SerializeField] float m_envMovementSpeed = 0.5f;
 
     public Action<float> OnEnvValueChanged;
-
+    bool environtmentInitialized = false;
     public float EnvMovementSpeed
     {
         get { return m_envMovementSpeed; }
@@ -45,8 +45,16 @@ public class SegmentManager : MonoBehaviour
         m_spawnPositionDiff = segmentPrefab.transform.GetChild(1).transform.position.z;
     }
 
+    private void Start()
+    {
+        environtmentInitialized = false;
+    }
+
     public void InitEnvironment()
     {
+        if (environtmentInitialized)
+            return;
+
         m_envMovementSpeed = 0;
         for (int spawnIndex = 0; spawnIndex <= totalSpawn; spawnIndex++)
         {
@@ -54,11 +62,12 @@ public class SegmentManager : MonoBehaviour
             {
                 initSpawn.SetActive(false);
             }
-            SpawnTile(spawnIndex, spawnIndex == totalSpawn);
+            SpawnSegment(spawnIndex, spawnIndex == totalSpawn);
         }
+        environtmentInitialized = true;
     }
 
-    public void SpawnTile(int? p_name = null, bool p_isLast = false)
+    public void SpawnSegment(int? p_name = null, bool p_isLast = false)
     {
         GameObject temp = Instantiate(segmentPrefab, nextSpawnPoint, Quaternion.identity);
         if (p_isLast)
@@ -77,11 +86,11 @@ public class SegmentManager : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = m_segmentSpawnPointColor;
-        m_segmentSpawnPoint = new Vector3(0, 0, GetLastSpawnPosition());
+        m_segmentSpawnPoint = new Vector3(nextSpawnPoint.x, nextSpawnPoint.y, GetLastSpawnPosition());
         Gizmos.DrawSphere(m_segmentSpawnPoint, m_segmentSpawnPointSphereSize);
     }
 
-    public float GetLastSpawnPosition() => (totalSpawn) * m_spawnPositionDiff;
+    public float GetLastSpawnPosition() => (totalSpawn) * m_spawnPositionDiff; //Returns z position of the last Segment
     public int GetTotalSpawnCount() => totalSpawn;
     public float GetSpawnPositionDifference() => m_spawnPositionDiff;
 
