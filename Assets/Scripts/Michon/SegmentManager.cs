@@ -11,13 +11,13 @@ public class SegmentManager : MonoBehaviour
     [Header("Spawn Values")]
     [Tooltip("If theres already a preset spawn enabled")]
     [SerializeField] GameObject m_initSpawn;
+    [SerializeField] int m_segmentSpawnCount = 15;
     [Space]
     [Tooltip("Gameobject that handled the Spawning of this Object")]
     [SerializeField] GameObject m_segmentParent;
     [SerializeField] GameObject m_initSegmentPrefab;
     [SerializeField] GameObject m_segmentPrefab;
     [SerializeField] Vector3 m_nextSpawnPoint;
-    [SerializeField] int m_totalSpawn = 15;
     [Space]
     [Tooltip("Found in Prefab as 'Next Point'. Sets where the next spawn object will be.")]
     [SerializeField] float m_spawnPositionDiff;
