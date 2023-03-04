@@ -71,13 +71,13 @@ public class SegmentManager : MonoBehaviour
             return;
 
         m_envMovementSpeed = 0;
-        for (int spawnIndex = 0; spawnIndex <= m_totalSpawn; spawnIndex++)
+        for (int spawnIndex = 0; spawnIndex <= m_segmentSpawnCount; spawnIndex++)
         {
             if (m_initSpawn != null && spawnIndex < 1)
             {
                 m_initSpawn.SetActive(false);
             }
-            SpawnSegment(spawnIndex, spawnIndex == m_totalSpawn);
+            SpawnSegment(spawnIndex, spawnIndex == m_segmentSpawnCount);
         }
         environtmentInitialized = true;
     }
@@ -105,7 +105,7 @@ public class SegmentManager : MonoBehaviour
         Gizmos.DrawSphere(m_segmentSpawnPoint, m_segmentSpawnPointSphereSize);
     }
 
-    public float GetLastSpawnPosition() => (m_totalSpawn) * m_spawnPositionDiff; //Returns z position of the last Segment
-    public int GetTotalSpawnCount() => m_totalSpawn;
+    public float GetLastSpawnPosition() => (m_segmentSpawnCount) * m_spawnPositionDiff; //Returns z position of the last Segment
+    public int GetTotalSpawnCount() => m_segmentSpawnCount;
     public float GetSpawnPositionDifference() => m_spawnPositionDiff;
 }
