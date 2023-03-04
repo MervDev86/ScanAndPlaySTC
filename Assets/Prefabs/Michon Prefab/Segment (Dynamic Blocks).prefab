@@ -13224,15 +13224,14 @@ MonoBehaviour:
   m_coinPrefab: {fileID: 681084056512101516, guid: 86f8181616978294497bf5163d10ff68, type: 3}
   m_ObstaclePrefab: {fileID: 3513120157906751832, guid: 02a82e7a718df8749aeb913af3ed8032, type: 3}
   m_spawnObstacle: 0
-  m_spawnChance: 0.69
+  m_spawnChance: 0.342
   xPoints:
   - -2
   - 0
   - 2
-  m_gridColumn: 3
   m_gridRow: 6
-  zOffset: -3.54
   m_itemHeight: 0.48
+  m_itemSpawnzOffset: 0
   d_sphereSize: 0.2
   d_color: {r: 1, g: 0, b: 0.7581215, a: 1}
   blockSpawnOffset: {x: 0, y: 0, z: 0}

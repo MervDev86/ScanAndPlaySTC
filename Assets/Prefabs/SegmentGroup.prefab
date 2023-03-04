@@ -47,14 +47,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_envMovementSpeed: 0.5
   m_initSpawn: {fileID: 2684208805669377608}
+  m_segmentSpawnCount: 15
   m_segmentParent: {fileID: 2684208805283619399}
   m_initSegmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
   m_segmentPrefab: {fileID: 2638800640560455772, guid: 1de230376836caf47a8bf90976354c21, type: 3}
   m_nextSpawnPoint: {x: 0, y: 0, z: 0}
-  m_totalSpawn: 3
   m_spawnPositionDiff: 190.63
   m_segmentSpawnPointSphereSize: 15
-  m_segmentSpawnPoint: {x: 0, y: 0, z: 571.89}
+  m_segmentSpawnPoint: {x: 0, y: 0, z: 2859.4502}
   m_segmentSpawnPointColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &134789802364761620
 PrefabInstance:
@@ -125,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2638800641994311684, guid: 1de230376836caf47a8bf90976354c21, type: 3}
       propertyPath: m_spawnChance
-      value: 1
+      value: 0.286
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1de230376836caf47a8bf90976354c21, type: 3}

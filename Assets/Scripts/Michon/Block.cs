@@ -121,36 +121,53 @@ public class Block : MonoBehaviour
     [ContextMenu("Spawnables/Spawn Collections")]
     void SpawnItems(bool p_initSpawn = false)
     {
-        if (p_initSpawn && transform.GetSiblingIndex() <= m_coinSpawnLimit)
+        if (p_initSpawn && transform.GetSiblingIndex() <= m_coinSpawnLimit)//Skip Spawn on Init
         {
             Debug.Log($"{gameObject.name} skipped spawn at index {transform.GetSiblingIndex()}");
-
             return;
         }
 
+        bool spawnedColumn = false;
         bool obstacleSpawned = false;
+
         for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)
         {
             bool spawnOnThisColumn = Random.Range(0, 2) >= 1 - m_spawnChance;
             //SPAWN OBSTACLE
-            if (m_spawnObstacle && Random.Range(0, 2) >= 1 && !obstacleSpawned)
+            if (SpawnObstacle(obstacleSpawned, columnIndex))
             {
-                var obj = Instantiate(m_ObstaclePrefab, transform);
-                obj.transform.localPosition = spawnPoints[columnIndex, 0];
-                obstacleSpawned = true;
                 continue;
             }
-
-            //SPAWN COIN
-            for (int rowIndex = 0; rowIndex < m_gridRow; rowIndex++)
+            else
             {
-                if (spawnOnThisColumn)
+                //SPAWN COIN
+                for (int rowIndex = 0; rowIndex < m_gridRow; rowIndex++)
                 {
-                    var obj = Instantiate(m_coinPrefab, transform);
-                    obj.transform.localPosition = spawnPoints[columnIndex, rowIndex];
+                    if (spawnOnThisColumn)
+                    {
+                        var obj = Instantiate(m_coinPrefab, transform);
+                        obj.transform.localPosition = spawnPoints[columnIndex, rowIndex];
+                    }
                 }
+                spawnedColumn = spawnOnThisColumn;
+            }
+            if (spawnedColumn)// Spawn only on 1 column per block 
+            {
+                break;
             }
         }
+    }
+
+    bool SpawnObstacle(bool p_obstacleSpawned, int p_columnIndex)
+    {
+        if (m_spawnObstacle && Random.Range(0, 2) >= 1 && !p_obstacleSpawned)
+        {
+            var obj = Instantiate(m_ObstaclePrefab, transform);
+            obj.transform.localPosition = spawnPoints[p_columnIndex, 0];
+            p_obstacleSpawned = true;
+            return true;
+        }
+        return false;
     }
 
     void GetXpoints()
