@@ -56,8 +56,6 @@ public class PlayerControl : MonoBehaviour
                 m_initPosition.x + GameManager.instance.GetMovementDistance,
             };
         }
-
-
     }
 
     private void MoveLeft()
@@ -83,12 +81,13 @@ public class PlayerControl : MonoBehaviour
             m_targetPosition.x = m_movementXPositions[p_index];
     }
 
-    public void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
+        if (!m_isActive) return;
+
         if (other.tag == "Coins")
         {
-            Debug.Log("Add score");
+            OnTriggerPoints.Invoke(other.GetComponent<Coin>().points);
         }
-        // OnTriggerPoints
     }
 }

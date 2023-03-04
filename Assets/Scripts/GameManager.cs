@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ChangeGameState(GameState.MAIN_MENU);
+        m_leaderBoard.gameObject.SetActive(false);
         SessionsHandler.OnInitializeGame += OnInitializeGame;
         SessionsHandler.OnPlayer1SetName += m_playerHandler1.SetPlayerReady;
         SessionsHandler.OnPlayer2SetName += m_playerHandler2.SetPlayerReady;
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
                 if (m_isSinglePlayer || (!m_isSinglePlayer && m_playerHandler2.currentState == PlayerStatus.Gameover))
                 {
                     ChangeGameState(GameState.GAME_OVER);
-                    Debug.Log("GAME OVER");
+                    //Debug.Log("GAME OVER");
                 }
             }
         }
@@ -121,12 +122,12 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z)) //Simulate Player1 Ready
         {
-            m_playerHandler1.AddScore(5);
+            m_playerHandler1.AddPoints(5);
         }
 
         if (Input.GetKeyDown(KeyCode.X)) //Simulate Player1 Ready
         {
-            m_playerHandler2.AddScore(5);
+            m_playerHandler2.AddPoints(5);
         }
     }
 
@@ -196,11 +197,24 @@ public class GameManager : MonoBehaviour
                 
                 break;
             case GameState.GAME_OVER:
-
+                StartCoroutine(SaveScoreAndShowLeaderBoards());
                 break;
             default:
                 break;
         }
+    }
+
+    IEnumerator SaveScoreAndShowLeaderBoards()
+    {
+        Debug.Log("SaveScoreAndShowLeaderBoards");
+        m_leaderBoard.SaveScore(m_playerHandler1.playerName,"0", m_playerHandler1.score.ToString());
+        yield return new WaitForSeconds(5);
+        Debug.Log("Show leaderboards");
+        m_leaderBoard.gameObject.SetActive(true);
+        m_leaderBoard.InitLeaderboard();
+        yield return new WaitForSeconds(5);
+        Restart();
+
     }
     
     void Restart()

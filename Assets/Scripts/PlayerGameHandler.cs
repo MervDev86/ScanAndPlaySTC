@@ -16,7 +16,6 @@ public class PlayerGameHandler : MonoBehaviour
     [SerializeField] float m_maxTime = 60;
     [SerializeField] float m_multiplier = 1;
     [SerializeField] float m_startingSpeed = 0.5f;
-    
     [SerializeField] GameObject[] m_renderCameras;
     
     
@@ -32,12 +31,16 @@ public class PlayerGameHandler : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.instance.onChangedGameState -= OnGameStateChange;
+        playerControl.OnTriggerPoints -= AddPoints;
     }
 
     public void InitGame(bool p_isSingle)
     {
         m_isSingle = p_isSingle;
-        
+        m_currentTime = m_maxTime;
+        playerControl.OnTriggerPoints += AddPoints;
+
+
         if (p_isSingle)
         {
             m_renderCameras[0].SetActive(true);
@@ -102,12 +105,14 @@ public class PlayerGameHandler : MonoBehaviour
     {
         if (currentState == PlayerStatus.Playing)
         {
-            m_currentTime += Time.deltaTime * m_multiplier;
-            m_playerHUD.SetGameTime(m_currentTime);
-            if (m_currentTime >= m_maxTime)
+            m_currentTime -= Time.deltaTime * m_multiplier;
+
+            if (m_currentTime <= 0)
             {
+                m_currentTime = 0;
                 GameOver();
             }
+            m_playerHUD.SetGameTime(m_currentTime);
         }
     }
 
@@ -122,7 +127,7 @@ public class PlayerGameHandler : MonoBehaviour
 
     public void StartGame()
     {
-        m_currentTime = 0;
+        m_currentTime = m_maxTime;
         currentState = PlayerStatus.Starting;
         StartCoroutine(StartGameSeq());
     }
@@ -147,7 +152,7 @@ public class PlayerGameHandler : MonoBehaviour
         }
     }
 
-    public void AddScore(int p_score)
+    public void AddPoints(int p_score)
     {
         score += p_score;
         m_playerHUD.SetScore(score);
