@@ -14,19 +14,25 @@ public class Block : MonoBehaviour
     [SerializeField] bool m_spawnObstacle = false;
     [Space]
     [Range(0, 1)]
+    [Tooltip("Chance Percentage To Spawn Item per Column (1 =100% chance)")]
     [SerializeField] float m_spawnChance = 1;
     [Header("Grid")]
-    //xPoints is supposed to be based off the movement points of the player  | l | m = 0 | r |   ++ current: -2 0 2
+    //xPoints is based off the movement points of the player  | l | m = 0 | r |   ++ current: -2 0 2
     [SerializeField] float[] xPoints = new float[3];
-    [SerializeField] int m_gridColumn = 3; //DEFAULT = 3  => FOR NOW KEEP THE SAME VAL UNLESS CHANGED IN THE FUTURE
     [Range(0, 100)]
     [SerializeField] int m_gridRow;
+    int m_gridColumn = 3; //DEFAULT = 3  => FOR NOW KEEP THE SAME VAL UNLESS CHANGED IN THE FUTURE
     [Space]
-    [SerializeField] float zOffset;
+
     [SerializeField] float m_itemHeight = 1;
+    [Tooltip("Coin Spawn Offset in Z Axis")]
+    [SerializeField] float m_itemSpawnzOffset;
+    [Tooltip("Maximum Columns that spawn coins. Default : 3")]
+    [SerializeField] int m_coinSpawnLimit = 3;
     Vector3[,] spawnPoints;
     [Space]
 
+    #region Debug Properties
     [Header("Item Spawn Visualizer")]
     [SerializeField] float d_sphereSize = 0.3f;
     [SerializeField] Color d_color = Color.white;
@@ -40,6 +46,8 @@ public class Block : MonoBehaviour
     [SerializeField] bool showNextBlockPreview = true;
     [SerializeField] int previewLimit = 2;
     [SerializeField] Color previewColor = Color.white;
+    #endregion
+
 
     public float maxXBounds;
     public float maxYBounds;
@@ -98,7 +106,7 @@ public class Block : MonoBehaviour
         {
             for (int rowIndex = 0; rowIndex < m_gridRow; rowIndex++)
             {
-                var yVal = (rowIndex * spawnPointDelta) + zOffset;
+                var yVal = (rowIndex * spawnPointDelta) + m_itemSpawnzOffset;
                 try
                 {
                     spawnPoints[columnIndex, rowIndex] = new Vector3(xPoints[columnIndex], m_itemHeight, yVal);
@@ -106,6 +114,35 @@ public class Block : MonoBehaviour
                 catch (System.Exception e)
                 {
 
+                }
+            }
+        }
+    }
+
+
+    [ContextMenu("Spawnables/Spawn Collections")]
+    void SpawnItems()
+    {
+        bool obstacleSpawned = false;
+        for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)
+        {
+            bool spawnOnThisColumn = Random.Range(0, 2) >= 1 - m_spawnChance;
+            //SPAWN OBSTACLE
+            if (m_spawnObstacle && Random.Range(0, 2) >= 1 && !obstacleSpawned)
+            {
+                var obj = Instantiate(m_ObstaclePrefab, transform);
+                obj.transform.localPosition = spawnPoints[columnIndex, 0];
+                obstacleSpawned = true;
+                continue;
+            }
+
+            //SPAWN COIN
+            for (int rowIndex = 0; rowIndex < m_gridRow; rowIndex++)
+            {
+                if (spawnOnThisColumn)
+                {
+                    var obj = Instantiate(m_coinPrefab, transform);
+                    obj.transform.localPosition = spawnPoints[columnIndex, rowIndex];
                 }
             }
         }
@@ -119,34 +156,6 @@ public class Block : MonoBehaviour
             xPoints[xPointIndex] = xPointIndex * playerMovementPointDelta;
         }
     }
-
-    [ContextMenu("Spawnables/Spawn Collections")]
-    void SpawnItems()
-    {
-        bool obstacleSpawned = false;
-        for (int columnIndex = 0; columnIndex < m_gridColumn; columnIndex++)
-        {
-            bool spawnOnThisColumn = Random.Range(0, 2) >= m_spawnChance;
-            if (m_spawnObstacle && Random.Range(0, 2) >= 1 && !obstacleSpawned)
-            {
-                var obj = Instantiate(m_ObstaclePrefab, transform);
-                obj.transform.localPosition = spawnPoints[columnIndex, 0];
-                obstacleSpawned = true;
-                continue;
-            }
-
-            for (int rowIndex = 0; rowIndex < m_gridRow; rowIndex++)
-            {
-                if (spawnOnThisColumn)
-                {
-                    var obj = Instantiate(m_coinPrefab, transform);
-                    obj.transform.localPosition = spawnPoints[columnIndex, rowIndex];
-                }
-            }
-        }
-    }
-
-
     //void SpawnItems()//Spawn on All Points
     //{
     //    foreach (var spawnPosition in spawnPoints)
