@@ -2,7 +2,8 @@
 
 public class GroundTile : MonoBehaviour
 {
-    GroundSpawner groundSpawner;
+
+    // GroundSpawner groundSpawner;
     Collider m_collider;
 
     [SerializeField] GameObject coinPrefab;
@@ -15,6 +16,8 @@ public class GroundTile : MonoBehaviour
     [Header("Debug")]
     [SerializeField] Vector3 calculatedPoint;
     [SerializeField] float indicatorSize = 0.5f;
+    
+
 
     #region lifecycles
 
@@ -36,12 +39,11 @@ public class GroundTile : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
-    }
+    // private void Start()
+    // {
+    //     groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+    // }
     #endregion
-
 
     public void SpawnObstacle()
     {

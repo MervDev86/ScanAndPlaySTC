@@ -5,13 +5,16 @@ using System.Collections.Generic;
 using TMPro;
 using System;
 using NetworkClientHandler;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
     MAIN_MENU,
-    GAME_COUNTDOWN,
-    GAME_START,
-    GAME_END
+    WAITING,
+    GAME_STARTED,
+    GAME_PLAYING,
+    GAME_OVER,
+    LEADERBOARD,
 }
 
 [ExecuteInEditMode]
@@ -21,60 +24,21 @@ public class GameManager : MonoBehaviour
 
     public event Action<float> OnEnvValueChanged;
     public Action<GameState> onChangedGameState;
-
-    [SerializeField] int score;
-
+    
     [Header("Game Values")]
     [SerializeField] GameState m_gameState;
-
-    [Header("UI")]
-    [SerializeField] TextMeshProUGUI scoreText;
-
-    [Header("Player Values")]
-    [SerializeField] int m_playerCount;
-    [SerializeField] ForwardMovement m_playerForwardMovement;
-    [SerializeField] int m_totalMovementPoints = 3;
 
     [Tooltip("Calculated using Chunk Bounds")]
     [SerializeField] float _movementDistance = 3.33f;//Calculated using Chunk Bounds
 
-    [Header("Movement")]
-    [SerializeField] float envMovementSpeed = 0.5f;
-    [SerializeField] float startingSpeed = 0.2f;
-    [SerializeField] float speedIncreasePerPoint = 0.1f;
-    [SerializeField] Vector3[] MovementSpawnPositions;
-    [SerializeField] SessionsHandler networkSessionHandler;
-    //[SerializeField] Countdown networkSessionHandler;
 
+    [SerializeField] private PlayerGameHandler m_playerHandler1;
+    [SerializeField] private PlayerGameHandler m_playerHandler2;
+    [SerializeField] private Leaderboards m_leaderBoard;
 
-    public float EnvMovementSpeed
-    {
-        get { return envMovementSpeed; }
-        set
-        {
-            if (value != envMovementSpeed)
-            {
-                envMovementSpeed = value;
-                OnEnvValueChanged?.Invoke(value);
-            }
-        }
-    }
+    [SerializeField] GameObject m_introPanel;
 
-
-
-
-
-
-    public float GetGlobalSpeed()
-    {
-        return envMovementSpeed;
-    }
-
-    private void OnValidate()
-    {
-
-    }
-
+    private bool m_isSinglePlayer = true; 
     private void Awake()
     {
         instance = this;
@@ -82,29 +46,127 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.LogWarning($"Distance Set to: {_movementDistance}");
         ChangeGameState(GameState.MAIN_MENU);
+        m_leaderBoard.gameObject.SetActive(false);
+        SessionsHandler.OnInitializeGame += OnInitializeGame;
+        SessionsHandler.OnPlayer1SetName += m_playerHandler1.SetPlayerReady;
+        SessionsHandler.OnPlayer2SetName += m_playerHandler2.SetPlayerReady;
+        SessionsHandler.OnMovePlayer1 += m_playerHandler1.playerControl.MoveToPositionIndex;
+        SessionsHandler.OnMovePlayer2 += m_playerHandler2.playerControl.MoveToPositionIndex;
     }
 
-    #region Score
-    public void IncrementScore()
+    private void OnDestroy()
     {
-        score++;
-        scoreText.text = score.ToString();
-        // Increase the player's speed
-        //m_playerForwardMovement.speed += m_playerForwardMovement.speedIncreasePerPoint;
-        EnvMovementSpeed += speedIncreasePerPoint;
+        SessionsHandler.OnInitializeGame -= OnInitializeGame;
+        SessionsHandler.OnPlayer1SetName -= m_playerHandler1.SetPlayerReady;
+        SessionsHandler.OnPlayer2SetName -= m_playerHandler2.SetPlayerReady;
+        SessionsHandler.OnMovePlayer1 -= m_playerHandler1.playerControl.MoveToPositionIndex;
+        SessionsHandler.OnMovePlayer2 -= m_playerHandler2.playerControl.MoveToPositionIndex;
     }
 
-    public int GetScore()
+    private void Update()
     {
-        return score;
+        if (m_gameState == GameState.GAME_PLAYING)
+        {
+            if (m_playerHandler1.currentState == PlayerStatus.Gameover)
+            {
+                if (m_isSinglePlayer || (!m_isSinglePlayer && m_playerHandler2.currentState == PlayerStatus.Gameover))
+                {
+                    ChangeGameState(GameState.GAME_OVER);
+                    //Debug.Log("GAME OVER");
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {  
+            Restart();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {  
+            Application.Quit();
+        }
+        
+        //For Debug Only
+        if (Input.GetKeyDown(KeyCode.F1)) //Start 1 player game
+        {
+            OnInitializeGame(1);
+            m_introPanel.SetActive(false);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F2)) //Start 2 player game
+        {
+            OnInitializeGame(2);
+            m_introPanel.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F3)) //Simulate Player1 Ready
+        {
+            m_playerHandler1.SetPlayerReady("Mabin");
+            StartGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F4)) //Simulate Player1 Ready
+        {
+            m_playerHandler2.SetPlayerReady("Rainne");
+            StartGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F5)) //Simulate Player1 Ready
+        {
+            m_playerHandler1.GameOver();
+            if (!m_isSinglePlayer)
+                m_playerHandler2.GameOver();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z)) //Simulate Player1 Ready
+        {
+            m_playerHandler1.AddPoints(5);
+        }
+
+        if (Input.GetKeyDown(KeyCode.X)) //Simulate Player1 Ready
+        {
+            m_playerHandler2.AddPoints(5);
+        }
     }
 
-    #endregion
+    void StartGame()
+    {
+        if (m_isSinglePlayer && m_playerHandler1.currentState == PlayerStatus.Ready)
+        {
+            m_playerHandler1.StartGame();
+        }
+        else if (!m_isSinglePlayer 
+            && m_playerHandler1.currentState == PlayerStatus.Ready 
+            && m_playerHandler2.currentState == PlayerStatus.Ready) //Start game if both players are ready
+        {
+            m_playerHandler1.StartGame();
+            m_playerHandler2.StartGame();
+        }
+        ChangeGameState(GameState.GAME_PLAYING);
+    }
+
+
+
+    public void OnInitializeGame(int m_playerCount) //TODO listen to server to start the game
+    {
+        m_isSinglePlayer = m_playerCount == 1;
+        if (m_playerCount == 1)
+        {
+            m_playerHandler1.InitGame(m_isSinglePlayer);
+            m_playerHandler2.ResetPlayer();
+        }
+        else
+        {
+            m_playerHandler1.InitGame(m_isSinglePlayer);
+            m_playerHandler2.InitGame(m_isSinglePlayer);
+        }
+        ChangeGameState(GameState.GAME_STARTED);
+    }
+    
 
     #region Spawn and Movement
-    public int GetTotalMovementPoints => m_totalMovementPoints;
     public float GetMovementDistance => _movementDistance;
     #endregion
 
@@ -125,19 +187,41 @@ public class GameManager : MonoBehaviour
             case GameState.MAIN_MENU:
 
                 break;
-            case GameState.GAME_COUNTDOWN:
-                EnvMovementSpeed = 0;
+            case GameState.WAITING:
+
                 break;
-            case GameState.GAME_START:
-                EnvMovementSpeed = startingSpeed;
+            case GameState.GAME_STARTED:
+
                 break;
-            case GameState.GAME_END:
-                UIManager.Instance.ShowEndScreen();
+            case GameState.GAME_PLAYING:
+                
+                break;
+            case GameState.GAME_OVER:
+                StartCoroutine(SaveScoreAndShowLeaderBoards());
                 break;
             default:
                 break;
         }
     }
+
+    IEnumerator SaveScoreAndShowLeaderBoards()
+    {
+        Debug.Log("SaveScoreAndShowLeaderBoards");
+        m_leaderBoard.SaveScore(m_playerHandler1.playerName,"0", m_playerHandler1.score.ToString());
+        yield return new WaitForSeconds(5);
+        Debug.Log("Show leaderboards");
+        m_leaderBoard.gameObject.SetActive(true);
+        m_leaderBoard.InitLeaderboard();
+        yield return new WaitForSeconds(5);
+        Restart();
+
+    }
+    
+    void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
+    
     #endregion
 
     #region Debug

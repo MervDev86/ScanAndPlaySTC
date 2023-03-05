@@ -17,23 +17,23 @@ public class Countdown : MonoBehaviour
         m_currentTimeCountDown = m_startTime;
         m_gameStarting = false;
 
-        GameManager.instance.onChangedGameState += OnChangeState;
+        // GameManager.instance.onChangedGameState += OnChangeState;
     }
 
-    void OnChangeState(GameState p_gameState) 
-    {
-  
-        switch (p_gameState)
-        {
-            case GameState.GAME_COUNTDOWN:
-                m_gameStarting = true; break;
-
-            case GameState.GAME_END:
-            default:
-                m_gameStarting = false; break;
-        }
-       
-    }
+    // void OnChangeState(GameState p_gameState) 
+    // {
+    //
+    //     switch (p_gameState)
+    //     {
+    //         case GameState.GAME_COUNTDOWN:
+    //             m_gameStarting = true; break;
+    //
+    //         case GameState.GAME_END:
+    //         default:
+    //             m_gameStarting = false; break;
+    //     }
+    //    
+    // }
 
     // Update is called once per frame
     void Update()
@@ -48,13 +48,10 @@ public class Countdown : MonoBehaviour
 
                 //Call GameManager to Start
                 Debug.Log("GAME START");
-                GameManager.instance.ChangeGameState(GameState.GAME_START);
+                // GameManager.instance.ChangeGameState(GameState.GAME_START);
             }
 
             m_countdownText.text = m_currentTimeCountDown.ToString("##");
         }
-
-       
-
     }
 }
