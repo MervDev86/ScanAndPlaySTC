@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerGameHandler m_playerHandler1;
     [SerializeField] private PlayerGameHandler m_playerHandler2;
     [SerializeField] private Leaderboards m_leaderBoard;
+    [SerializeField] float m_maxTime = 60;
+    [SerializeField] float m_startingSpeed = 1f;
 
     [SerializeField] GameObject m_introPanel;
 
@@ -154,13 +156,13 @@ public class GameManager : MonoBehaviour
         m_isSinglePlayer = m_playerCount == 1;
         if (m_playerCount == 1)
         {
-            m_playerHandler1.InitGame(m_isSinglePlayer);
+            m_playerHandler1.InitGame(m_isSinglePlayer,m_maxTime,m_startingSpeed);
             m_playerHandler2.ResetPlayer();
         }
         else
         {
-            m_playerHandler1.InitGame(m_isSinglePlayer);
-            m_playerHandler2.InitGame(m_isSinglePlayer);
+            m_playerHandler1.InitGame(m_isSinglePlayer, m_maxTime, m_startingSpeed);
+            m_playerHandler2.InitGame(m_isSinglePlayer, m_maxTime, m_startingSpeed);
         }
         ChangeGameState(GameState.GAME_STARTED);
     }
@@ -208,6 +210,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("SaveScoreAndShowLeaderBoards");
         m_leaderBoard.SaveScore(m_playerHandler1.playerName,"0", m_playerHandler1.score.ToString());
+        if(!m_isSinglePlayer)
+            m_leaderBoard.SaveScore(m_playerHandler2.playerName, "0", m_playerHandler2.score.ToString());
         yield return new WaitForSeconds(5);
         Debug.Log("Show leaderboards");
         m_leaderBoard.gameObject.SetActive(true);

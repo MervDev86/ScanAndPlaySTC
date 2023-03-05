@@ -13,12 +13,13 @@ public class PlayerGameHandler : MonoBehaviour
     [Header("HUD")]
     [SerializeField] PlayerHud m_playerHUD;
     [SerializeField] float m_currentTime = 0;
-    [SerializeField] float m_maxTime = 60;
     [SerializeField] float m_multiplier = 1;
-    [SerializeField] float m_startingSpeed = 0.5f;
     [SerializeField] GameObject[] m_renderCameras;
-    
-    
+
+    float m_maxTime = 60;
+    float m_startingSpeed = 0.5f;
+
+
     int m_life = 3;
     bool m_isActive = false;
     private bool m_isSingle = true;
@@ -34,9 +35,11 @@ public class PlayerGameHandler : MonoBehaviour
         playerControl.OnTriggerPoints -= AddPoints;
     }
 
-    public void InitGame(bool p_isSingle)
+    public void InitGame(bool p_isSingle,float p_maxTime,float p_startingSpeed)
     {
         m_isSingle = p_isSingle;
+        m_maxTime = p_maxTime;
+        m_startingSpeed = p_startingSpeed;
         m_currentTime = m_maxTime;
         playerControl.OnTriggerPoints += AddPoints;
 
