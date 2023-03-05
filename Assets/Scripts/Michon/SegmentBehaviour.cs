@@ -36,11 +36,19 @@ public class SegmentBehaviour : MonoBehaviour
 #if !UNITY_EDITOR
     m_showEndSegment = false;
 #endif
-        endOfSegmentIndicator.SetActive(m_showEndSegment);
+        HideSegmenEndIndicator();
         SetRespawnPoint(new Vector3(transform.position.x, transform.position.y, m_spawnParent.GetLastSpawnPosition()));
         SpawnBlocks();
 
         // Debug.Log($"{gameObject.name} spawned at {transform.position}");
+    }
+
+    private void HideSegmenEndIndicator()
+    {
+        if (endOfSegmentIndicator != null)
+        {
+            endOfSegmentIndicator.SetActive(m_showEndSegment);
+        }
     }
 
     private void Update()
@@ -91,7 +99,7 @@ public class SegmentBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.Translate(new Vector3(0,0,-speedDelta));
+        transform.Translate(new Vector3(0, 0, -speedDelta));
     }
 
 

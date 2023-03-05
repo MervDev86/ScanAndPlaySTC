@@ -15,6 +15,7 @@ public class SegmentManager : MonoBehaviour
     [Space]
     [Tooltip("Gameobject that handled the Spawning of this Object")]
     [SerializeField] GameObject m_segmentParent;
+    [SerializeField] bool  m_useInitSpawn = false;
     [SerializeField] GameObject m_initSegmentPrefab;
     [SerializeField] GameObject m_segmentPrefab;
     [SerializeField] Vector3 m_nextSpawnPoint;
@@ -76,6 +77,7 @@ public class SegmentManager : MonoBehaviour
             if (m_initSpawn != null && spawnIndex < 1)
             {
                 m_initSpawn.SetActive(false);
+                SpawnSegment(true, spawnIndex, spawnIndex == m_segmentSpawnCount);
             }
             SpawnSegment(spawnIndex, spawnIndex == m_segmentSpawnCount);
         }
@@ -85,6 +87,31 @@ public class SegmentManager : MonoBehaviour
     public void SpawnSegment(int? p_index = null, bool p_isLast = false)
     {
         GameObject temp = Instantiate(m_segmentPrefab, m_nextSpawnPoint, Quaternion.identity);
+        if (p_isLast)
+        {
+            m_segmentSpawnPoint = temp.transform.position;
+        }
+
+        SegmentBehaviour sb = temp.GetComponent<SegmentBehaviour>();
+        sb.SetSpawnParent(this);
+        OnEnvValueChanged += sb.UpdateSpeed;
+        temp.transform.parent = m_segmentParent.transform;
+        temp.name = p_index != null ? $"Segment {p_index} " : "Segment";
+        m_nextSpawnPoint = temp.transform.GetChild(1).transform.position;
+    }
+
+    public void SpawnSegment(bool p_useInitModel, int? p_index = null, bool p_isLast = false)
+    {
+        GameObject temp ;
+        if (!p_useInitModel) 
+             temp = Instantiate(m_segmentPrefab, m_nextSpawnPoint, Quaternion.identity);
+        else
+        {
+            temp = m_initSpawn;
+            m_initSpawn.SetActive(true);
+
+        }
+
         if (p_isLast)
         {
             m_segmentSpawnPoint = temp.transform.position;

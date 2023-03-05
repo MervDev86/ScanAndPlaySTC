@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectMovement : MonoBehaviour
 {
-    float speedDelta;
+   public float speedDelta;
 
     private void Start()
     {
