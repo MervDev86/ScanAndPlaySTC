@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerHud : MonoBehaviour
 {
@@ -76,6 +77,7 @@ public class PlayerHud : MonoBehaviour
     public void ShowFinalScore(string p_name, int p_finalScore)
     {
         m_endScreenPanel.gameObject.SetActive(true);
+        m_endScreenPanel.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
         m_endScreenPName.text = p_name;
         m_endScreenScoreText.text = p_finalScore.ToString();
 

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{FD80200E-03EB-2D31-1DE0-AC96F86A3871}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{5973095D-5847-0AAA-3E57-E84F42575230}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullscreenEditor", "FullscreenEditor.csproj", "{EDB914E6-1FB8-FC15-79AB-1814501AFAD2}"
 EndProject
 Global
@@ -15,6 +17,10 @@ Global
 		{FD80200E-03EB-2D31-1DE0-AC96F86A3871}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD80200E-03EB-2D31-1DE0-AC96F86A3871}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD80200E-03EB-2D31-1DE0-AC96F86A3871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5973095D-5847-0AAA-3E57-E84F42575230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5973095D-5847-0AAA-3E57-E84F42575230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5973095D-5847-0AAA-3E57-E84F42575230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5973095D-5847-0AAA-3E57-E84F42575230}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EDB914E6-1FB8-FC15-79AB-1814501AFAD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EDB914E6-1FB8-FC15-79AB-1814501AFAD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDB914E6-1FB8-FC15-79AB-1814501AFAD2}.Release|Any CPU.ActiveCfg = Release|Any CPU

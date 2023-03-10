@@ -116,6 +116,8 @@ public class PlayerGameHandler : MonoBehaviour
                 GameOver();
             }
             m_playerHUD.SetGameTime(m_currentTime);
+
+            segmentManager.EnvMovementSpeed += 0.0009f;
         }
     }
 

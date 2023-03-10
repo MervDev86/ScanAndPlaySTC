@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using System;
 using NetworkClientHandler;
 using UnityEngine.SceneManagement;
+using DG.Tweening; 
 
 public enum GameState
 {
@@ -40,14 +38,25 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject m_introPanel;
 
-    private bool m_isSinglePlayer = true; 
+    private bool m_isSinglePlayer = true;
+
+    string[] m_config;
+    [SerializeField] float m_gameOverShowTime = 5;
+    [SerializeField] float m_leaderboardShowTime = 5;
+
     private void Awake()
     {
         instance = this;
+
     }
 
     private void Start()
     {
+        m_config = System.IO.File.ReadAllLines(Application.dataPath + "/StreamingAssets/GameConfig.ini");
+        m_maxTime = float.Parse(m_config[0].Split("=")[1]);
+        m_gameOverShowTime = float.Parse(m_config[1].Split("=")[1]);
+        m_leaderboardShowTime = float.Parse(m_config[2].Split("=")[1]);
+
         ChangeGameState(GameState.MAIN_MENU);
         m_leaderBoard.gameObject.SetActive(false);
         SessionsHandler.OnInitializeGame += OnInitializeGame;
@@ -214,16 +223,17 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SaveScoreAndShowLeaderBoards()
     {
-        Debug.Log("SaveScoreAndShowLeaderBoards");
+        //Debug.Log("Save2coreAndShowLeaderBoards");
         m_leaderBoard.SaveScore(m_playerHandler1.playerName,"0", m_playerHandler1.score.ToString());
         if(!m_isSinglePlayer)
             m_leaderBoard.SaveScore(m_playerHandler2.playerName, "0", m_playerHandler2.score.ToString());
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(m_gameOverShowTime);
         ChangeGameState(GameState.LEADERBOARD);
-        Debug.Log("Show leaderboards");
+        //Debug.Log("Show leaderboards");
         m_leaderBoard.gameObject.SetActive(true);
+        m_leaderBoard.GetComponent<CanvasGroup>().DOFade(1, 1);
         m_leaderBoard.InitLeaderboard();
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(m_leaderboardShowTime);
         Restart();
     }
     
