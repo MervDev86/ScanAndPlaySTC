@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
         ChangeGameState(GameState.MAIN_MENU);
         m_leaderBoard.gameObject.SetActive(false);
         SessionsHandler.OnInitializeGame += OnInitializeGame;
+        SessionsHandler.OnStartGame += StartGame;
         SessionsHandler.OnPlayer1SetName += m_playerHandler1.SetPlayerReady;
         SessionsHandler.OnPlayer2SetName += m_playerHandler2.SetPlayerReady;
         SessionsHandler.OnMovePlayer1 += m_playerHandler1.playerControl.MoveToPositionIndex;
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         SessionsHandler.OnInitializeGame -= OnInitializeGame;
+        SessionsHandler.OnStartGame += StartGame;
         SessionsHandler.OnPlayer1SetName -= m_playerHandler1.SetPlayerReady;
         SessionsHandler.OnPlayer2SetName -= m_playerHandler2.SetPlayerReady;
         SessionsHandler.OnMovePlayer1 -= m_playerHandler1.playerControl.MoveToPositionIndex;
@@ -187,20 +189,24 @@ public class GameManager : MonoBehaviour
         switch (p_gameState)
         {
             case GameState.MAIN_MENU:
-
+                m_introPanel.SetActive(true);
                 break;
+
             case GameState.WAITING:
-
+                m_introPanel.SetActive(false);
                 break;
-            case GameState.GAME_STARTED:
-
-                break;
-            case GameState.GAME_PLAYING:
                 
+            case GameState.GAME_STARTED:
+                m_introPanel.SetActive(false);
                 break;
+
+            case GameState.GAME_PLAYING:
+                break;
+
             case GameState.GAME_OVER:
                 StartCoroutine(SaveScoreAndShowLeaderBoards());
                 break;
+
             default:
                 break;
         }
@@ -213,12 +219,12 @@ public class GameManager : MonoBehaviour
         if(!m_isSinglePlayer)
             m_leaderBoard.SaveScore(m_playerHandler2.playerName, "0", m_playerHandler2.score.ToString());
         yield return new WaitForSeconds(5);
+        ChangeGameState(GameState.LEADERBOARD);
         Debug.Log("Show leaderboards");
         m_leaderBoard.gameObject.SetActive(true);
         m_leaderBoard.InitLeaderboard();
         yield return new WaitForSeconds(5);
         Restart();
-
     }
     
     void Restart()
