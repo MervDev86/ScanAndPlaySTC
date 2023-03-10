@@ -37,22 +37,11 @@ namespace NetworkClientHandler
         public static Action<string> OnPlayer2SetName;
         #endregion PLAYER_Movement
 
-        private static string DB_SESSIONS = "stcrunner_sessionsdebug";
-        private static string DB_REGISTRATIONS = "stcrunner_registrationsdebug";
+        private static string DB_SESSIONS = "stcrunner_sessions";
 
         private FirebaseApp m_App;
         private FirebaseDatabase m_DB;
         private DatabaseReference m_sessionsDB;
-
-        //private DatabaseReference m_registrationsDB;
-
-        //private DatabaseReference m_refCurrentPosP1;
-        //private DatabaseReference m_refUuidPosP1;
-        //private DatabaseReference m_refNameP1;
-
-        //private bool m_isPlaying = false;
-        //private bool m_isMultiplayer = false;
-        //private DatabaseReference m_player1;
 
         private int m_playerCount = 0;
 
