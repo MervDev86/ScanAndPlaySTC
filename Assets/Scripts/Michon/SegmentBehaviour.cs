@@ -29,6 +29,10 @@ public class SegmentBehaviour : MonoBehaviour
     [Header("Respawn Debug")]
     [SerializeField] float respawnPointDebugSize = 20;
 
+    //MERVIN ADDED
+    [SerializeField] bool m_isInitSegment = false;
+    [SerializeField] GameObject m_startingLine;
+
     public Action onRespawn;
 
     #region LifeCycle
@@ -50,6 +54,9 @@ public class SegmentBehaviour : MonoBehaviour
         if (transform.position.z <= m_segmentPosLimit)
         {
             Respawn();
+
+            if (m_isInitSegment && m_startingLine != null)
+                m_startingLine.SetActive(false);
         }
     }
     #endregion

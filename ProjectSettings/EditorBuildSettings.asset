@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MabinGameScene.unity
+    guid: 813ec1b5ed6157f418ba0eafa4b9a051
   m_configObjects: {}
