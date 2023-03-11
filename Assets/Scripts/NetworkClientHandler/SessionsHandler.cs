@@ -19,7 +19,7 @@ namespace NetworkClientHandler
     public class SessionsHandler : MonoBehaviour
     {
 
-
+        [SerializeField] string m_dbSession = "stcrunner_sessions";
         DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
         protected bool isFirebaseInitialized = false;
 
@@ -36,8 +36,6 @@ namespace NetworkClientHandler
         public static Action<int> OnMovePlayer2;
         public static Action<string> OnPlayer2SetName;
         #endregion PLAYER_Movement
-
-        private static string DB_SESSIONS = "stcrunner_sessions";
 
         private FirebaseApp m_App;
         private FirebaseDatabase m_DB;
@@ -71,7 +69,7 @@ namespace NetworkClientHandler
             m_App = FirebaseApp.DefaultInstance;
             m_DB = FirebaseDatabase.DefaultInstance;
 
-            m_sessionsDB = m_DB.GetReference(DB_SESSIONS);
+            m_sessionsDB = m_DB.GetReference(m_dbSession);
             m_sessionsDB.ChildAdded += HandleSessionsChildAdded;
             m_sessionsDB.ChildChanged += HandleSessionsChildChanged;
 

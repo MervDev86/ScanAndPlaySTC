@@ -68,7 +68,7 @@ public class Block : MonoBehaviour
         InitGridLayout();
         DestroySpawnedItems();
         SpawnItems(true);
-        Debug.Log($"{gameObject.name} spawned at index {transform.GetSiblingIndex()}");
+        //Debug.Log($"{gameObject.name} spawned at index {transform.GetSiblingIndex()}");
     }
     #endregion
 

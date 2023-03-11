@@ -231,7 +231,7 @@ public class GameManager : MonoBehaviour
         ChangeGameState(GameState.LEADERBOARD);
         //Debug.Log("Show leaderboards");
         m_leaderBoard.gameObject.SetActive(true);
-        m_leaderBoard.GetComponent<CanvasGroup>().DOFade(1, 1);
+        m_leaderBoard.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
         m_leaderBoard.InitLeaderboard();
         yield return new WaitForSeconds(m_leaderboardShowTime);
         Restart();

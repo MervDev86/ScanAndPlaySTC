@@ -104,7 +104,7 @@ public class PlayerGameHandler : MonoBehaviour
         segmentManager.EnvMovementSpeed = m_startingSpeed;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (currentState == PlayerStatus.Playing)
         {
@@ -117,7 +117,7 @@ public class PlayerGameHandler : MonoBehaviour
             }
             m_playerHUD.SetGameTime(m_currentTime);
 
-            segmentManager.EnvMovementSpeed += 0.0009f;
+            //segmentManager.EnvMovementSpeed += 0.0009f;
         }
     }
 

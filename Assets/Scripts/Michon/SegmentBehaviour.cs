@@ -26,6 +26,10 @@ public class SegmentBehaviour : MonoBehaviour
     [Header("Respawn Debug")]
     [SerializeField] float respawnPointDebugSize = 20;
 
+    //Mervin Added
+    [SerializeField] bool m_isStartingSegment = false;
+    [SerializeField] GameObject m_startingLine;
+
 
     public Action onRespawn;
 
@@ -55,6 +59,9 @@ public class SegmentBehaviour : MonoBehaviour
     {
         if (transform.position.z <= m_segmentPosLimit)
         {
+            if (m_isStartingSegment && m_startingLine != null)
+                m_startingLine.SetActive(false);
+
             Respawn();
         }
     }
@@ -75,9 +82,9 @@ public class SegmentBehaviour : MonoBehaviour
 
     void Respawn()
     {
-        Debug.Log($"{gameObject.name} despawned at {transform.position}");
+        //Debug.Log($"{gameObject.name} despawned at {transform.position}");
         transform.position = m_respawnPoint;
-        Debug.Log($"{gameObject.name} respawned at {transform.position}");
+        //Debug.Log($"{gameObject.name} respawned at {transform.position}");
         onRespawn?.Invoke();
     }
 
