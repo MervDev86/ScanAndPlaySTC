@@ -1077,6 +1077,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1397128185}
     m_Modifications:
+    - target: {fileID: 1423037312553471835, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_Name
+      value: Initial Segment
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037312553471837, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_totalBlockCount
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2222748421392739160, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
       propertyPath: m_Name
       value: SegmentGroup w_ start 3D
@@ -2271,12 +2279,15 @@ MonoBehaviour:
   playerName: PLAYER1
   m_playerHUD: {fileID: 1836805930}
   m_currentTime: 0
-  m_maxTime: 10
   m_multiplier: 1
-  m_startingSpeed: 0.2
   m_renderCameras:
   - {fileID: 963194225}
   - {fileID: 2105989616}
+--- !u!1 &744045253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1423037312553471835, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+  m_PrefabInstance: {fileID: 750902162}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &750902162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2284,6 +2295,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 710124139}
     m_Modifications:
+    - target: {fileID: 1423037310767294211, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_gridRow
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037310767294211, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_itemHeight
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037310767294211, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: previewLimit
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037310767294211, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_spawnChance
+      value: 0.068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037310767294211, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: previewColor.a
+      value: 0.64705884
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037310767294211, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: showDebugTools
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037310767294211, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_itemSpawnzOffset
+      value: -10.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037310767294211, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: showNextBlockPreview
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037311779006032, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037312553471837, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037312553471837, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_blockZOffset
+      value: 15.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423037312553471837, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_totalBlockCount
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2222748421392739160, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
       propertyPath: m_Name
       value: SegmentGroup w_ start 3D
@@ -2332,6 +2391,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2222748421392739162, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_initSegmentPrefab
+      value: 
+      objectReference: {fileID: 744045253}
+    - target: {fileID: 4539180597131743903, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 12da358ef39a3b340924212ffd7cbda6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 916f842d4afb679409dfbf55bc252a3f, type: 3}
 --- !u!4 &750902163 stripped
@@ -2768,7 +2835,11 @@ MonoBehaviour:
   m_playerHandler1: {fileID: 710124140}
   m_playerHandler2: {fileID: 1397128186}
   m_leaderBoard: {fileID: 1997604098}
+  m_maxTime: 60
+  m_startingSpeed: 1
   m_introPanel: {fileID: 756937284}
+  m_gameOverShowTime: 6
+  m_leaderboardShowTime: 6
 --- !u!4 &863502732
 Transform:
   m_ObjectHideFlags: 0
@@ -4474,7 +4545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1397128185
 Transform:
   m_ObjectHideFlags: 0
@@ -4514,9 +4585,7 @@ MonoBehaviour:
   playerName: PLAYER2
   m_playerHUD: {fileID: 269320755}
   m_currentTime: 0
-  m_maxTime: 10
   m_multiplier: 1
-  m_startingSpeed: 0.2
   m_renderCameras:
   - {fileID: 889862461}
   - {fileID: 1569805580}
