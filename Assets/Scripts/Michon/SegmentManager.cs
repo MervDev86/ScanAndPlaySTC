@@ -15,7 +15,7 @@ public class SegmentManager : MonoBehaviour
     [Space]
     [Tooltip("Gameobject that handled the Spawning of this Object")]
     [SerializeField] GameObject m_segmentParent;
-    [SerializeField] bool  m_useInitSpawn = false;
+    [SerializeField] bool m_useInitSpawn = false;
     [SerializeField] GameObject m_initSegmentPrefab;
     [SerializeField] GameObject m_segmentPrefab;
     [SerializeField] Vector3 m_nextSpawnPoint;
@@ -77,7 +77,7 @@ public class SegmentManager : MonoBehaviour
             if (m_initSpawn != null && spawnIndex < 1)
             {
                 m_initSpawn.SetActive(false);
-                SpawnSegment(true, spawnIndex, spawnIndex == m_segmentSpawnCount);
+                SpawnSegment(m_useInitSpawn, spawnIndex, spawnIndex == m_segmentSpawnCount);
             }
             SpawnSegment(spawnIndex, spawnIndex == m_segmentSpawnCount);
         }
@@ -102,14 +102,13 @@ public class SegmentManager : MonoBehaviour
 
     public void SpawnSegment(bool p_useInitModel, int? p_index = null, bool p_isLast = false)
     {
-        GameObject temp ;
-        if (!p_useInitModel) 
-             temp = Instantiate(m_segmentPrefab, m_nextSpawnPoint, Quaternion.identity);
+        GameObject temp;
+        if (!p_useInitModel)
+            temp = Instantiate(m_segmentPrefab, m_nextSpawnPoint, Quaternion.identity);
         else
         {
             temp = m_initSpawn;
             m_initSpawn.SetActive(true);
-
         }
 
         if (p_isLast)
@@ -135,4 +134,5 @@ public class SegmentManager : MonoBehaviour
     public float GetLastSpawnPosition() => (m_segmentSpawnCount) * m_spawnPositionDiff; //Returns z position of the last Segment
     public int GetTotalSpawnCount() => m_segmentSpawnCount;
     public float GetSpawnPositionDifference() => m_spawnPositionDiff;
+
 }

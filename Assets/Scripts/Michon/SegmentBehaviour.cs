@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SegmentBehaviour : MonoBehaviour
 {
+    [Header("Segment Setting")]
+    public bool m_spawnOnce = false;
     public float speedDelta = 0;
     [Header("Objs")]
     [SerializeField] SegmentManager m_spawnParent;
@@ -15,6 +17,7 @@ public class SegmentBehaviour : MonoBehaviour
     [SerializeField] GameObject m_initialBlock;
     [SerializeField] Transform m_blockParent;
     [SerializeField] GameObject m_blockPrefab;
+    [SerializeField] float m_blockZOffset = 0.3f;
     [SerializeField] int m_totalBlockCount = 17;
 
     [Header("Debugger")]
@@ -25,7 +28,6 @@ public class SegmentBehaviour : MonoBehaviour
     [SerializeField] Vector3 d_despawnPoint = new Vector3(14, 4, 10);
     [Header("Respawn Debug")]
     [SerializeField] float respawnPointDebugSize = 20;
-
 
     public Action onRespawn;
 
@@ -39,17 +41,9 @@ public class SegmentBehaviour : MonoBehaviour
         HideSegmenEndIndicator();
         SetRespawnPoint(new Vector3(transform.position.x, transform.position.y, m_spawnParent.GetLastSpawnPosition()));
         SpawnBlocks();
-
         // Debug.Log($"{gameObject.name} spawned at {transform.position}");
     }
 
-    private void HideSegmenEndIndicator()
-    {
-        if (endOfSegmentIndicator != null)
-        {
-            endOfSegmentIndicator.SetActive(m_showEndSegment);
-        }
-    }
 
     private void Update()
     {
@@ -62,7 +56,7 @@ public class SegmentBehaviour : MonoBehaviour
 
     void SpawnBlocks()
     {
-        Vector3[] blockPositionArr = Block.GetBlockSpawnPoints(m_totalBlockCount, m_initialBlock.transform.localPosition);
+        Vector3[] blockPositionArr = Block.GetBlockSpawnPoints(m_totalBlockCount, m_initialBlock.transform.localPosition, m_blockZOffset);
         for (int spawnIndex = 1; spawnIndex < blockPositionArr.Length; spawnIndex++)
         {
             var tempBlock = Instantiate(m_blockPrefab, m_blockParent);
@@ -71,10 +65,19 @@ public class SegmentBehaviour : MonoBehaviour
         }
     }
 
+    private void HideSegmenEndIndicator()
+    {
+        if (endOfSegmentIndicator != null)
+        {
+            endOfSegmentIndicator.SetActive(m_showEndSegment);
+        }
+    }
     #region Respawn Functions
 
     void Respawn()
     {
+        if (m_spawnOnce)
+            return;
         Debug.Log($"{gameObject.name} despawned at {transform.position}");
         transform.position = m_respawnPoint;
         Debug.Log($"{gameObject.name} respawned at {transform.position}");
@@ -125,4 +128,5 @@ public class SegmentBehaviour : MonoBehaviour
 
     #endregion
 
+    public float GetBlockOffset() => m_blockZOffset;
 }

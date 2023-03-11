@@ -12501,7 +12501,8 @@ MonoBehaviour:
   m_initialBlock: {fileID: 2638800641994311688}
   m_blockParent: {fileID: 2638800641404389718}
   m_blockPrefab: {fileID: 2638800641994311688}
-  m_totalBlockCount: 7
+  m_blockZOffset: 15.57
+  m_totalBlockCount: 5
   m_showEndSegment: 0
   endOfSegmentIndicator: {fileID: 2638800641070678297}
   m_segmentPosLimit: -191
@@ -12519,6 +12520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053c8421d9888014b90a2e64b2fe648c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedDelta: 0
 --- !u!1 &2638800641070678297
 GameObject:
   m_ObjectHideFlags: 0
@@ -13224,20 +13226,20 @@ MonoBehaviour:
   m_coinPrefab: {fileID: 681084056512101516, guid: 86f8181616978294497bf5163d10ff68, type: 3}
   m_ObstaclePrefab: {fileID: 3513120157906751832, guid: 02a82e7a718df8749aeb913af3ed8032, type: 3}
   m_spawnObstacle: 0
-  m_spawnChance: 0.342
+  m_spawnChance: 0.085
   xPoints:
   - -2
   - 0
   - 2
-  m_gridRow: 6
+  m_gridRow: 3
   m_itemHeight: 0.48
-  m_itemSpawnzOffset: 0
-  d_sphereSize: 0.2
+  m_itemSpawnzOffset: -0.8
+  d_sphereSize: 0.68
   d_color: {r: 1, g: 0, b: 0.7581215, a: 1}
   blockSpawnOffset: {x: 0, y: 0, z: 0}
-  showDebugTools: 1
+  showDebugTools: 0
   showNextBlockPreview: 0
-  previewLimit: 7
+  previewLimit: 4
   previewColor: {r: 0, g: 0.5517826, b: 1, a: 0.16470589}
   maxXBounds: 7.147087
   maxYBounds: 10.872333

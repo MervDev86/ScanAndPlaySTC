@@ -15,7 +15,8 @@ public class Block : MonoBehaviour
     [Range(0, 1)]
     [Tooltip("Chance Percentage To Spawn Item per Column (1 = 100% chance)")]
     [SerializeField] float m_spawnChance = 1;
-    [Header("Grid")]
+
+    [Header("Item Grid")]
     //xPoints is based off the movement points of the player  | l | m = 0 | r |   ++ current: -2 0 2
     [SerializeField] float[] xPoints = new float[3];
     [Range(0, 100)]
@@ -189,13 +190,13 @@ public class Block : MonoBehaviour
     //}
 
 
-    public static Vector3[] GetBlockSpawnPoints(int p_count, Vector3 p_initialBlockPosition)
+    public static Vector3[] GetBlockSpawnPoints(int p_count, Vector3 p_initialBlockPosition, float p_zPosOffset = 0)
     {
         Vector3[] spawnPoints = new Vector3[p_count];
         for (int spawnPointIndex = 0; spawnPointIndex < spawnPoints.Length; spawnPointIndex++)
         {
             //spawnPoints[spawnPointIndex] = p_initialBlockPosition + new Vector3(p_initialBlockPosition.x, p_initialBlockPosition.y, m_boundaryLength * spawnPointIndex);
-            spawnPoints[spawnPointIndex] = new Vector3(0, 0, m_boundaryLength * spawnPointIndex) + p_initialBlockPosition;
+            spawnPoints[spawnPointIndex] = new Vector3(0, 0, (m_boundaryLength + p_zPosOffset) * spawnPointIndex) + p_initialBlockPosition;
         }
 
         return spawnPoints;
@@ -250,7 +251,7 @@ public class Block : MonoBehaviour
             for (int i = 0; i < previewLimit; i++)
             {
                 //Gizmos.DrawCube(transform.position , m_collider.size);
-                Gizmos.DrawCube(transform.position + new Vector3(transform.position.x, transform.position.y, m_collider.size.z * i), m_collider.size);
+                Gizmos.DrawCube(transform.position + new Vector3(transform.position.x, transform.position.y, (m_segmentBehaviour.GetBlockOffset() + m_collider.size.z) * i), m_collider.size);
             }
         }
     }
@@ -263,7 +264,6 @@ public class Block : MonoBehaviour
         {
             for (int yIndex = 0; yIndex < m_gridColumn; yIndex++)
             {
-
                 info += $" {spawnPoints[xIndex, yIndex]}";
             }
             info += "\n";
