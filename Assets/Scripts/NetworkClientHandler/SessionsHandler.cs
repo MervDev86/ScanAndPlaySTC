@@ -119,7 +119,7 @@ namespace NetworkClientHandler
             }
             if (args.Snapshot != null)
             {
-                Debug.Log("dbsessions.onChildChanged = " + args.Snapshot.Key + " | " + args.Snapshot.Value);
+                //Debug.Log("dbsessions.onChildChanged = " + args.Snapshot.Key + " | " + args.Snapshot.Value);
                 switch (args.Snapshot.Key)
                 {
                     case SessionsDataRef.PLAYER_COUNT:
