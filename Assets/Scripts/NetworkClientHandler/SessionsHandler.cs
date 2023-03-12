@@ -192,6 +192,8 @@ namespace NetworkClientHandler
 
         void OnDestroy()
         {
+            m_sessionsDB.Child(SessionsDataRef.GAME_STATE).SetValueAsync("IDLE");
+
             m_sessionsDB.ChildAdded -= HandleSessionsChildAdded;
             m_sessionsDB.ChildChanged -= HandleSessionsChildChanged;
 
