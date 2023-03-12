@@ -20,6 +20,7 @@ namespace NetworkClientHandler
     {
 
         [SerializeField] string m_dbSession = "stcrunner_sessions";
+
         DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
         protected bool isFirebaseInitialized = false;
 
@@ -28,6 +29,7 @@ namespace NetworkClientHandler
         //MERVIN ADDED
         public static Action<int> OnInitializeGame;     //Set how many players
         public static Action OnStartGame;               // Set to GameState.PLAYING
+        public static Action OnRestartGame;               // Set to GameState.IDLE
 
         #region PLAYER_Movement
         public static Action<int> OnMovePlayer1;
@@ -43,6 +45,7 @@ namespace NetworkClientHandler
 
         private int m_playerCount = 0;
 
+        private GameState m_currentGameState = GameState.MAIN_MENU;
 
         // Start is called before the first frame update
         void Start()
@@ -116,7 +119,7 @@ namespace NetworkClientHandler
             }
             if (args.Snapshot != null)
             {
-                Debug.Log("dbsessions.onChildChanged = " + args.Snapshot.Key + " | " + args.Snapshot.Value);
+                //Debug.Log("dbsessions.onChildChanged = " + args.Snapshot.Key + " | " + args.Snapshot.Value);
                 switch (args.Snapshot.Key)
                 {
                     case SessionsDataRef.PLAYER_COUNT:
@@ -145,7 +148,10 @@ namespace NetworkClientHandler
                                     break;
 
                                 case "IDLE":
-                                default:
+                                    if (m_currentGameState == GameState.GAME_PLAYING)
+                                    {
+                                        OnRestartGame?.Invoke();
+                                    }
                                     break;
                             }
                             break;
@@ -169,13 +175,14 @@ namespace NetworkClientHandler
         private void OnGameStateChanged(GameState pState)
         {
             //Debug.Log("SessionClientHandler.OnGameOver() ::--> " + pState);
+            m_currentGameState = pState;
 
-            if (pState == GameState.GAME_OVER)
+            if (m_currentGameState == GameState.GAME_OVER)
             {
                 // Set database to gameState = END
                 m_sessionsDB.Child(SessionsDataRef.GAME_STATE).SetValueAsync("END");
             }
-            else if (pState == GameState.LEADERBOARD)
+            else if (m_currentGameState == GameState.LEADERBOARD)
             {
                 // Set database to gameState = IDLE
                 m_sessionsDB.Child(SessionsDataRef.GAME_STATE).SetValueAsync("IDLE");
@@ -185,6 +192,8 @@ namespace NetworkClientHandler
 
         void OnDestroy()
         {
+            m_sessionsDB.Child(SessionsDataRef.GAME_STATE).SetValueAsync("IDLE");
+
             m_sessionsDB.ChildAdded -= HandleSessionsChildAdded;
             m_sessionsDB.ChildChanged -= HandleSessionsChildChanged;
 

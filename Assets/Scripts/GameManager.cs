@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
         m_leaderBoard.gameObject.SetActive(false);
         SessionsHandler.OnInitializeGame += OnInitializeGame;
         SessionsHandler.OnStartGame += StartGame;
+        SessionsHandler.OnRestartGame += Restart;
         SessionsHandler.OnPlayer1SetName += m_playerHandler1.SetPlayerReady;
         SessionsHandler.OnPlayer2SetName += m_playerHandler2.SetPlayerReady;
         SessionsHandler.OnMovePlayer1 += m_playerHandler1.playerControl.MoveToPositionIndex;
@@ -70,7 +71,8 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         SessionsHandler.OnInitializeGame -= OnInitializeGame;
-        SessionsHandler.OnStartGame += StartGame;
+        SessionsHandler.OnStartGame -= StartGame;
+        SessionsHandler.OnRestartGame -= Restart;
         SessionsHandler.OnPlayer1SetName -= m_playerHandler1.SetPlayerReady;
         SessionsHandler.OnPlayer2SetName -= m_playerHandler2.SetPlayerReady;
         SessionsHandler.OnMovePlayer1 -= m_playerHandler1.playerControl.MoveToPositionIndex;
