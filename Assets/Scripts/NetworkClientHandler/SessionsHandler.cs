@@ -145,10 +145,12 @@ namespace NetworkClientHandler
                                     break;
 
                                 case "END":
+                                    Debug.Log("on END");
                                     break;
 
                                 case "IDLE":
-                                    if (m_currentGameState == GameState.GAME_PLAYING)
+                                    Debug.Log("on IDLE");
+                                    //if (m_currentGameState == GameState.GAME_PLAYING || m_currentGameState == GameState.WAITING)
                                     {
                                         OnRestartGame?.Invoke();
                                     }
@@ -181,11 +183,14 @@ namespace NetworkClientHandler
             {
                 // Set database to gameState = END
                 m_sessionsDB.Child(SessionsDataRef.GAME_STATE).SetValueAsync("END");
+                m_sessionsDB.Child(SessionsDataRef.PLAYER_COUNT).SetValueAsync(0);
             }
             else if (m_currentGameState == GameState.LEADERBOARD)
             {
                 // Set database to gameState = IDLE
                 m_sessionsDB.Child(SessionsDataRef.GAME_STATE).SetValueAsync("IDLE");
+                m_sessionsDB.Child(SessionsDataRef.PLAYER_1).RemoveValueAsync();
+                m_sessionsDB.Child(SessionsDataRef.PLAYER_2).RemoveValueAsync();
             }
             return;
         }
