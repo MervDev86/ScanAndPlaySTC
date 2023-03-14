@@ -85,9 +85,9 @@ public class SegmentBehaviour : MonoBehaviour
     {
         if (m_spawnOnce)
             return;
-        Debug.Log($"{gameObject.name} despawned at {transform.position}");
+        //Debug.Log($"{gameObject.name} despawned at {transform.position}");
         transform.position = m_respawnPoint;
-        Debug.Log($"{gameObject.name} respawned at {transform.position}");
+        //Debug.Log($"{gameObject.name} respawned at {transform.position}");
         onRespawn?.Invoke();
     }
 
